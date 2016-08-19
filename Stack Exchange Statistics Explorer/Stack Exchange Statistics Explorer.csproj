@@ -269,7 +269,6 @@
     </Content>
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <Content Include="SQL Scripts\01 Create SE.SityStyling.sql" />
     <Content Include="SQL Scripts\02 Create SE.Sites.sql" />
