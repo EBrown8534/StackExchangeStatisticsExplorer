@@ -5,13 +5,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="detail-header">
-        <h2 class="medium-5 small-12 columns"><%:HttpUtility.HtmlDecode(LatestStats.Site.Name) %></h2>
+        <h2 class="medium-5 small-12 columns">
+            <img src="<%:CurrentSite.HighResolutionIconUrl ?? CurrentSite.IconUrl %>" width="48" height="48" />
+            <%:HttpUtility.HtmlDecode(CurrentSite.Name) %>
+        </h2>
         <div class="medium-3 small-6 columns">
             <asp:HyperLink runat="server" ID="MetaSite" Visible="false" CssClass="button success radius right" Text="Meta Site &raquo;"></asp:HyperLink>
             <asp:HyperLink runat="server" ID="MainSite" Visible="false" CssClass="button success radius right" Text="Main Site &raquo;"></asp:HyperLink>
         </div>
         <div class="medium-4 small-6 columns">
-            <a href="<%:LatestStats.Site.SiteUrl%>" class="button radius right medium-12" target="_blank">View on Stack Exchange &raquo;</a>
+            <a href="<%:CurrentSite.SiteUrl%>" class="button radius right medium-12" target="_blank">View on Stack Exchange &raquo;</a>
         </div>
     </div>
     <div class="medium-12 columns">
@@ -21,39 +24,39 @@
                 <tbody>
                     <tr>
                         <th>Site ID</th>
-                        <td><%:LatestStats.Site.Id.ToString("d") %></td>
+                        <td><%:CurrentSite.Id.ToString("d") %></td>
                     </tr>
                     <tr>
                         <th>API Parameter</th>
-                        <td><%:LatestStats.Site.ApiSiteParameter %></td>
+                        <td><%:CurrentSite.ApiSiteParameter %></td>
                     </tr>
                     <tr>
                         <th>Audience</th>
-                        <td><%:LatestStats.Site.Audience %></td>
+                        <td><%:CurrentSite.Audience %></td>
                     </tr>
                     <tr>
                         <th>Date of Closed Beta</th>
-                        <td><%:LatestStats.Site.ClosedBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
+                        <td><%:CurrentSite.ClosedBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
                     </tr>
                     <tr>
                         <th>Date of Open Beta</th>
-                        <td><%:LatestStats.Site.OpenBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
+                        <td><%:CurrentSite.OpenBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
                     </tr>
                     <tr>
                         <th>Date of Launch</th>
-                        <td><%:LatestStats.Site.LaunchDateTime?.ToLongDateString() ?? "N/A" %></td>
+                        <td><%:CurrentSite.LaunchDateTime?.ToLongDateString() ?? "N/A" %></td>
                     </tr>
                     <tr>
                         <th>State</th>
-                        <td><%:LatestStats.Site.HumanizeState %></td>
+                        <td><%:CurrentSite.HumanizeState %></td>
                     </tr>
                     <tr>
                         <th>Type</th>
-                        <td><%:LatestStats.Site.HumanizeType %></td>
+                        <td><%:CurrentSite.HumanizeType %></td>
                     </tr>
                     <tr>
                         <th>URL</th>
-                        <td><%:LatestStats.Site.SiteUrl %></td>
+                        <td><%:CurrentSite.SiteUrl %></td>
                     </tr>
                 </tbody>
             </table>
