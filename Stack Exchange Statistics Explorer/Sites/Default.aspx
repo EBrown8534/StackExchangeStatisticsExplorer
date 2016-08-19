@@ -134,7 +134,10 @@
             <div runat="server" class="large-3 medium-4 site columns">
                 <div onclick="window.location.href = '/Sites/Detail?SiteId=<%#Binder.Eval<Site>(Container, "Site").Id %>'" class="radius panel">
                     <h3>
-                        <img src="<%#Binder.Eval<Site>(Container, "Site").HighResolutionIconUrl ?? Binder.Eval<Site>(Container, "Site").IconUrl %>" width="32" height="32" /> <span class="name"><%#Binder.Eval<Site>(Container, "Site").Name.Length > 0 ? Binder.Eval<Site>(Container, "Site").Name : "-" %></span>
+                        <img src="<%#Binder.Eval<Site>(Container, "Site").HighResolutionIconUrl ?? Binder.Eval<Site>(Container, "Site").IconUrl %>" width="32" height="32" />
+                        <span class="name">
+                            <%#Binder.Eval<Site>(Container, "Site").Name.Length > 0 ? Binder.Eval<Site>(Container, "Site").Name : "-" %>
+                        </span>
                         <%--<a href='<%#Binder.Eval<Site>(Container, "Site").SiteUrl %>' target="_blank">View</a>--%>
                     </h3>
                     <p>
