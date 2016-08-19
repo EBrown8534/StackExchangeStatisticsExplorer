@@ -6,6 +6,9 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="small-12 medium-12 columns">
         <h3>Proposed Features</h3>
+        <p>
+            Note: as time permits, features proposed here will be ported to the <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer">GitHub Repository</a>. It is preferred to propose features and report bugs as <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer/issues">issues</a> there.
+        </p>
         <asp:ListView runat="server" ID="Requests">
             <LayoutTemplate>
                 <table class="medium-12">
@@ -40,6 +43,9 @@
         <p>
             For bug reports, simply describe the issue as if it were a feature request to fix the bug.
         </p>
+    </div>
+    <div class='small-12 medium-12 columns alert-box radius <%:Message.Text.StartsWith("Error:") ? "alert" : "success" %> <%:Message.Text.Length == 0 ? "hidden" : "" %>'>
+        <asp:Literal runat="server" ID="Message"></asp:Literal>
     </div>
     <div class="small-6 medium-3 columns">
         Proposed By (Optional):

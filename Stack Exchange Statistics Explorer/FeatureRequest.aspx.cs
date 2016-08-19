@@ -38,9 +38,22 @@ namespace Stack_Exchange_Statistics_Explorer
 
             if (string.IsNullOrWhiteSpace(description))
             {
+                Message.Text = "Error: You did not enter a description of the request/issue.";
                 return;
             }
-            
+
+            if (area?.Length > 64)
+            {
+                Message.Text = "Error: The 'Area' must not be longer than 64 characters.";
+                return;
+            }
+
+            if (proposedBy?.Length > 64)
+            {
+                Message.Text = "Error: The 'ProposedBy' must not be longer than 64 characters.";
+                return;
+            }
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
                 if (connection.State != ConnectionState.Open)
@@ -57,6 +70,8 @@ namespace Stack_Exchange_Statistics_Explorer
                     command.ExecuteNonQuery();
                 }
             }
+
+            Message.Text = "Your information was submitted successfully.";
         }
     }
 }
