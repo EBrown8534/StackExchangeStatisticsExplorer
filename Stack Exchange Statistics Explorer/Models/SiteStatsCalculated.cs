@@ -26,10 +26,10 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public double? UnansweredRateChange => UnansweredRate - Previous?.UnansweredRate;
 
         [ApiDescription("Number of questions posted for each day since the earliest of: <code>" + nameof(Models.Site.ClosedBetaDateTime) + "</code>, <code>" + nameof(Models.Site.OpenBetaDateTime) + "</code> or <code>" + nameof(Models.Site.LaunchDateTime) + "</code>.")]
-        public double QuestionsPerDay => (double)TotalQuestions / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime)).Value.Days;
+        public double QuestionsPerDay => (double)TotalQuestions / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime))?.Days ?? 1;
 
         [ApiDescription("Number of answers posted for each day since the earliest of: <code>" + nameof(Models.Site.ClosedBetaDateTime) + "</code>, <code>" + nameof(Models.Site.OpenBetaDateTime) + "</code> or <code>" + nameof(Models.Site.LaunchDateTime) + "</code>.")]
-        public double AnswersPerDay => (double)TotalAnswers / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime)).Value.Days;
+        public double AnswersPerDay => (double)TotalAnswers / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime))?.Days ?? 1;
 
         [ApiDescription("Change in <code>" + nameof(TotalAccepted) + "</code> from the previous object.", Nullable = true)]
         public int? TotalAcceptedChange => TotalAccepted - Previous?.TotalAccepted;
