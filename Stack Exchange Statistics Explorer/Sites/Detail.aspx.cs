@@ -52,6 +52,27 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
                 sitesStats = SiteStatsCalculated.LoadFromDatabase(connection, CurrentSite);
                 AllLatestStats = Models.Site.LoadAllWithStatsFromDatabase(connection);
+
+                if (CurrentSite.ApiSiteParameter.StartsWith("meta."))
+                {
+                    var mainSite = Models.Site.LoadFromDatabase(connection, CurrentSite.ApiSiteParameter.Replace("meta.", ""));
+
+                    if (mainSite != null)
+                    {
+                        MainSite.Visible = true;
+                        MainSite.NavigateUrl = "/Sites/Detail?SiteId=" + mainSite.Id.ToString("x");
+                    }
+                }
+                else
+                {
+                    var metaSite = Models.Site.LoadFromDatabase(connection, "meta." + CurrentSite.ApiSiteParameter);
+
+                    if (metaSite != null)
+                    {
+                        MetaSite.Visible = true;
+                        MetaSite.NavigateUrl = "/Sites/Detail?SiteId=" + metaSite.Id.ToString("x");
+                    }
+                }
             }
 
             sitesStats = sitesStats.Where(x => x.Manual == false).OrderByDescending(x => x.Gathered).ToList();

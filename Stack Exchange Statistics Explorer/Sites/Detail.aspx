@@ -5,9 +5,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="detail-header">
-        <h2 class="medium-8 small-12 columns"><%:HttpUtility.HtmlDecode(LatestStats.Site.Name) %></h2>
-        <div class="medium-4 small-12 columns">
-            <a href="<%:LatestStats.Site.SiteUrl%>" class="button button-success radius right" target="_blank">View on Stack Exchange &raquo;</a>
+        <h2 class="medium-5 small-12 columns"><%:HttpUtility.HtmlDecode(LatestStats.Site.Name) %></h2>
+        <div class="medium-3 small-6 columns">
+            <asp:HyperLink runat="server" ID="MetaSite" Visible="false" CssClass="button success radius right" Text="Meta Site &raquo;"></asp:HyperLink>
+            <asp:HyperLink runat="server" ID="MainSite" Visible="false" CssClass="button success radius right" Text="Main Site &raquo;"></asp:HyperLink>
+        </div>
+        <div class="medium-4 small-6 columns">
+            <a href="<%:LatestStats.Site.SiteUrl%>" class="button radius right medium-12" target="_blank">View on Stack Exchange &raquo;</a>
         </div>
     </div>
     <div class="medium-12 columns">
