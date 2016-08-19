@@ -16,7 +16,7 @@ namespace Stack_Exchange_Statistics_Explorer
         {
             var requests = new List<Models.FeatureRequest>();
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ApiDataConnection"].ConnectionString))
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
                 if (connection.State != ConnectionState.Open)
                 {
@@ -41,7 +41,7 @@ namespace Stack_Exchange_Statistics_Explorer
                 return;
             }
             
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ApiDataConnection"].ConnectionString))
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
                 if (connection.State != ConnectionState.Open)
                 {
