@@ -59,22 +59,22 @@
             <table class="detail-table">
                 <tbody>
                     <tr>
-                        <th data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</th>
+                        <th><span data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</span></th>
                         <td class='<%:LatestStats.QuestionsPerDay >= 10 ? "good" : LatestStats.QuestionsPerDay >= 5 ? "neutral" : "bad" %>'><%:LatestStats.QuestionsPerDay.ToString("0.00") %></td>
                         <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
                     <tr>
-                        <th data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</th>
+                        <th><span data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</span></th>
                         <td class='<%:LatestStats.AnsweredRate >= .9 ? "good" : LatestStats.AnsweredRate >= .8 ? "neutral" : "bad" %>'><%:LatestStats.AnsweredRate.ToString("0.00%") %></td>
                         <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
                     <tr>
-                        <th data-tooltip class="has-tip" title="Every site needs a solid group of core users to assist in moderating the site. We recommend 150 users with 200+ rep.">Avid Users</th>
+                        <th><span data-tooltip class="has-tip" title="Every site needs a solid group of core users to assist in moderating the site. We recommend 150 users with 200+ rep.">Avid Users</span></th>
                         <td class='<%:LatestStats.UsersAbove200Rep >= 150 ? "good" : LatestStats.UsersAbove200Rep >= 125 ? "neutral" : "bad" %>'><%:LatestStats.UsersAbove200Rep?.ToString("n0") %></td>
                         <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
                     <tr>
-                        <th data-tooltip class="has-tip" title="2.5 answers per question is good, only 1 answer per question needs somework. On a healthy site, questions recieve multiple answers and the best answer is voted to the top.">Answer Ratio</th>
+                        <th><span data-tooltip class="has-tip" title="2.5 answers per question is good, only 1 answer per question needs somework. On a healthy site, questions recieve multiple answers and the best answer is voted to the top.">Answer Ratio</span></th>
                         <td class='<%:LatestStats.AnswerRatio >= 2.5 ? "good" : LatestStats.AnswerRatio >= 1 ? "neutral" : "bad" %>'><%:LatestStats.AnswerRatio.ToString("0.00") %></td>
                         <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
@@ -82,7 +82,7 @@
             </table>
         </div>
         <div class="small-12 medium-5 columns">
-            <h3 data-tooltip class="has-tip" title="Rankings are based on other sites of the same type. Main sites are only ranked among Main sites, and Meta sites only ranked among Meta sites.">Rankings</h3>
+            <h3><span data-tooltip class="has-tip" title="Rankings are based on other sites of the same type. Main sites are only ranked among Main sites, and Meta sites only ranked among Meta sites.">Rankings</span></h3>
             <table class="detail-table">
                 <tbody>
                     <tr>
