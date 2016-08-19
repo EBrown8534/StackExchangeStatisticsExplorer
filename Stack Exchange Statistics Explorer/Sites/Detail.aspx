@@ -5,16 +5,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="detail-header">
-        <h2 class="medium-5 small-12 columns">
+        <h2 class="medium-6 small-12 columns">
             <img src="<%:CurrentSite.HighResolutionIconUrl ?? CurrentSite.IconUrl %>" width="48" height="48" />
             <%:HttpUtility.HtmlDecode(CurrentSite.Name) %>
         </h2>
         <div class="medium-3 small-6 columns">
-            <asp:HyperLink runat="server" ID="MetaSite" Visible="false" CssClass="button success radius right" Text="Meta Site &raquo;"></asp:HyperLink>
-            <asp:HyperLink runat="server" ID="MainSite" Visible="false" CssClass="button success radius right" Text="Main Site &raquo;"></asp:HyperLink>
+            <asp:HyperLink runat="server" ID="MetaSite" Visible="false" CssClass="button success radius right medium-12" Text="Meta Site &raquo;"></asp:HyperLink>
+            <asp:HyperLink runat="server" ID="MainSite" Visible="false" CssClass="button success radius right medium-12" Text="Main Site &raquo;"></asp:HyperLink>
         </div>
-        <div class="medium-4 small-6 columns">
-            <a href="<%:CurrentSite.SiteUrl%>" class="button radius right medium-12" target="_blank">View on Stack Exchange &raquo;</a>
+        <div class="medium-3 small-6 columns">
+            <a href="<%:CurrentSite.SiteUrl%>" class="button radius right medium-12" target="_blank">View on SE &raquo;</a>
         </div>
     </div>
     <div class="medium-12 columns">
@@ -57,6 +57,14 @@
                     <tr>
                         <th>URL</th>
                         <td><%:CurrentSite.SiteUrl %></td>
+                    </tr>
+                    <tr>
+                        <th>Twitter Account</th>
+                        <td><a class='<%:CurrentSite.TwitterAccount?.Length > 0 ? "" : "hidden" %>' href="https://twitter.com/<%:CurrentSite.TwitterAccount %>"><%:"@" + CurrentSite.TwitterAccount %></a></td>
+                    </tr>
+                    <tr>
+                        <th>Logo</th>
+                        <td><img src="<%:CurrentSite.LogoUrl %>" height="48" /></td>
                     </tr>
                 </tbody>
             </table>

@@ -60,7 +60,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                     if (mainSite != null)
                     {
                         MainSite.Visible = true;
-                        MainSite.NavigateUrl = "/Sites/Detail?SiteId=" + mainSite.Id.ToString();
+                        MainSite.NavigateUrl = "/Sites/Detail?SiteId=" + mainSite.Id.ToString("d");
                     }
                 }
                 else
@@ -70,7 +70,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                     if (metaSite != null)
                     {
                         MetaSite.Visible = true;
-                        MetaSite.NavigateUrl = "/Sites/Detail?SiteId=" + metaSite.Id.ToString();
+                        MetaSite.NavigateUrl = "/Sites/Detail?SiteId=" + metaSite.Id.ToString("d");
                     }
                 }
             }
