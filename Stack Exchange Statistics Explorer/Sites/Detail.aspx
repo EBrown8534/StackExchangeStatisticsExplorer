@@ -1,0 +1,281 @@
+﻿<%@ Page Title="Site Stats" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Detail.aspx.cs" Inherits="Stack_Exchange_Statistics_Explorer.Sites.Detail" %>
+
+<%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities" %>
+<%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities.Extensions" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="detail-header">
+        <h2 class="medium-8 small-12 columns"><%:HttpUtility.HtmlDecode(Stats.Site.Name) %></h2>
+        <div class="medium-4 small-12 columns">
+            <a href="<%:Stats.Site.SiteUrl%>" class="button button-success radius right" target="_blank">View on Stack Exchange &raquo;</a>
+        </div>
+    </div>
+    <div class="medium-12 columns">
+        <div class="medium-7 small-12 columns">
+            <h3>General</h3>
+            <table class="detail-table medium-12">
+                <tbody>
+                    <tr>
+                        <th>Site ID</th>
+                        <td><%:Stats.Site.Id.ToString("d") %></td>
+                    </tr>
+                    <tr>
+                        <th>API Parameter</th>
+                        <td><%:Stats.Site.ApiSiteParameter %></td>
+                    </tr>
+                    <tr>
+                        <th>Audience</th>
+                        <td><%:Stats.Site.Audience %></td>
+                    </tr>
+                    <tr>
+                        <th>Date of Closed Beta</th>
+                        <td><%:Stats.Site.ClosedBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
+                    </tr>
+                    <tr>
+                        <th>Date of Open Beta</th>
+                        <td><%:Stats.Site.OpenBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
+                    </tr>
+                    <tr>
+                        <th>Date of Launch</th>
+                        <td><%:Stats.Site.LaunchDateTime?.ToLongDateString() ?? "N/A" %></td>
+                    </tr>
+                    <tr>
+                        <th>State</th>
+                        <td><%:Stats.Site.HumanizeState %></td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td><%:Stats.Site.HumanizeType %></td>
+                    </tr>
+                    <tr>
+                        <th>URL</th>
+                        <td><%:Stats.Site.SiteUrl %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="medium-5 small-12 columns">
+            <h3>Health</h3>
+            <table class="detail-table">
+                <tbody>
+                    <tr>
+                        <th data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</th>
+                        <td class='<%:Stats.QuestionsPerDay >= 10 ? "good" : Stats.QuestionsPerDay >= 5 ? "neutral" : "bad" %>'><%:Stats.QuestionsPerDay.ToString("0.00") %></td>
+                        <td class='show-for-large-up <%:Stats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>Needs work</td>
+                    </tr>
+                    <tr>
+                        <th data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</th>
+                        <td class='<%:Stats.AnsweredRate >= .9 ? "good" : Stats.AnsweredRate >= .8 ? "neutral" : "bad" %>'><%:Stats.AnsweredRate.ToString("0.00%") %></td>
+                        <td class='show-for-large-up <%:Stats.AnsweredRate >= .9 ? "hidden" : "" %>'>Needs work</td>
+                    </tr>
+                    <tr>
+                        <th data-tooltip class="has-tip" title="Every site needs a solid group of core users to assist in moderating the site. We recommend 150 users with 200+ rep.">Avid Users</th>
+                        <td class='<%:Stats.UsersAbove200Rep >= 150 ? "good" : Stats.UsersAbove200Rep >= 125 ? "neutral" : "bad" %>'><%:Stats.UsersAbove200Rep?.ToString("n0") %></td>
+                        <td class='show-for-large-up <%:Stats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>Needs work</td>
+                    </tr>
+                    <tr>
+                        <th data-tooltip class="has-tip" title="2.5 answers per question is good, only 1 answer per question needs somework. On a healthy site, questions recieve multiple answers and the best answer is voted to the top.">Answer Ratio</th>
+                        <td class='<%:Stats.AnswerRatio >= 2.5 ? "good" : Stats.AnswerRatio >= 1 ? "neutral" : "bad" %>'><%:Stats.AnswerRatio.ToString("0.00") %></td>
+                        <td class='show-for-large-up <%:Stats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>Needs work</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="medium-12 columns graphs">
+            <h3>Graphs</h3>
+            <ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#graphSet1">General Charts</a></li>
+                <li class="tab-title"><a href="#graphSet2">Question Charts</a></li>
+                <li class="tab-title"><a href="#graphSet3">Answer Charts</a></li>
+            </ul>
+            <div class="tabs-content">
+                <div class="content active" id="graphSet1">
+                    <svg class="zombieChart"></svg>
+                    <svg class="usersOver150RepChart"></svg>
+                    <svg class="usersOver200RepChart"></svg>
+                </div>
+                <div class="content" id="graphSet2">
+                    <svg class="questionsPerDayChart"></svg>
+                    <svg class="questionsChart"></svg>
+                    <svg class="questionsChangeChart"></svg>
+                </div>
+                <div class="content" id="graphSet3">
+                    <svg class="answersPerDayChart"></svg>
+                    <svg class="answersChart"></svg>
+                    <svg class="answersChangeChart"></svg>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var fW = 960;
+                var fH = 450;
+                var hW = fW / 2;
+                var hH = fH / 2;
+                var m = { top: 5, right: 3, bottom: 60, left: 70 }
+                var siteId = "<%:Stats.Site.Id%>";
+                var lTC = 60;
+                var sTC = 15;
+
+                buildBasicChart(m, fW, fH, siteId, ".zombieChart", "UnansweredRate", "0.00%", "Unanswered Rate (in %)", lTC);
+                buildBasicChart(m, hW, hH, siteId, ".usersOver150RepChart", "UsersAbove150Rep", "0", "Users > 150 Rep", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".usersOver200RepChart", "UsersAbove200Rep", "0", "Users > 200 Rep", sTC);
+
+                buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.00", "Questions Per Day", lTC);
+                buildBasicChart(m, hW, hH, siteId, ".questionsChart", "TotalQuestions", "0", "Total Questions", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".questionsChangeChart", "TotalQuestionsChange", "0", "Questions Change", sTC);
+
+                buildBasicChart(m, fW, fH, siteId, ".answersPerDayChart", "AnswersPerDay", "0.00", "Answers Per Day", lTC);
+                buildBasicChart(m, hW, hH, siteId, ".answersChart", "TotalAnswers", "0", "Total Answers", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".answersChangeChart", "TotalAnswersChange", "0", "Answers Change", sTC);
+            </script>
+            <h3>Raw Stats Data (Newest to oldest)
+            <span class="right">
+                <span class="show-for-medium-up">
+                    <span class="switch radius has-tip" data-tooltip aria-haspopup="true" title="Toggle deltas">
+                        <input id="toggleDeltas" type="checkbox" checked />
+                        <label for="toggleDeltas"></label>
+                    </span>
+                </span>
+            </span>
+            </h3>
+            <script type="text/javascript">
+                document.getElementById("toggleDeltas").addEventListener('change', function (event) {
+                    if (document.getElementById("toggleDeltas").checked) {
+                        $(".delta").removeClass("hidden");
+                    } else {
+                        $(".delta").addClass("hidden");
+                    }
+                });
+            </script>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gathered</th>
+                        <%--<th>API Revision</th>
+                <th>New Active Users</th>--%>
+                        <th class="show-for-medium-up">Accepted</th>
+                        <th>Answered</th>
+                        <th>Answers</th>
+                        <%--<th>Badges</th>--%>
+                        <%--<th>Comments</th>--%>
+                        <th>Questions</th>
+                        <th class="show-for-large-up">Unanswered</th>
+                        <th class="show-for-medium-up">Users</th>
+                        <th class="show-for-medium-up">Votes</th>
+                        <th class="show-for-medium-up">Users > 150 Rep</th>
+                        <th>Users > 200 Rep</th>
+                        <th>Answered Rate</th>
+                        <th class="show-for-large-up">Unanswered Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <asp:ListView runat="server" ID="SiteStats">
+                        <LayoutTemplate>
+                            <tr runat="server" id="groupPlaceholder"></tr>
+                        </LayoutTemplate>
+
+                        <GroupTemplate>
+                            <tr runat="server" id="itemPlaceholder"></tr>
+                        </GroupTemplate>
+
+                        <ItemTemplate>
+                            <tr runat="server">
+                                <td>
+                                    <span class="show-for-large-up">
+                                    <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("ddd d MMM yy") %>
+                                        </span>
+                                    <span class="hide-for-large-up">
+                                    <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("d-M-yy") %>
+                                    </span>
+                                </td>
+                                <%--<td>
+                            <%#Binder.Eval<string>(Container, "ApiRevision") %>
+                        </td>
+                        <td>
+                            <%#Binder.Eval<int>(Container, "NewActiveUsers") %>
+                        </td>--%>
+                                <td class="show-for-medium-up">
+                                    <%#Binder.Eval<int>(Container, "TotalAccepted") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAcceptedChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalAcceptedChange") < 0 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalAcceptedChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td class="show-for-large-up">
+                                    <%#Binder.Eval<int>(Container, "TotalAnswered") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAnsweredChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalAnsweredChange") < 0 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalAnsweredChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%#Binder.Eval<int>(Container, "TotalAnswers") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAnswersChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalAnswersChange") < 0 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalAnswersChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <%--<td>
+                            <%#Binder.Eval<int>(Container, "TotalBadges") %>
+                            (<%#Binder.Eval<int>(Container, "TotalBadgesChange").ToString().IncludeSign() %>)
+                        </td>--%>
+                                <%--<td>
+                            <%#Binder.Eval<int>(Container, "TotalComments") %>
+                            (<%#Binder.Eval<int>(Container, "TotalAnsweredChange").ToString().IncludeSign() %>)
+                        </td>--%>
+                                <td>
+                                    <%#Binder.Eval<int>(Container, "TotalQuestions") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalQuestionsChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalQuestionsChange") < 0 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalQuestionsChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%#Binder.Eval<int>(Container, "TotalUnanswered") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalUnansweredChange") > 0 ? "bad" : Binder.Eval<int?>(Container, "TotalUnansweredChange") < 0 ? "good" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalUnansweredChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td class="show-for-medium-up">
+                                    <%#Binder.Eval<int>(Container, "TotalUsers") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalUsersChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalUsersChange") < 0 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalUsersChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td class="show-for-medium-up">
+                                    <%#Binder.Eval<int>(Container, "TotalVotes") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalVotesChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalVotesChange") < 0 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<int?>(Container, "TotalVotesChange")?.ToString().IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td class="show-for-medium-up">
+                                    <span class='<%#Binder.Eval<int?>(Container, "UsersAbove150Rep") == null ? "grey" : "" %>'>
+                                        <%#Binder.Eval<int?>(Container, "UsersAbove150Rep")?.ToString() ?? "N/A" %><br />
+                                        <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "UsersAbove150RepChange") > 0 ? "good" : Binder.Eval<int?>(Container, "UsersAbove150RepChange") < 0 ? "bad" : "neutral" %>'>
+                                            <%#Binder.Eval<int?>(Container, "UsersAbove150RepChange")?.ToString().IncludeSign() %>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class='<%#Binder.Eval<int?>(Container, "UsersAbove200Rep") == null ? "grey" : "" %>'>
+                                        <%#Binder.Eval<int?>(Container, "UsersAbove200Rep")?.ToString() ?? "N/A" %><br />
+                                        <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "UsersAbove200RepChange") > 0 ? "good" : Binder.Eval<int?>(Container, "UsersAbove200RepChange") < 0 ? "bad" : "neutral" %>'>
+                                            <%#Binder.Eval<int?>(Container, "UsersAbove200RepChange")?.ToString().IncludeSign() %>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="show-for-large-up">
+                                    <%#Binder.Eval<double>(Container, "AnsweredRate").ToString("0.00%") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "AnsweredRateChange") >= 0.00005 ? "good" : Binder.Eval<double?>(Container, "AnsweredRateChange") <= -0.00005 ? "bad" : "neutral" %>'>
+                                        <%#Binder.Eval<double?>(Container, "AnsweredRateChange")?.ToString("0.00%").IncludeSign() %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%#Binder.Eval<double>(Container, "UnansweredRate").ToString("0.00%") %><br />
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "UnansweredRateChange") >= 0.00005 ? "bad" : Binder.Eval<double?>(Container, "UnansweredRateChange") <= -0.00005 ? "good" : "neutral" %>'>
+                                        <%#Binder.Eval<double?>(Container, "UnansweredRateChange")?.ToString("0.00%").IncludeSign() %>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:ListView>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</asp:Content>

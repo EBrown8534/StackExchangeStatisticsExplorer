@@ -1,0 +1,88 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Stack_Exchange_Statistics_Explorer.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Stack Exchange Statistics Explorer</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+        <%: Scripts.Render("~/bundles/list") %>
+        <%: Scripts.Render("~/bundles/d3") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <%: Scripts.Render("~/bundles/foundation") %>
+
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a runat="server" href="~/">Stack Exchange Statistics Explorer</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#">
+                        <span>Menu</span>
+                    </a>
+                </li>
+            </ul>
+
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li><a runat="server" href="~/">Home</a></li>
+                    <li><a runat="server" href="~/Sites">Sites</a></li>
+                    <li><a runat="server" href="~/API">API</a></li>
+                    <li><a runat="server" href="~/About">About</a></li>
+                    <%--<li><a runat="server" href="~/SystemHealth">Health</a></li>--%>
+                </ul>
+            </section>
+        </nav>
+
+        <div class="container body-content row">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="container">
+            <hr />
+            <footer class="row">
+                <p>
+                    Website and Software Copyright &copy; <%: DateTime.Now.Year %> - Elliott Brown Computer Solutions<br />
+                    Version: <%:Assembly.GetName().Version.ToString() %> built on <%:System.IO.File.GetLastWriteTimeUtc(Assembly.Location).ToString(@"d MMM yyyy \a\t HH:mm:ss") %> UTC<br />
+                    This website is not directly affiliated with <a href="http://www.stackexchange.com">Stack Exchange</a>, all data is retrieved directly from the <a href="http://api.stackexchange.com">Stack Exchange API</a> and is subject to the original API terms of service.<br />
+                    <br />
+                    <span class="small">Want to see more features? Find any bugs? Report them on the <a runat="server" href="~/FeatureRequest">Feature Request</a> page.</span>
+                </p>
+            </footer>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $(document).foundation();
+    </script>
+</body>
+</html>
