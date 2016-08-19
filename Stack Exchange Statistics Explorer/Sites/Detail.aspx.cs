@@ -13,7 +13,9 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 {
     public partial class Detail : System.Web.UI.Page
     {
-        protected SiteStatsCalculated Stats { get; private set; }
+        protected SiteStatsCalculated LatestStats { get; private set; }
+        protected List<SiteStatsCalculated> AllLatestStats { get; private set; }
+        protected Site CurrentSite { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,8 +31,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                     Response.Redirect("/Sites/Default");
                 }
             }
-
-            var site = new Site();
+            
             var sitesStats = new List<SiteStatsCalculated>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString))
@@ -42,25 +43,30 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
                 if (validGuid)
                 {
-                    site = Models.Site.LoadFromDatabase(connection, siteIdGuid);
+                    CurrentSite = Models.Site.LoadFromDatabase(connection, siteIdGuid);
                 }
                 else
                 {
-                    site = Models.Site.LoadFromDatabase(connection, apiSiteParameter);
+                    CurrentSite = Models.Site.LoadFromDatabase(connection, apiSiteParameter);
                 }
-                sitesStats = SiteStatsCalculated.LoadFromDatabase(connection, site);
+
+                sitesStats = SiteStatsCalculated.LoadFromDatabase(connection, CurrentSite);
+                AllLatestStats = Models.Site.LoadAllWithStatsFromDatabase(connection);
             }
 
             sitesStats = sitesStats.Where(x => x.Manual == false).OrderByDescending(x => x.Gathered).ToList();
 
             SiteStatsCalculated.LinkToNext(sitesStats);
 
-            Title = site.Name;
+            Title = CurrentSite.Name;
+            LatestStats = sitesStats[0];
 
-            Stats = sitesStats[0];
-
-            SiteStats.DataSource = sitesStats;
+            SiteStats.DataSource = sitesStats.Take(7);
             SiteStats.DataBind();
         }
+
+        protected int GetRank<T>(Func<SiteStatsCalculated, T> pred) => AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).OrderByDescending(pred).TakeWhile(x => x.SiteId != CurrentSite.Id).Count() + 1;
+
+        protected int GetPercentile<T>(Func<SiteStatsCalculated, T> pred) => (int)(((double)AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() - GetRank(pred)) / AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() * 100);
     }
 }

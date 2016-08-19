@@ -85,9 +85,9 @@ namespace Stack_Exchange_Statistics_Explorer.Models
             return site;
         }
 
-        public static List<SiteStats> LoadAllWithStatsFromDatabase(SqlConnection connection)
+        public static List<SiteStatsCalculated> LoadAllWithStatsFromDatabase(SqlConnection connection)
         {
-            var sitesStats = new List<SiteStats>();
+            var sitesStats = new List<SiteStatsCalculated>();
 
             using (var command = new SqlCommand("SELECT S.*, SS.Id AS [StyleId], SS.LinkColor, SS.TagBackgroundColor, SS.TagForegroundColor FROM SE.vwAllSitesWithLatestStat AS S INNER JOIN SE.SiteStyling AS SS ON SS.Id = S.StylingId ORDER BY S.Id ASC", connection))
             using (var reader = command.ExecuteReader())
@@ -95,7 +95,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
                 while (reader.Read())
                 {
                     var site = LoadFromReader(reader);
-                    var siteStats = new SiteStats();
+                    var siteStats = new SiteStatsCalculated();
                     SiteStats.LoadFromReader(reader, siteStats);
                     siteStats.Site = site;
                     sitesStats.Add(siteStats);

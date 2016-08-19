@@ -17,7 +17,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var siteStats = new List<SiteStats>();
+            var siteStats = new List<SiteStatsCalculated>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString))
             {

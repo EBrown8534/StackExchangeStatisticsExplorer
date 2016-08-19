@@ -5,9 +5,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="detail-header">
-        <h2 class="medium-8 small-12 columns"><%:HttpUtility.HtmlDecode(Stats.Site.Name) %></h2>
+        <h2 class="medium-8 small-12 columns"><%:HttpUtility.HtmlDecode(LatestStats.Site.Name) %></h2>
         <div class="medium-4 small-12 columns">
-            <a href="<%:Stats.Site.SiteUrl%>" class="button button-success radius right" target="_blank">View on Stack Exchange &raquo;</a>
+            <a href="<%:LatestStats.Site.SiteUrl%>" class="button button-success radius right" target="_blank">View on Stack Exchange &raquo;</a>
         </div>
     </div>
     <div class="medium-12 columns">
@@ -17,39 +17,39 @@
                 <tbody>
                     <tr>
                         <th>Site ID</th>
-                        <td><%:Stats.Site.Id.ToString("d") %></td>
+                        <td><%:LatestStats.Site.Id.ToString("d") %></td>
                     </tr>
                     <tr>
                         <th>API Parameter</th>
-                        <td><%:Stats.Site.ApiSiteParameter %></td>
+                        <td><%:LatestStats.Site.ApiSiteParameter %></td>
                     </tr>
                     <tr>
                         <th>Audience</th>
-                        <td><%:Stats.Site.Audience %></td>
+                        <td><%:LatestStats.Site.Audience %></td>
                     </tr>
                     <tr>
                         <th>Date of Closed Beta</th>
-                        <td><%:Stats.Site.ClosedBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
+                        <td><%:LatestStats.Site.ClosedBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
                     </tr>
                     <tr>
                         <th>Date of Open Beta</th>
-                        <td><%:Stats.Site.OpenBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
+                        <td><%:LatestStats.Site.OpenBetaDateTime?.ToLongDateString() ?? "N/A" %></td>
                     </tr>
                     <tr>
                         <th>Date of Launch</th>
-                        <td><%:Stats.Site.LaunchDateTime?.ToLongDateString() ?? "N/A" %></td>
+                        <td><%:LatestStats.Site.LaunchDateTime?.ToLongDateString() ?? "N/A" %></td>
                     </tr>
                     <tr>
                         <th>State</th>
-                        <td><%:Stats.Site.HumanizeState %></td>
+                        <td><%:LatestStats.Site.HumanizeState %></td>
                     </tr>
                     <tr>
                         <th>Type</th>
-                        <td><%:Stats.Site.HumanizeType %></td>
+                        <td><%:LatestStats.Site.HumanizeType %></td>
                     </tr>
                     <tr>
                         <th>URL</th>
-                        <td><%:Stats.Site.SiteUrl %></td>
+                        <td><%:LatestStats.Site.SiteUrl %></td>
                     </tr>
                 </tbody>
             </table>
@@ -60,23 +60,65 @@
                 <tbody>
                     <tr>
                         <th data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</th>
-                        <td class='<%:Stats.QuestionsPerDay >= 10 ? "good" : Stats.QuestionsPerDay >= 5 ? "neutral" : "bad" %>'><%:Stats.QuestionsPerDay.ToString("0.00") %></td>
-                        <td class='show-for-large-up <%:Stats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:LatestStats.QuestionsPerDay >= 10 ? "good" : LatestStats.QuestionsPerDay >= 5 ? "neutral" : "bad" %>'><%:LatestStats.QuestionsPerDay.ToString("0.00") %></td>
+                        <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
                     <tr>
                         <th data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</th>
-                        <td class='<%:Stats.AnsweredRate >= .9 ? "good" : Stats.AnsweredRate >= .8 ? "neutral" : "bad" %>'><%:Stats.AnsweredRate.ToString("0.00%") %></td>
-                        <td class='show-for-large-up <%:Stats.AnsweredRate >= .9 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:LatestStats.AnsweredRate >= .9 ? "good" : LatestStats.AnsweredRate >= .8 ? "neutral" : "bad" %>'><%:LatestStats.AnsweredRate.ToString("0.00%") %></td>
+                        <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
                     <tr>
                         <th data-tooltip class="has-tip" title="Every site needs a solid group of core users to assist in moderating the site. We recommend 150 users with 200+ rep.">Avid Users</th>
-                        <td class='<%:Stats.UsersAbove200Rep >= 150 ? "good" : Stats.UsersAbove200Rep >= 125 ? "neutral" : "bad" %>'><%:Stats.UsersAbove200Rep?.ToString("n0") %></td>
-                        <td class='show-for-large-up <%:Stats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:LatestStats.UsersAbove200Rep >= 150 ? "good" : LatestStats.UsersAbove200Rep >= 125 ? "neutral" : "bad" %>'><%:LatestStats.UsersAbove200Rep?.ToString("n0") %></td>
+                        <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>Needs work</td>
                     </tr>
                     <tr>
                         <th data-tooltip class="has-tip" title="2.5 answers per question is good, only 1 answer per question needs somework. On a healthy site, questions recieve multiple answers and the best answer is voted to the top.">Answer Ratio</th>
-                        <td class='<%:Stats.AnswerRatio >= 2.5 ? "good" : Stats.AnswerRatio >= 1 ? "neutral" : "bad" %>'><%:Stats.AnswerRatio.ToString("0.00") %></td>
-                        <td class='show-for-large-up <%:Stats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:LatestStats.AnswerRatio >= 2.5 ? "good" : LatestStats.AnswerRatio >= 1 ? "neutral" : "bad" %>'><%:LatestStats.AnswerRatio.ToString("0.00") %></td>
+                        <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>Needs work</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="small-12 medium-5 columns">
+            <h3 data-tooltip class="has-tip" title="Rankings are based on other sites of the same type. Main sites are only ranked among Main sites, and Meta sites only ranked among Meta sites.">Rankings</h3>
+            <table class="detail-table">
+                <tbody>
+                    <tr>
+                        <th>Questions</th>
+                        <td>
+                            <%:GetRank(x => x.TotalQuestions) %> / <%:AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() %>
+                            (<%:GetPercentile(x => x.TotalQuestions).ToString().AddIth()%> percentile)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Answers</th>
+                        <td>
+                            <%:GetRank(x => x.TotalAnswers) %> / <%:AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() %> 
+                            (<%:GetPercentile(x => x.TotalAnswers).ToString().AddIth()%> percentile)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Answered Rate</th>
+                        <td>
+                            <%:GetRank(x => x.AnsweredRate) %> / <%:AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() %>
+                            (<%:GetPercentile(x => x.AnsweredRate).ToString().AddIth()%> percentile)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Answer Ratio</th>
+                        <td>
+                            <%:GetRank(x => x.AnswerRatio) %> / <%:AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() %>
+                            (<%:GetPercentile(x => x.AnswerRatio).ToString().AddIth()%> percentile)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Percent Users > 150 Rep</th>
+                        <td>
+                            <%:GetRank(x => (double)(x.UsersAbove150Rep ?? 0) / x.TotalUsers) %> / <%:AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() %>
+                            (<%:GetPercentile(x => (double)(x.UsersAbove150Rep ?? 0) / x.TotalUsers).ToString().AddIth()%> percentile)
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -111,7 +153,7 @@
                 var hW = fW / 2;
                 var hH = fH / 2;
                 var m = { top: 5, right: 3, bottom: 60, left: 70 }
-                var siteId = "<%:Stats.Site.Id%>";
+                var siteId = "<%:LatestStats.Site.Id%>";
                 var lTC = 60;
                 var sTC = 15;
 
@@ -181,10 +223,10 @@
                             <tr runat="server">
                                 <td>
                                     <span class="show-for-large-up">
-                                    <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("ddd d MMM yy") %>
-                                        </span>
+                                        <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("ddd d MMM yy") %>
+                                    </span>
                                     <span class="hide-for-large-up">
-                                    <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("d-M-yy") %>
+                                        <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("d-M-yy") %>
                                     </span>
                                 </td>
                                 <%--<td>
