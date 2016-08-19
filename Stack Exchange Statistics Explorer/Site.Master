@@ -75,7 +75,7 @@
                     Version: <%:Assembly.GetName().Version.ToString() %> built on <%:System.IO.File.GetLastWriteTimeUtc(Assembly.Location).ToString(@"d MMM yyyy \a\t HH:mm:ss") %> UTC<br />
                     This website is not directly affiliated with <a href="http://www.stackexchange.com">Stack Exchange</a>, all data is retrieved directly from the <a href="http://api.stackexchange.com">Stack Exchange API</a> and is subject to the original API terms of service.<br />
                     <br />
-                    <span class="small">Want to see more features? Find any bugs? Report them on the <a runat="server" href="~/FeatureRequest">Feature Request</a> page or the <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer">GitHub Repository</a>.</span>
+                    <span class="small">Want to see more features? Find any bugs? Report them on the <a runat="server" href="~/FeatureRequest">Feature Request</a> page or the <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer/issues">GitHub Repository</a>.</span>
                 </p>
             </footer>
         </div>
