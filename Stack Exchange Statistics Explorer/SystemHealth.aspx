@@ -37,12 +37,18 @@
 
         <ItemTemplate>
             <tr runat="server">
-                <td><%#((ApiBatchLog)Container.DataItem).StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") %></td>
-                <td><%#((ApiBatchLog)Container.DataItem).EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") %></td>
-                <td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).StartDateTime.GetClassOption(x => x.TimeOfDay <= new TimeSpan(0, 1, 0), x => x.TimeOfDay > new TimeSpan(0, 1, 30)) %>'>
+                    <%#((ApiBatchLog)Container.DataItem).StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") %>
+                </td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).EndDateTime.GetClassOption(x => x.TimeOfDay <= new TimeSpan(0, 15, 0), x => x.TimeOfDay > new TimeSpan(0, 20, 0)) %>'>
+                    <%#((ApiBatchLog)Container.DataItem).EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") %>
+                </td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).TimeTaken.GetClassOption(x => x <= new TimeSpan(0, 10, 0), x => x > new TimeSpan(0, 15, 0)) %>'>
                     <%#((ApiBatchLog)Container.DataItem).TimeTaken.ToString(@"h\:mm\:ss") %>
                 </td>
-                <td><%#((ApiBatchLog)Container.DataItem).RequestCount %></td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).RequestCount.GetClassOption(x => x < 7500, x => x > 2000) %>'>
+                    <%#((ApiBatchLog)Container.DataItem).RequestCount %>
+                </td>
                 <td class='<%#((ApiBatchLog)Container.DataItem).RequestsPerSecond.GetClassOption(x => x >= 3, x => x < 2) %>'>
                     <%#((ApiBatchLog)Container.DataItem).RequestsPerSecond.ToString("0.00") %>
                 </td>
@@ -53,11 +59,15 @@
                 <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1200, x => x > 1500) %>'>
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.ToString("0.00") %>
                 </td>
-                <td><%#((ApiBatchLog)Container.DataItem).BackoffCount %></td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).BackoffCount.GetClassOption(x => x <= 7, x => x > 15) %>'>
+                    <%#((ApiBatchLog)Container.DataItem).BackoffCount %>
+                </td>
                 <td class='<%#((ApiBatchLog)Container.DataItem).TotalBackoff.GetClassOption(x => x <= 70, x => x > 150) %>'>
                     <%#((ApiBatchLog)Container.DataItem).TotalBackoff %>
                 </td>
-                <td><%#((ApiBatchLog)Container.DataItem).EndQuotaRemaining %></td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).EndQuotaRemaining.GetClassOption(x => x >= 2000, x => x < 1500) %>'>
+                    <%#((ApiBatchLog)Container.DataItem).EndQuotaRemaining %>
+                </td>
             </tr>
         </ItemTemplate>
     </asp:ListView>
