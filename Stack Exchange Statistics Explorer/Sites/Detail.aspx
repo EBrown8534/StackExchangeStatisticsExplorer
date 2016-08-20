@@ -2,6 +2,7 @@
 
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities" %>
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities.Extensions" %>
+<%@ Import Namespace="Evbpc.Framework.Utilities.Extensions" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="detail-header">
@@ -64,7 +65,8 @@
                     </tr>
                     <tr>
                         <th>Logo</th>
-                        <td><img src="<%:CurrentSite.LogoUrl %>" height="48" /></td>
+                        <td>
+                            <img src="<%:CurrentSite.LogoUrl %>" height="48" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -75,23 +77,39 @@
                 <tbody>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</span></th>
-                        <td class='<%:LatestStats.QuestionsPerDay >= 10 ? "good" : LatestStats.QuestionsPerDay >= 5 ? "neutral" : "bad" %>'><%:LatestStats.QuestionsPerDay.ToString("0.00") %></td>
-                        <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:new Dictionary<string, Predicate<double>> { ["good"] = x => x >= 10, ["neutral"] = x => x >= 5, ["bad"] = x => true }.FindKey(LatestStats.QuestionsPerDay) %>'>
+                            <%:LatestStats.QuestionsPerDay.ToString("0.00") %>
+                        </td>
+                        <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>
+                            Needs work
+                        </td>
                     </tr>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</span></th>
-                        <td class='<%:LatestStats.AnsweredRate >= .9 ? "good" : LatestStats.AnsweredRate >= .8 ? "neutral" : "bad" %>'><%:LatestStats.AnsweredRate.ToString("0.00%") %></td>
-                        <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:new Dictionary<string, Predicate<double>> { ["good"] = x => x >= .9, ["neutral"] = x => x >= .8, ["bad"] = x => true }.FindKey(LatestStats.AnsweredRate) %>'>
+                            <%:LatestStats.AnsweredRate.ToString("0.00%") %>
+                        </td>
+                        <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>
+                            Needs work
+                        </td>
                     </tr>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="Every site needs a solid group of core users to assist in moderating the site. We recommend 150 users with 200+ rep.">Avid Users</span></th>
-                        <td class='<%:LatestStats.UsersAbove200Rep >= 150 ? "good" : LatestStats.UsersAbove200Rep >= 125 ? "neutral" : "bad" %>'><%:LatestStats.UsersAbove200Rep?.ToString("n0") %></td>
-                        <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:new Dictionary<string, Predicate<int?>> { ["grey"] = x => !x.HasValue, ["good"] = x => x >= 150, ["neutral"] = x => x >= 125, ["bad"] = x => true }.FindKey(LatestStats.UsersAbove200Rep) %>'>
+                            <%:LatestStats.UsersAbove200Rep?.ToString("n0") ?? "N/A" %>
+                        </td>
+                        <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>
+                            Needs work
+                        </td>
                     </tr>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="2.5 answers per question is good, only 1 answer per question needs somework. On a healthy site, questions recieve multiple answers and the best answer is voted to the top.">Answer Ratio</span></th>
-                        <td class='<%:LatestStats.AnswerRatio >= 2.5 ? "good" : LatestStats.AnswerRatio >= 1 ? "neutral" : "bad" %>'><%:LatestStats.AnswerRatio.ToString("0.00") %></td>
-                        <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>Needs work</td>
+                        <td class='<%:new Dictionary<string, Predicate<double>> { ["good"] = x => x >= 2.5, ["neutral"] = x => x >= 1, ["bad"] = x => true }.FindKey(LatestStats.AnswerRatio) %>'>
+                            <%:LatestStats.AnswerRatio.ToString("0.00") %>
+                        </td>
+                        <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>
+                            Needs work
+                        </td>
                     </tr>
                 </tbody>
             </table>
