@@ -13,6 +13,8 @@ namespace Stack_Exchange_Statistics_Explorer
 {
     public partial class SystemHealth : System.Web.UI.Page
     {
+        protected TableInfo TableSizeTotals { get; private set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var logResults = new List<ApiBatchLog>();
@@ -41,6 +43,17 @@ namespace Stack_Exchange_Statistics_Explorer
 
             apiLogResults = apiLogResults.OrderByDescending(x => x.StartDateTime).ToList();
 
+            TableSizeTotals = new TableInfo();
+            TableSizeTotals.TableName = "Total";
+
+            foreach (var tableSize in tableSizes)
+            {
+                TableSizeTotals.RowCount += tableSize.RowCount;
+                TableSizeTotals.IndexCount += tableSize.IndexCount;
+                TableSizeTotals.TotalSpaceKB += tableSize.TotalSpaceKB;
+                TableSizeTotals.UsedSpaceKB += tableSize.UsedSpaceKB;
+            }
+
             ApiLogResults.DataSource = apiLogResults;
             ApiLogResults.DataBind();
 
@@ -59,7 +72,7 @@ namespace Stack_Exchange_Statistics_Explorer
             public DateTime Created { get; set; }
             public DateTime Modified { get; set; }
 
-            public string FullTableName => SchemaName + '.' + TableName;
+            public string FullTableName => (SchemaName != null ? SchemaName + '.' : "") + TableName;
             public long UnusedSpaceKB => TotalSpaceKB - UsedSpaceKB;
             public double UsedSpacePerRowKB => RowCount == 0 ? 0 : (double)UsedSpaceKB / RowCount;
 
