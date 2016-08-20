@@ -16,6 +16,7 @@ namespace Stack_Exchange_Statistics_Explorer
         protected void Page_Load(object sender, EventArgs e)
         {
             var logResults = new List<ApiBatchLog>();
+            var tableSizes = new List<TableInfo>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ApiDataConnection"].ConnectionString))
             {
@@ -25,6 +26,7 @@ namespace Stack_Exchange_Statistics_Explorer
                 }
 
                 logResults = ApiBatchLog.LoadAllFromDatabase(connection);
+                tableSizes = TableInfo.LoadAllFromDatabase(connection).Where(x => x.SchemaName == "SE").ToList();
             }
 
             var apiLogResults = new List<ApiBatchLog>();
@@ -41,6 +43,77 @@ namespace Stack_Exchange_Statistics_Explorer
 
             ApiLogResults.DataSource = apiLogResults;
             ApiLogResults.DataBind();
+
+            TableSizeResults.DataSource = tableSizes;
+            TableSizeResults.DataBind();
+        }
+
+        protected class TableInfo
+        {
+            public string TableName { get; set; }
+            public string SchemaName { get; set; }
+            public long RowCount { get; set; }
+            public long TotalSpaceKB { get; set; }
+            public long UsedSpaceKB { get; set; }
+            public int IndexCount { get; set; }
+            public DateTime Created { get; set; }
+            public DateTime Modified { get; set; }
+
+            public string FullTableName => SchemaName + '.' + TableName;
+            public long UnusedSpaceKB => TotalSpaceKB - UsedSpaceKB;
+            public double UsedSpacePerRowKB => RowCount == 0 ? 0 : (double)UsedSpaceKB / RowCount;
+
+            public static List<TableInfo> LoadAllFromDatabase(SqlConnection connection)
+            {
+                var results = new List<TableInfo>();
+
+                using (var command = new SqlCommand(@"SELECT 
+    CAST(t.name AS VARCHAR(64)) AS TableName,
+    CAST(s.name AS VARCHAR(64)) AS SchemaName,
+    p.[rows] AS [RowCount],
+    SUM(a.total_pages) * 8 AS TotalSpaceKB, 
+    SUM(a.used_pages) * 8 AS UsedSpaceKB,
+    COUNT(i.name) AS IndexCount,
+	t.create_date AS Created,
+	t.modify_date AS Modified
+FROM 
+    sys.tables t
+INNER JOIN      
+    sys.indexes i ON t.[object_id] = i.[object_id]
+INNER JOIN 
+    sys.partitions p ON i.[object_id] = p.[object_id] AND i.index_id = p.index_id
+INNER JOIN 
+    sys.allocation_units a ON p.[partition_id] = a.container_id
+LEFT OUTER JOIN 
+    sys.schemas s ON t.[schema_id] = s.[schema_id]
+WHERE 
+    s.name = 'SE'
+GROUP BY 
+    t.name, s.name, p.[rows], t.create_date, t.modify_date
+ORDER BY 
+    s.name, t.name", connection))
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        results.Add(LoadFromReader(reader));
+                    }
+                }
+
+                return results;
+            }
+
+            public static TableInfo LoadFromReader(SqlDataReader reader) => new TableInfo
+            {
+                TableName = reader.GetItem<string>(nameof(TableName)),
+                SchemaName = reader.GetItem<string>(nameof(SchemaName)),
+                RowCount = reader.GetItem<long>(nameof(RowCount)),
+                TotalSpaceKB = reader.GetItem<long>(nameof(TotalSpaceKB)),
+                UsedSpaceKB = reader.GetItem<long>(nameof(UsedSpaceKB)),
+                IndexCount = reader.GetItem<int>(nameof(IndexCount)),
+                Created = reader.GetItem<DateTime>(nameof(Created)),
+                Modified = reader.GetItem<DateTime>(nameof(Modified))
+            };
         }
 
         protected class ApiBatchLog

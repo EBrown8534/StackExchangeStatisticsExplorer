@@ -6,10 +6,49 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>System Health</h2>
+    <h3>Data Store Health</h3>
+    <asp:ListView runat="server" ID="TableSizeResults">
+        <LayoutTemplate>
+            <table class="medium-12">
+                <thead>
+                    <tr>
+                        <th>Table Name</th>
+                        <th>Created</th>
+                        <th>Last Updated</th>
+                        <th>Row Count</th>
+                        <th>Index Count</th>
+                        <th>Total Size</th>
+                        <th>Used Space</th>
+                        <th>Used Space / Row</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr runat="server" id="groupPlaceholder"></tr>
+                </tbody>
+            </table>
+        </LayoutTemplate>
+
+        <GroupTemplate>
+            <tr runat="server" id="itemPlaceholder"></tr>
+        </GroupTemplate>
+
+        <ItemTemplate>
+            <tr runat="server">
+                <td><%#((TableInfo)Container.DataItem).FullTableName %></td>
+                <td><%#((TableInfo)Container.DataItem).Created.ToString("yyyy-MM-dd HH:mm:ss") %></td>
+                <td><%#((TableInfo)Container.DataItem).Modified.ToString("yyyy-MM-dd HH:mm:ss") %></td>
+                <td><%#((TableInfo)Container.DataItem).RowCount.ToString("n0") %> kB</td>
+                <td><%#((TableInfo)Container.DataItem).IndexCount %></td>
+                <td><%#((TableInfo)Container.DataItem).TotalSpaceKB.ToString("n0") %> kB</td>
+                <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
+                <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
+            </tr>
+        </ItemTemplate>
+    </asp:ListView>
     <h3>Data Gathering Health</h3>
     <asp:ListView runat="server" ID="ApiLogResults">
         <LayoutTemplate>
-            <table>
+            <table class="medium-12">
                 <thead>
                     <tr>
                         <th>Start</th>
