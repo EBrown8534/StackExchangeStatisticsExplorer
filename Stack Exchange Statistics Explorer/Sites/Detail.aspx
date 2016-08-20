@@ -65,8 +65,7 @@
                     </tr>
                     <tr>
                         <th>Logo</th>
-                        <td>
-                            <img src="<%:CurrentSite.LogoUrl %>" height="48" /></td>
+                        <td><img src="<%:CurrentSite.LogoUrl %>" height="48" /></td>
                     </tr>
                 </tbody>
             </table>
