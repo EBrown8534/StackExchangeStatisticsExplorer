@@ -17,6 +17,7 @@
                         <th>Time Taken</th>
                         <th>Total Requests</th>
                         <th>Requests / Second</th>
+                        <th>Milliseconds / Request</th>
                         <th>Sites Loaded</th>
                         <th>Milliseconds / Site</th>
                         <th>Backoff Count</th>
@@ -36,21 +37,24 @@
 
         <ItemTemplate>
             <tr runat="server">
-                <td><%#((ApiBatchLog)Container.DataItem).StartDateTime.ToString("yyyy-MM-dd HH:mm:ss.fffffff") %></td>
-                <td><%#((ApiBatchLog)Container.DataItem).EndDateTime.ToString("yyyy-MM-dd HH:mm:ss.fffffff") %></td>
+                <td><%#((ApiBatchLog)Container.DataItem).StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") %></td>
+                <td><%#((ApiBatchLog)Container.DataItem).EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") %></td>
                 <td>
-                    <%#((ApiBatchLog)Container.DataItem).TimeTaken %>
+                    <%#((ApiBatchLog)Container.DataItem).TimeTaken.ToString(@"h\:mm\:ss") %>
                 </td>
                 <td><%#((ApiBatchLog)Container.DataItem).RequestCount %></td>
-                <td class='<%#new Dictionary<string, Predicate<double>> { ["good"] = x => x >= 3, ["neutral"] = x => x > 2, ["bad"] = x => true }.FindKey(((ApiBatchLog)Container.DataItem).RequestsPerSecond) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).RequestsPerSecond.GetClassOption(x => x >= 3, x => x < 2) %>'>
                     <%#((ApiBatchLog)Container.DataItem).RequestsPerSecond.ToString("0.00") %>
                 </td>
+                <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerRequest.GetClassOption(x => x <= 300, x => x > 500) %>'>
+                    <%#((ApiBatchLog)Container.DataItem).MillisecondsPerRequest.ToString("0.00") %>
+                </td>
                 <td><%#((ApiBatchLog)Container.DataItem).SiteCount %></td>
-                <td class='<%#new Dictionary<string, Predicate<double>> { ["good"] = x => x <= 1200, ["neutral"] = x => x <= 1500, ["bad"] = x => true }.FindKey(((ApiBatchLog)Container.DataItem).MillisecondsPerSite) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1200, x => x > 1500) %>'>
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.ToString("0.00") %>
                 </td>
                 <td><%#((ApiBatchLog)Container.DataItem).BackoffCount %></td>
-                <td class='<%#new Dictionary<string, Predicate<int>> { ["good"] = x => x <= 90, ["neutral"] = x => x <= 150, ["bad"] = x => true }.FindKey(((ApiBatchLog)Container.DataItem).TotalBackoff) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).TotalBackoff.GetClassOption(x => x <= 70, x => x > 150) %>'>
                     <%#((ApiBatchLog)Container.DataItem).TotalBackoff %>
                 </td>
                 <td><%#((ApiBatchLog)Container.DataItem).EndQuotaRemaining %></td>

@@ -493,6 +493,7 @@
     </Compile>
     <Compile Include="Utilities\Binder.cs" />
     <Compile Include="Utilities\Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Utilities\Extensions\GenericExtensions.cs" />
     <Compile Include="Utilities\Extensions\ResponseTypeExtensions.cs" />
     <Compile Include="Utilities\Extensions\SqlDataReaderExtensions.cs" />
     <Compile Include="Utilities\Extensions\StringExtensions.cs" />

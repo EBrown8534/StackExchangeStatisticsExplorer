@@ -76,7 +76,7 @@
                 <tbody>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</span></th>
-                        <td class='<%:new Dictionary<string, Predicate<double>> { ["good"] = x => x >= 10, ["neutral"] = x => x >= 5, ["bad"] = x => true }.FindKey(LatestStats.QuestionsPerDay) %>'>
+                        <td class='<%:LatestStats.QuestionsPerDay.GetClassOption(x => x >= 10, x => x < 5) %>'>
                             <%:LatestStats.QuestionsPerDay.ToString("0.00") %>
                         </td>
                         <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>
@@ -85,7 +85,7 @@
                     </tr>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</span></th>
-                        <td class='<%:new Dictionary<string, Predicate<double>> { ["good"] = x => x >= .9, ["neutral"] = x => x >= .8, ["bad"] = x => true }.FindKey(LatestStats.AnsweredRate) %>'>
+                        <td class='<%:LatestStats.AnsweredRate.GetClassOption(x => x >= .9, x => x < .8) %>'>
                             <%:LatestStats.AnsweredRate.ToString("0.00%") %>
                         </td>
                         <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>
@@ -94,7 +94,7 @@
                     </tr>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="Every site needs a solid group of core users to assist in moderating the site. We recommend 150 users with 200+ rep.">Avid Users</span></th>
-                        <td class='<%:new Dictionary<string, Predicate<int?>> { ["grey"] = x => !x.HasValue, ["good"] = x => x >= 150, ["neutral"] = x => x >= 125, ["bad"] = x => true }.FindKey(LatestStats.UsersAbove200Rep) %>'>
+                        <td class='<%:LatestStats.UsersAbove200Rep.GetClassOption(x => x >= 150, x => x < 125) %>'>
                             <%:LatestStats.UsersAbove200Rep?.ToString("n0") ?? "N/A" %>
                         </td>
                         <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>
@@ -103,7 +103,7 @@
                     </tr>
                     <tr>
                         <th><span data-tooltip class="has-tip" title="2.5 answers per question is good, only 1 answer per question needs somework. On a healthy site, questions recieve multiple answers and the best answer is voted to the top.">Answer Ratio</span></th>
-                        <td class='<%:new Dictionary<string, Predicate<double>> { ["good"] = x => x >= 2.5, ["neutral"] = x => x >= 1, ["bad"] = x => true }.FindKey(LatestStats.AnswerRatio) %>'>
+                        <td class='<%:LatestStats.AnswerRatio.GetClassOption(x => x >= 2.5, x => x < 1) %>'>
                             <%:LatestStats.AnswerRatio.ToString("0.00") %>
                         </td>
                         <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>
@@ -269,19 +269,19 @@
                         </td>--%>
                                 <td class="show-for-medium-up">
                                     <%#Binder.Eval<int>(Container, "TotalAccepted") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAcceptedChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalAcceptedChange") < 0 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAcceptedChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalAcceptedChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
                                 <td class="show-for-large-up">
                                     <%#Binder.Eval<int>(Container, "TotalAnswered") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAnsweredChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalAnsweredChange") < 0 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAnsweredChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalAnsweredChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
                                 <td>
                                     <%#Binder.Eval<int>(Container, "TotalAnswers") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAnswersChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalAnswersChange") < 0 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAnswersChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalAnswersChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
@@ -295,32 +295,32 @@
                         </td>--%>
                                 <td>
                                     <%#Binder.Eval<int>(Container, "TotalQuestions") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalQuestionsChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalQuestionsChange") < 0 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalQuestionsChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalQuestionsChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
                                 <td>
                                     <%#Binder.Eval<int>(Container, "TotalUnanswered") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalUnansweredChange") > 0 ? "bad" : Binder.Eval<int?>(Container, "TotalUnansweredChange") < 0 ? "good" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalUnansweredChange").GetClassOption(x => x < 0, x => x > 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalUnansweredChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
                                 <td class="show-for-medium-up">
                                     <%#Binder.Eval<int>(Container, "TotalUsers") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalUsersChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalUsersChange") < 0 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalUsersChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalUsersChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
                                 <td class="show-for-medium-up">
                                     <%#Binder.Eval<int>(Container, "TotalVotes") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalVotesChange") > 0 ? "good" : Binder.Eval<int?>(Container, "TotalVotesChange") < 0 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalVotesChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                         <%#Binder.Eval<int?>(Container, "TotalVotesChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
                                 <td class="show-for-medium-up">
                                     <span class='<%#Binder.Eval<int?>(Container, "UsersAbove150Rep") == null ? "grey" : "" %>'>
                                         <%#Binder.Eval<int?>(Container, "UsersAbove150Rep")?.ToString() ?? "N/A" %><br />
-                                        <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "UsersAbove150RepChange") > 0 ? "good" : Binder.Eval<int?>(Container, "UsersAbove150RepChange") < 0 ? "bad" : "neutral" %>'>
+                                        <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "UsersAbove150RepChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                             <%#Binder.Eval<int?>(Container, "UsersAbove150RepChange")?.ToString().IncludeSign() %>
                                         </span>
                                     </span>
@@ -328,20 +328,20 @@
                                 <td>
                                     <span class='<%#Binder.Eval<int?>(Container, "UsersAbove200Rep") == null ? "grey" : "" %>'>
                                         <%#Binder.Eval<int?>(Container, "UsersAbove200Rep")?.ToString() ?? "N/A" %><br />
-                                        <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "UsersAbove200RepChange") > 0 ? "good" : Binder.Eval<int?>(Container, "UsersAbove200RepChange") < 0 ? "bad" : "neutral" %>'>
+                                        <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "UsersAbove200RepChange").GetClassOption(x => x > 0, x => x < 0) %>'>
                                             <%#Binder.Eval<int?>(Container, "UsersAbove200RepChange")?.ToString().IncludeSign() %>
                                         </span>
                                     </span>
                                 </td>
                                 <td class="show-for-large-up">
                                     <%#Binder.Eval<double>(Container, "AnsweredRate").ToString("0.00%") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "AnsweredRateChange") >= 0.00005 ? "good" : Binder.Eval<double?>(Container, "AnsweredRateChange") <= -0.00005 ? "bad" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "AnsweredRateChange").GetClassOption(x => x > 0.00005, x => x < 0.00005) %>'>
                                         <%#Binder.Eval<double?>(Container, "AnsweredRateChange")?.ToString("0.00%").IncludeSign() %>
                                     </span>
                                 </td>
                                 <td>
                                     <%#Binder.Eval<double>(Container, "UnansweredRate").ToString("0.00%") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "UnansweredRateChange") >= 0.00005 ? "bad" : Binder.Eval<double?>(Container, "UnansweredRateChange") <= -0.00005 ? "good" : "neutral" %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "UnansweredRateChange").GetClassOption(x => x < 0.00005, x => x > 0.00005) %>'>
                                         <%#Binder.Eval<double?>(Container, "UnansweredRateChange")?.ToString("0.00%").IncludeSign() %>
                                     </span>
                                 </td>

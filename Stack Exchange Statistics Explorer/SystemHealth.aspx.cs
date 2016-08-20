@@ -59,9 +59,10 @@ namespace Stack_Exchange_Statistics_Explorer
             public int EndQuotaRemaining { get; set; }
             public int SiteCount { get; set; }
 
-            public double RequestsPerSecond => RequestCount / (EndDateTime - StartDateTime).TotalSeconds;
+            public double RequestsPerSecond => RequestCount / TimeTaken.TotalSeconds;
             public TimeSpan TimeTaken => EndDateTime - StartDateTime;
-            public double MillisecondsPerSite => (EndDateTime - StartDateTime).TotalMilliseconds / SiteCount;
+            public double MillisecondsPerSite => TimeTaken.TotalMilliseconds / SiteCount;
+            public double MillisecondsPerRequest => TimeTaken.TotalMilliseconds / RequestCount;
 
             public static ApiBatchLog LoadFromReader(SqlDataReader reader) => new ApiBatchLog
             {
