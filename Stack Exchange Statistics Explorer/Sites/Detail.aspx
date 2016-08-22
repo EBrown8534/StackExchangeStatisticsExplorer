@@ -335,13 +335,13 @@
                                 </td>
                                 <td class="show-for-large-up">
                                     <%#Binder.Eval<double>(Container, "AnsweredRate").ToString("0.00%") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "AnsweredRateChange").GetClassOption(x => x > 0.00005, x => x < 0.00005) %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "AnsweredRateChange").GetClassOption(x => x > 0.00005, x => x < -0.00005) %>'>
                                         <%#Binder.Eval<double?>(Container, "AnsweredRateChange")?.ToString("0.00%").IncludeSign() %>
                                     </span>
                                 </td>
                                 <td>
                                     <%#Binder.Eval<double>(Container, "UnansweredRate").ToString("0.00%") %><br />
-                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "UnansweredRateChange").GetClassOption(x => x < 0.00005, x => x > 0.00005) %>'>
+                                    <span class='show-for-medium-up delta <%#Binder.Eval<double?>(Container, "UnansweredRateChange").GetClassOption(x => x < -0.00005, x => x > 0.00005) %>'>
                                         <%#Binder.Eval<double?>(Container, "UnansweredRateChange")?.ToString("0.00%").IncludeSign() %>
                                     </span>
                                 </td>
