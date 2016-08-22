@@ -224,13 +224,9 @@
                 <thead>
                     <tr>
                         <th>Gathered</th>
-                        <%--<th>API Revision</th>
-                <th>New Active Users</th>--%>
                         <th class="show-for-medium-up">Accepted</th>
                         <th>Answered</th>
                         <th>Answers</th>
-                        <%--<th>Badges</th>--%>
-                        <%--<th>Comments</th>--%>
                         <th>Questions</th>
                         <th class="show-for-large-up">Unanswered</th>
                         <th class="show-for-medium-up">Users</th>
@@ -261,12 +257,6 @@
                                         <%#Binder.Eval<DateTime>(Container, "Gathered").ToString("d-M-yy") %>
                                     </span>
                                 </td>
-                                <%--<td>
-                            <%#Binder.Eval<string>(Container, "ApiRevision") %>
-                        </td>
-                        <td>
-                            <%#Binder.Eval<int>(Container, "NewActiveUsers") %>
-                        </td>--%>
                                 <td class="show-for-medium-up">
                                     <%#Binder.Eval<int>(Container, "TotalAccepted") %><br />
                                     <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalAcceptedChange").GetClassOption(x => x > 0, x => x < 0) %>'>
@@ -285,14 +275,6 @@
                                         <%#Binder.Eval<int?>(Container, "TotalAnswersChange")?.ToString().IncludeSign() %>
                                     </span>
                                 </td>
-                                <%--<td>
-                            <%#Binder.Eval<int>(Container, "TotalBadges") %>
-                            (<%#Binder.Eval<int>(Container, "TotalBadgesChange").ToString().IncludeSign() %>)
-                        </td>--%>
-                                <%--<td>
-                            <%#Binder.Eval<int>(Container, "TotalComments") %>
-                            (<%#Binder.Eval<int>(Container, "TotalAnsweredChange").ToString().IncludeSign() %>)
-                        </td>--%>
                                 <td>
                                     <%#Binder.Eval<int>(Container, "TotalQuestions") %><br />
                                     <span class='show-for-medium-up delta <%#Binder.Eval<int?>(Container, "TotalQuestionsChange").GetClassOption(x => x > 0, x => x < 0) %>'>
