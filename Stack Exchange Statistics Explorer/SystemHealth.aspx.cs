@@ -13,12 +13,13 @@ namespace Stack_Exchange_Statistics_Explorer
 {
     public partial class SystemHealth : System.Web.UI.Page
     {
-        protected TableInfo TableSizeTotals { get; private set; }
+        protected TableInfo CoreTableSizeTotals { get; private set; }
+        protected TableInfo WebsiteTableSizeTotals { get; private set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var logResults = new List<ApiBatchLog>();
-            var tableSizes = new List<TableInfo>();
+            var coreTableSizes = new List<TableInfo>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ApiDataConnection"].ConnectionString))
             {
@@ -28,7 +29,19 @@ namespace Stack_Exchange_Statistics_Explorer
                 }
 
                 logResults = ApiBatchLog.LoadAllFromDatabase(connection);
-                tableSizes = TableInfo.LoadAllFromDatabase(connection).Where(x => x.SchemaName == "SE").ToList();
+                coreTableSizes = TableInfo.LoadAllFromDatabase(connection).Where(x => x.SchemaName == "SE").ToList();
+            }
+
+            var websiteTableSizes = new List<TableInfo>();
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString))
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                websiteTableSizes = TableInfo.LoadAllFromDatabase(connection).Where(x => x.SchemaName == "SE").ToList();
             }
 
             var apiLogResults = new List<ApiBatchLog>();
@@ -43,22 +56,36 @@ namespace Stack_Exchange_Statistics_Explorer
 
             apiLogResults = apiLogResults.OrderByDescending(x => x.StartDateTime).ToList();
 
-            TableSizeTotals = new TableInfo();
-            TableSizeTotals.TableName = "Total";
+            CoreTableSizeTotals = new TableInfo();
+            CoreTableSizeTotals.TableName = "Total";
 
-            foreach (var tableSize in tableSizes)
+            foreach (var tableSize in coreTableSizes)
             {
-                TableSizeTotals.RowCount += tableSize.RowCount;
-                TableSizeTotals.IndexCount += tableSize.IndexCount;
-                TableSizeTotals.TotalSpaceKB += tableSize.TotalSpaceKB;
-                TableSizeTotals.UsedSpaceKB += tableSize.UsedSpaceKB;
+                CoreTableSizeTotals.RowCount += tableSize.RowCount;
+                CoreTableSizeTotals.IndexCount += tableSize.IndexCount;
+                CoreTableSizeTotals.TotalSpaceKB += tableSize.TotalSpaceKB;
+                CoreTableSizeTotals.UsedSpaceKB += tableSize.UsedSpaceKB;
+            }
+
+            WebsiteTableSizeTotals = new TableInfo();
+            WebsiteTableSizeTotals.TableName = "Total";
+
+            foreach (var tableSize in websiteTableSizes)
+            {
+                WebsiteTableSizeTotals.RowCount += tableSize.RowCount;
+                WebsiteTableSizeTotals.IndexCount += tableSize.IndexCount;
+                WebsiteTableSizeTotals.TotalSpaceKB += tableSize.TotalSpaceKB;
+                WebsiteTableSizeTotals.UsedSpaceKB += tableSize.UsedSpaceKB;
             }
 
             ApiLogResults.DataSource = apiLogResults;
             ApiLogResults.DataBind();
 
-            TableSizeResults.DataSource = tableSizes;
-            TableSizeResults.DataBind();
+            CoreTableSizeResults.DataSource = coreTableSizes;
+            CoreTableSizeResults.DataBind();
+
+            WebsiteTableSizeResults.DataSource = websiteTableSizes;
+            WebsiteTableSizeResults.DataBind();
         }
 
         protected class TableInfo
@@ -86,7 +113,7 @@ namespace Stack_Exchange_Statistics_Explorer
     p.[rows] AS [RowCount],
     SUM(a.total_pages) * 8 AS TotalSpaceKB, 
     SUM(a.used_pages) * 8 AS UsedSpaceKB,
-    COUNT(i.name) AS IndexCount,
+    COUNT(DISTINCT i.index_id) AS IndexCount,
 	t.create_date AS Created,
 	t.modify_date AS Modified
 FROM 

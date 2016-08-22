@@ -7,6 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>System Health</h2>
     <h3>Data Store Health</h3>
+    <h4>Primary Database</h4>
     <table class="medium-12">
         <thead>
             <tr>
@@ -21,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <asp:ListView runat="server" ID="TableSizeResults">
+            <asp:ListView runat="server" ID="CoreTableSizeResults">
                 <LayoutTemplate>
                     <tr runat="server" id="groupPlaceholder"></tr>
                 </LayoutTemplate>
@@ -44,14 +45,63 @@
                 </ItemTemplate>
             </asp:ListView>
             <tr>
-                <th><%:TableSizeTotals.FullTableName %></th>
+                <th><%:CoreTableSizeTotals.FullTableName %></th>
                 <th></th>
                 <th></th>
-                <th><%:TableSizeTotals.RowCount.ToString("n0") %></th>
-                <th><%:TableSizeTotals.IndexCount %></th>
-                <th><%:TableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
-                <th><%:TableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
-                <th><%:TableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th><%:CoreTableSizeTotals.RowCount.ToString("n0") %></th>
+                <th><%:CoreTableSizeTotals.IndexCount %></th>
+                <th><%:CoreTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
+                <th><%:CoreTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
+                <th><%:CoreTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Production Database</h4>
+    <table class="medium-12">
+        <thead>
+            <tr>
+                <th>Table Name</th>
+                <th>Created</th>
+                <th>Last Updated</th>
+                <th>Row Count</th>
+                <th>Index Count</th>
+                <th>Total Size</th>
+                <th>Used Space</th>
+                <th>Used Space / Row</th>
+            </tr>
+        </thead>
+        <tbody>
+            <asp:ListView runat="server" ID="WebsiteTableSizeResults">
+                <LayoutTemplate>
+                    <tr runat="server" id="groupPlaceholder"></tr>
+                </LayoutTemplate>
+
+                <GroupTemplate>
+                    <tr runat="server" id="itemPlaceholder"></tr>
+                </GroupTemplate>
+
+                <ItemTemplate>
+                    <tr runat="server">
+                        <td><%#((TableInfo)Container.DataItem).FullTableName %></td>
+                        <td><%#((TableInfo)Container.DataItem).Created.ToString("yyyy-MM-dd HH:mm:ss") %></td>
+                        <td><%#((TableInfo)Container.DataItem).Modified.ToString("yyyy-MM-dd HH:mm:ss") %></td>
+                        <td><%#((TableInfo)Container.DataItem).RowCount.ToString("n0") %></td>
+                        <td><%#((TableInfo)Container.DataItem).IndexCount %></td>
+                        <td><%#((TableInfo)Container.DataItem).TotalSpaceKB.ToString("n0") %> kB</td>
+                        <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
+                        <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+            <tr>
+                <th><%:WebsiteTableSizeTotals.FullTableName %></th>
+                <th></th>
+                <th></th>
+                <th><%:WebsiteTableSizeTotals.RowCount.ToString("n0") %></th>
+                <th><%:WebsiteTableSizeTotals.IndexCount %></th>
+                <th><%:WebsiteTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
+                <th><%:WebsiteTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
+                <th><%:WebsiteTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
             </tr>
         </tbody>
     </table>
