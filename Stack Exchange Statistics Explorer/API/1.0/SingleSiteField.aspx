@@ -101,7 +101,19 @@
     </asp:ListView>
     <h3>Examples</h3>
     <p>
-        Returns the percentage of questions that remained unanswered for the site <code>Code Review</code> with dates in <code>d-MMM-yy</code> format and the values in <code>0.00%</code> format.<br />
-        <code>/API/1.0/SingleSiteField.ashx?Site=<%:CodeReviewId %>&Field=UnansweredRate&DateFormat=d-MMM-yy&FieldFormat=0.00%</code>
+        Returns the percentage of questions that remained unanswered for the site <code>Code Review</code> with dates in <code>d-MMM-yy</code> format and the values in <code>0.00%</code> format:
+    </p>
+    <p>
+        <code class="block">
+            /API/1.0/SingleSiteField.ashx?Site=<%:CodeReviewId %>&Field=UnansweredRate&DateFormat=d-MMM-yy&FieldFormat=0.00%
+        </code>
+    </p>
+    <p>
+        Example response:
+    </p>
+    <p>
+        <code class="block">
+            {"Items":[{"Gathered":"10-Apr-16","FieldValue":"6.36%"},{"Gathered":"11-Apr-16","FieldValue":"6.35%"},{"Gathered":"12-Apr-16","FieldValue":"6.33%"},{"Gathered":"13-Apr-16","FieldValue":"6.32%"},{"Gathered":"14-Apr-16","FieldValue":"6.35%"},{"Gathered":"15-Apr-16","FieldValue":"6.37%"},{"Gathered":"16-Apr-16","FieldValue":"6.40%"},{"Gathered":"17-Apr-16","FieldValue":"6.41%"},{"Gathered":"18-Apr-16","FieldValue":"6.41%"},{"Gathered":"19-Apr-16","FieldValue":"6.44%"},{"Gathered":"20-Apr-16","FieldValue":"6.45%"},{"Gathered":"21-Apr-16","FieldValue":"6.45%"},{"Gathered":"22-Apr-16","FieldValue":"6.48%"},{"Gathered":"23-Apr-16","FieldValue":"6.48%"},{"Gathered":"24-Apr-16","FieldValue":"6.49%"},{"Gathered":"25-Apr-16","FieldValue":"6.49%"},{"Gathered":"26-Apr-16","FieldValue":"6.49%"},{"Gathered":"27-Apr-16","FieldValue":"6.48%"},{"Gathered":"28-Apr-16","FieldValue":"6.50%"},{"Gathered":"29-Apr-16","FieldValue":"6.52%"}, ... ],"HasMore":false,"QuotaMax":2147483647,"QuotaRemaining":2147483647,"Backoff":null,"IsError":false}
+        </code>
     </p>
 </asp:Content>

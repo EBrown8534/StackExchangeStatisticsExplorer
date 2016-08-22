@@ -122,6 +122,10 @@ code {
     padding: 5px;
 }
 
+.block {
+    display: block !important;
+}
+
 /* Graph CSS */
 .axis,
 .tooltip {
