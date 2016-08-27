@@ -171,6 +171,7 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="API\1.0\Default.aspx" />
     <Content Include="API\1.0\SingleSiteField.aspx" />
+    <Content Include="API\1.0\SiteHistory.aspx" />
     <Content Include="API\Default.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\foundation\foundation.css" />
@@ -395,7 +396,6 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="API\1.0\Models\SingleSiteFieldResponseItem.cs" />
-    <Compile Include="API\1.0\Models\SiteHistoryItem.cs" />
     <Compile Include="API\1.0\Models\SiteHistoryResponseItem.cs" />
     <Compile Include="API\1.0\Requests\Request.cs" />
     <Compile Include="API\1.0\Requests\SingleSiteFieldRequest.cs" />
@@ -413,6 +413,13 @@
       <DependentUpon>SiteHistory.ashx</DependentUpon>
     </Compile>
     <Compile Include="API\1.0\Requests\SiteHistoryRequest.cs" />
+    <Compile Include="API\1.0\SiteHistory.aspx.cs">
+      <DependentUpon>SiteHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="API\1.0\SiteHistory.aspx.designer.cs">
+      <DependentUpon>SiteHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="API\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
