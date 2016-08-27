@@ -44,7 +44,7 @@ namespace Stack_Exchange_Statistics_Explorer.API._1._0.Requests
                         break;
                     // For the JSON and XML types, serailize the entire response.
                     case ResponseType.Json:
-                        JsonSerialization.Serialize(responseWrapped, ref responseString);
+                        JsonSerialization.Serialize(responseWrapped, ref responseString, true);
                         break;
                     case ResponseType.Xml:
                         XmlSerialization.Serialize(responseWrapped, ref responseString);
