@@ -1,15 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
+    [Serializable]
     public class SiteStatsCalculated : SiteStats
     {
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
         [ApiDescription("Previous <code>" + nameof(SiteStatsCalculated) + "</code> object when linked.")]
         public SiteStatsCalculated Previous { get; set; }
 

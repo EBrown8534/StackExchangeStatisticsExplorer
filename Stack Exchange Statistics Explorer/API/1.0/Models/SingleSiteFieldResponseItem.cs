@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stack_Exchange_Statistics_Explorer.API._1._0.Models
 {
+    [Serializable]
     public class SingleSiteFieldResponseItem : IBaseModel
     {
         [DelimitedColumn(Name = "Gathered", Order = 0)]

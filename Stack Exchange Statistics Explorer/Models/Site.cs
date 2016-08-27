@@ -12,6 +12,7 @@ using Evbpc.Framework.Utilities.Extensions;
 
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
+    [Serializable]
     public class Site : Evbpc.Framework.Integrations.StackExchange.API.Models.Site
     {
         public Guid Id { get; set; }

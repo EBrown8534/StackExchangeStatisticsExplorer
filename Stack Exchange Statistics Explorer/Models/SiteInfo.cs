@@ -1,5 +1,8 @@
-﻿namespace Stack_Exchange_Statistics_Explorer.Models
+﻿using System;
+
+namespace Stack_Exchange_Statistics_Explorer.Models
 {
+    [Serializable]
     public class SiteInfo
     {
         [ApiDescription("Reported number of answers per minute of site activity.")]

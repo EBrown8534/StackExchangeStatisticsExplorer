@@ -8,11 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using static Stack_Exchange_Statistics_Explorer.Utilities.Extensions.SqlDataReaderExtensions;
 using static Stack_Exchange_Statistics_Explorer.Utilities.Extensions.DateTimeExtensions;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
+    [Serializable]
     public class SiteStats : SiteInfo
     {
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
         [ApiDescription("The <code>" + nameof(Models.Site) + "</code> object for this object.")]
         public Site Site { get; set; }
 
