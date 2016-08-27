@@ -19,6 +19,7 @@
                 <th>Total Size</th>
                 <th>Used Space</th>
                 <th>Used Space / Row</th>
+                <th>Rows Added per Day</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,7 @@
                         <td><%#((TableInfo)Container.DataItem).TotalSpaceKB.ToString("n0") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
+                        <td><%#((TableInfo)Container.DataItem).RowsPerDay.ToString("0.00") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:ListView>
@@ -53,6 +55,7 @@
                 <th><%:CoreTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
                 <th><%:CoreTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
                 <th><%:CoreTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th></th>
             </tr>
         </tbody>
     </table>
@@ -68,6 +71,7 @@
                 <th>Total Size</th>
                 <th>Used Space</th>
                 <th>Used Space / Row</th>
+                <th>Rows Added per Day</th>
             </tr>
         </thead>
         <tbody>
@@ -90,6 +94,7 @@
                         <td><%#((TableInfo)Container.DataItem).TotalSpaceKB.ToString("n0") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
+                        <td><%#((TableInfo)Container.DataItem).RowsPerDay.ToString("0.00") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:ListView>
@@ -102,6 +107,7 @@
                 <th><%:WebsiteTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
                 <th><%:WebsiteTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
                 <th><%:WebsiteTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th></th>
             </tr>
         </tbody>
     </table>

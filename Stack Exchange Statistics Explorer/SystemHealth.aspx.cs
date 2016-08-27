@@ -102,6 +102,7 @@ namespace Stack_Exchange_Statistics_Explorer
             public string FullTableName => (SchemaName != null ? SchemaName + '.' : "") + TableName;
             public long UnusedSpaceKB => TotalSpaceKB - UsedSpaceKB;
             public double UsedSpacePerRowKB => RowCount == 0 ? 0 : (double)UsedSpaceKB / RowCount;
+            public double RowsPerDay => (double)RowCount / (DateTime.UtcNow - Created).Days;
 
             public static List<TableInfo> LoadAllFromDatabase(SqlConnection connection)
             {
