@@ -55,7 +55,7 @@
                 <td>csv</td>
                 <td>Comma-Separated Values</td>
                 <td>
-                    Returns the Items of the response in a delimited format using literal commas (<code>,</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters.<br />
+                    Returns the Items of the response in a delimited format using literal commas (<code>,</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters. Collections and sub-objects will not be returned.<br />
                     <code class="block">Property,Property2<br />Value,Value2</code>
                 </td>
             </tr>
@@ -63,7 +63,7 @@
                 <td>tsv</td>
                 <td>Tab-Separated Values</td>
                 <td>
-                    Returns the Items of the response in a delimited format using literal tabs (<code>\t</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters.<br />
+                    Returns the Items of the response in a delimited format using literal tabs (<code>\t</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters. Collections and sub-objects will not be returned.<br />
                     <code class="block">Property\tProperty2<br />Value\tValue2</code>
                 </td>
             </tr>
@@ -71,7 +71,7 @@
                 <td>psv</td>
                 <td>Pipe-Separated Values</td>
                 <td>
-                    Returns the Items of the response in a delimited format using literal pipes (<code>|</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters.<br />
+                    Returns the Items of the response in a delimited format using literal pipes (<code>|</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters. Collections and sub-objects will not be returned.<br />
                     <code class="block">Property|Property2<br />Value|Value2</code>
                 </td>
             </tr>
