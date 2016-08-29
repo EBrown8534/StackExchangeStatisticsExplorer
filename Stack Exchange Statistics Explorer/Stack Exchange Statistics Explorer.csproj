@@ -172,6 +172,7 @@
     <Content Include="API\1.0\Default.aspx" />
     <Content Include="API\1.0\SingleSiteField.aspx" />
     <Content Include="API\1.0\SiteHistory.aspx" />
+    <Content Include="API\1.0\Sites.aspx" />
     <Content Include="API\Default.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\foundation\foundation.css" />
@@ -202,6 +203,7 @@
     <Content Include="Scripts\foundation\foundation.topbar.js" />
     <Content Include="Scripts\foundation\jquery.cookie.js" />
     <Content Include="API\1.0\SingleSiteField.ashx" />
+    <Content Include="API\1.0\Sites.ashx" />
     <None Include="Properties\PublishProfiles\WEB01.pubxml" />
     <Content Include="Scripts\d3\LICENSE" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
@@ -396,9 +398,11 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="API\1.0\Models\SingleSiteFieldResponseItem.cs" />
+    <Compile Include="API\1.0\Models\ApiSite.cs" />
     <Compile Include="API\1.0\Models\SiteHistoryResponseItem.cs" />
     <Compile Include="API\1.0\Requests\Request.cs" />
     <Compile Include="API\1.0\Requests\SingleSiteFieldRequest.cs" />
+    <Compile Include="API\1.0\Requests\SitesRequest.cs" />
     <Compile Include="API\1.0\SingleSiteField.ashx.cs">
       <DependentUpon>SingleSiteField.ashx</DependentUpon>
     </Compile>
@@ -419,6 +423,16 @@
     </Compile>
     <Compile Include="API\1.0\SiteHistory.aspx.designer.cs">
       <DependentUpon>SiteHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="API\1.0\Sites.ashx.cs">
+      <DependentUpon>Sites.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="API\1.0\Sites.aspx.cs">
+      <DependentUpon>Sites.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="API\1.0\Sites.aspx.designer.cs">
+      <DependentUpon>Sites.aspx</DependentUpon>
     </Compile>
     <Compile Include="API\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
