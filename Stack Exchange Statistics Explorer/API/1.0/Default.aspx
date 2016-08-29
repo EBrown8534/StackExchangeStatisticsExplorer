@@ -20,7 +20,7 @@
         <tbody>
             <tr>
                 <td>FileType</td>
-                <td><code>json</code><%--, <code>xml</code>--%>, <code>tsv</code>, <code>csv</code>, <code>psv</code></td>
+                <td><code>json</code>, <code>xml</code>, <code>tsv</code>, <code>csv</code>, <code>psv</code></td>
                 <td>Specifies what type of data format should be returned.</td>
             </tr>
         </tbody>
@@ -43,11 +43,14 @@
                     <code class="block">{"property":"value","property2":{"property2.property":"value"}}</code>
                 </td>
             </tr>
-            <%--<tr>
+            <tr>
                 <td>xml</td>
                 <td>Extensible Markup Language</td>
-                <td>A graph object that maps property names to object values, including all sub-properties and collections. <code></code></td>
-            </tr>--%>
+                <td>
+                    A graph object that maps property names to object values, including all sub-properties and collections.<br />
+                    <code class="block"><pre>&lt;?xml version="1.0" encoding="utf-16"?&gt;<br />&lt;RootElement&gt;<br />&lt;Property&gt;Value&lt;/Property&gt;<br />&lt;Property2&gt;<br />&lt;Property2.Property&gt;Value&lt;/Property2.Property&gt;<br />&lt;/Property2&gt;<br />&lt;/RootElement&gt;</pre></code>
+                </td>
+            </tr>
             <tr>
                 <td>csv</td>
                 <td>Comma-Separated Values</td>

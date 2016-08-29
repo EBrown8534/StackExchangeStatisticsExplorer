@@ -17,6 +17,7 @@ using Evbpc.Framework.Utilities.Serialization.DelimitedSerialization;
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
     [Serializable]
+    [XmlType(TypeName = "DatabaseSite")]
     public class Site : Evbpc.Framework.Integrations.StackExchange.API.Models.Site
     {
         public Guid Id { get; set; }

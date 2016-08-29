@@ -47,7 +47,7 @@ namespace Stack_Exchange_Statistics_Explorer.API._1._0.Requests
                         JsonSerialization.Serialize(responseWrapped, ref responseString, true);
                         break;
                     case ResponseType.Xml:
-                        XmlSerialization.Serialize(responseWrapped, ref responseString);
+                        XmlSerialization.Serialize(responseWrapped, ref responseString, true);
                         break;
                 }
 
