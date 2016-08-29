@@ -20,8 +20,57 @@
         <tbody>
             <tr>
                 <td>FileType</td>
-                <td><code>json</code>, <code>xml</code>, <code>tsv</code>, <code>csv</code>, <code>psv</code></td>
-                <td>Specifies what type of data format should be returned. <code>json</code>: JavaScript Object Notation; <code>xml</code>: Extensible Markup Language; <code>tsv</code>: Tab-Separated Values; <code>csv</code>: Comma-Separated Values; <code>psv</code>: Pipe-Separated Values</td>
+                <td><code>json</code><%--, <code>xml</code>--%>, <code>tsv</code>, <code>csv</code>, <code>psv</code></td>
+                <td>Specifies what type of data format should be returned.</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>FileType Descriptions</h3>
+    <table class="medium-12">
+        <thead>
+            <tr>
+                <th>Value</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>json</td>
+                <td>Javascript Object Notation</td>
+                <td>
+                    A graph object that maps property names to object values, including all sub-properties and collections.<br />
+                    <code class="block">{"property":"value","property2":{"property2.property":"value"}}</code>
+                </td>
+            </tr>
+            <%--<tr>
+                <td>xml</td>
+                <td>Extensible Markup Language</td>
+                <td>A graph object that maps property names to object values, including all sub-properties and collections. <code></code></td>
+            </tr>--%>
+            <tr>
+                <td>csv</td>
+                <td>Comma-Separated Values</td>
+                <td>
+                    Returns the Items of the response in a delimited format using literal commas (<code>,</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters.<br />
+                    <code class="block">Property,Property2<br />Value,Value2</code>
+                </td>
+            </tr>
+            <tr>
+                <td>tsv</td>
+                <td>Tab-Separated Values</td>
+                <td>
+                    Returns the Items of the response in a delimited format using literal tabs (<code>\t</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters.<br />
+                    <code class="block">Property\tProperty2<br />Value\tValue2</code>
+                </td>
+            </tr>
+            <tr>
+                <td>psv</td>
+                <td>Pipe-Separated Values</td>
+                <td>
+                    Returns the Items of the response in a delimited format using literal pipes (<code>|</code>) as column delimiters, and new lines (<code>\r\n</code>) as row delimiters.<br />
+                    <code class="block">Property|Property2<br />Value|Value2</code>
+                </td>
             </tr>
         </tbody>
     </table>
