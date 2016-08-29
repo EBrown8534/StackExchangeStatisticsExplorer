@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using static Stack_Exchange_Statistics_Explorer.Utilities.Extensions.SqlDataReaderExtensions;
 using static Stack_Exchange_Statistics_Explorer.Utilities.Extensions.DateTimeExtensions;
 using Evbpc.Framework.Utilities.Extensions;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
+using Evbpc.Framework.Utilities.Serialization.DelimitedSerialization;
 
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
@@ -18,10 +22,29 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public Guid Id { get; set; }
         public DateTime LastUpdate { get; set; }
         public DateTime FirstUpdate { get; set; }
+
+        public string AliasesString => Aliases == null ? null : string.Join(";", Aliases);
+        public string MarkdownExtensionsString => MarkdownExtensions == null ? null : string.Join(";", MarkdownExtensions);
         
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
+        [DelimitedIgnore]
         public long LastUpdateEpoch => DateTimeExtensions.ToEpoch(LastUpdate.ConvertTimeToUtc());
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
+        [DelimitedIgnore]
         public long FirstUpdateEpoch => DateTimeExtensions.ToEpoch(FirstUpdate.ConvertTimeToUtc());
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
+        [DelimitedIgnore]
         public DateTime? LastEffectiveDateTime => LaunchDateTime ?? OpenBetaDateTime ?? ClosedBetaDateTime;
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
+        [DelimitedIgnore]
         public DateTime? FirstEffectiveDateTime => ClosedBetaDateTime ?? OpenBetaDateTime ?? LaunchDateTime;
 
         public static List<Site> LoadAllFromDatabase(SqlConnection connection)
@@ -95,7 +118,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
             {
                 while (reader.Read())
                 {
-                    var site = LoadFromReader(reader);
+                    var site = LoadFromReader(reader, true);
                     var siteStats = new SiteStatsCalculated();
                     SiteStats.LoadFromReader(reader, siteStats);
                     siteStats.Site = site;
@@ -106,7 +129,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
             return sitesStats;
         }
 
-        public static Site LoadFromReader(SqlDataReader reader)
+        public static Site LoadFromReader(SqlDataReader reader, bool includeStyling = false)
         {
             var site = new Site();
 
@@ -130,10 +153,13 @@ namespace Stack_Exchange_Statistics_Explorer.Models
             site.LastUpdate = reader.GetItem<DateTime>(nameof(LastUpdate));
             site.FirstUpdate = reader.GetItem<DateTime>(nameof(FirstUpdate));
 
-            site.Styling = new Evbpc.Framework.Integrations.StackExchange.API.Models.Styling();
-            site.Styling.LinkColor = reader.GetItem<string>(nameof(site.Styling.LinkColor));
-            site.Styling.TagBackgroundColor = reader.GetItem<string>(nameof(site.Styling.TagBackgroundColor));
-            site.Styling.TagForegroundColor = reader.GetItem<string>(nameof(site.Styling.TagForegroundColor));
+            if (includeStyling)
+            {
+                site.Styling = new Evbpc.Framework.Integrations.StackExchange.API.Models.Styling();
+                site.Styling.LinkColor = reader.GetItem<string>(nameof(site.Styling.LinkColor));
+                site.Styling.TagBackgroundColor = reader.GetItem<string>(nameof(site.Styling.TagBackgroundColor));
+                site.Styling.TagForegroundColor = reader.GetItem<string>(nameof(site.Styling.TagForegroundColor));
+            }
 
             return site;
         }
@@ -173,7 +199,11 @@ namespace Stack_Exchange_Statistics_Explorer.Models
                 }
             }
         }
-
+        
+        [JsonIgnore]
+        [ScriptIgnore]
+        [XmlIgnore]
+        [DelimitedIgnore]
         public string DateTitle => HumanizeState.Replace("Graduated", "Graduation").Replace("Meta", "Creation");
     }
 }
