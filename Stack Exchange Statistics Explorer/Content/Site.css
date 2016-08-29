@@ -126,6 +126,10 @@ code {
     display: block !important;
 }
 
+.center {
+    text-align: center;
+}
+
 /* Graph CSS */
 .axis,
 .tooltip {
