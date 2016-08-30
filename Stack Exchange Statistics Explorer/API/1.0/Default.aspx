@@ -55,7 +55,7 @@
                 <td>csv</td>
                 <td>Comma-Separated Values</td>
                 <td>
-                    Returns the Items of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal commas (<code>,</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal comma (<code>,</code>) will be escaped with the unicode sequence for a comma: <code>\u002C</code>.<br />
+                    Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal commas (<code>,</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal comma (<code>,</code>) will be escaped with the unicode sequence for a comma: <code>\u002C</code>.<br />
                     <code class="block">Property,Property2<br />Value,Value2</code>
                 </td>
             </tr>
@@ -63,7 +63,7 @@
                 <td>tsv</td>
                 <td>Tab-Separated Values</td>
                 <td>
-                    Returns the Items of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal tabs (<code>\t</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal tab (<code>\t</code>) will be escaped with the escape sequence for a tab: <code>\t</code>.<br />
+                    Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal tabs (<code>\t</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal tab (<code>\t</code>) will be escaped with the escape sequence for a tab: <code>\t</code>.<br />
                     <code class="block">Property&nbsp;&nbsp;&nbsp;&nbsp;Property2<br />Value&nbsp;&nbsp;&nbsp;Value2</code>
                 </td>
             </tr>
@@ -71,7 +71,7 @@
                 <td>psv</td>
                 <td>Pipe-Separated Values</td>
                 <td>
-                    Returns the Items of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal pipes (<code>|</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal pipe (<code>|</code>) will be escaped with the unicode sequence for a pipe: <code>\u007C</code>.<br />
+                    Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal pipes (<code>|</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal pipe (<code>|</code>) will be escaped with the unicode sequence for a pipe: <code>\u007C</code>.<br />
                     <code class="block">Property|Property2<br />Value|Value2</code>
                 </td>
             </tr>
