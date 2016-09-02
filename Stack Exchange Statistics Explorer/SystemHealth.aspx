@@ -20,6 +20,7 @@
                 <th>Used Space</th>
                 <th>Used Space / Row</th>
                 <th>Rows Added per Day</th>
+                <th>Space Used per Day</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@
                         <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).RowsPerDay.ToString("0.00") %></td>
+                        <td><%#(((TableInfo)Container.DataItem).RowsPerDay * ((TableInfo)Container.DataItem).UsedSpacePerRowKB).ToString("0.00") %> kB</td>
                     </tr>
                 </ItemTemplate>
             </asp:ListView>
@@ -55,6 +57,7 @@
                 <th><%:CoreTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
                 <th><%:CoreTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
                 <th><%:CoreTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th></th>
                 <th></th>
             </tr>
         </tbody>
@@ -72,6 +75,7 @@
                 <th>Used Space</th>
                 <th>Used Space / Row</th>
                 <th>Rows Added per Day</th>
+                <th>Space Used per Day</th>
             </tr>
         </thead>
         <tbody>
@@ -95,6 +99,7 @@
                         <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
                         <td><%#((TableInfo)Container.DataItem).RowsPerDay.ToString("0.00") %></td>
+                        <td><%#(((TableInfo)Container.DataItem).RowsPerDay * ((TableInfo)Container.DataItem).UsedSpacePerRowKB).ToString("0.00") %> kB</td>
                     </tr>
                 </ItemTemplate>
             </asp:ListView>
@@ -107,6 +112,7 @@
                 <th><%:WebsiteTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
                 <th><%:WebsiteTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
                 <th><%:WebsiteTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th></th>
                 <th></th>
             </tr>
         </tbody>
@@ -164,10 +170,10 @@
                 <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1200, x => x > 1500) %>'>
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.ToString("0.00") %>
                 </td>
-                <td class='<%#((ApiBatchLog)Container.DataItem).BackoffCount.GetClassOption(x => x <= 7, x => x > 15) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).BackoffCount.GetClassOption(x => x <= 6, x => x > 15) %>'>
                     <%#((ApiBatchLog)Container.DataItem).BackoffCount %>
                 </td>
-                <td class='<%#((ApiBatchLog)Container.DataItem).TotalBackoff.GetClassOption(x => x <= 70, x => x > 150) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).TotalBackoff.GetClassOption(x => x <= 60, x => x > 150) %>'>
                     <%#((ApiBatchLog)Container.DataItem).TotalBackoff %>
                 </td>
                 <td class='<%#((ApiBatchLog)Container.DataItem).EndQuotaRemaining.GetClassOption(x => x >= 2000, x => x < 1500) %>'>
