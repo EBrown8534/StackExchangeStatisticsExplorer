@@ -1,4 +1,5 @@
-﻿using Stack_Exchange_Statistics_Explorer.Utilities.Extensions;
+﻿using Evbpc.Framework.Utilities;
+using Stack_Exchange_Statistics_Explorer.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -63,8 +64,8 @@ namespace Stack_Exchange_Statistics_Explorer
             {
                 CoreTableSizeTotals.RowCount += tableSize.RowCount;
                 CoreTableSizeTotals.IndexCount += tableSize.IndexCount;
-                CoreTableSizeTotals.TotalSpaceKB += tableSize.TotalSpaceKB;
-                CoreTableSizeTotals.UsedSpaceKB += tableSize.UsedSpaceKB;
+                CoreTableSizeTotals.TotalSpace += tableSize.TotalSpace;
+                CoreTableSizeTotals.UsedSpace += tableSize.UsedSpace;
             }
 
             WebsiteTableSizeTotals = new TableInfo();
@@ -74,8 +75,8 @@ namespace Stack_Exchange_Statistics_Explorer
             {
                 WebsiteTableSizeTotals.RowCount += tableSize.RowCount;
                 WebsiteTableSizeTotals.IndexCount += tableSize.IndexCount;
-                WebsiteTableSizeTotals.TotalSpaceKB += tableSize.TotalSpaceKB;
-                WebsiteTableSizeTotals.UsedSpaceKB += tableSize.UsedSpaceKB;
+                WebsiteTableSizeTotals.TotalSpace += tableSize.TotalSpace;
+                WebsiteTableSizeTotals.UsedSpace += tableSize.UsedSpace;
             }
 
             ApiLogResults.DataSource = apiLogResults;
@@ -93,15 +94,15 @@ namespace Stack_Exchange_Statistics_Explorer
             public string TableName { get; set; }
             public string SchemaName { get; set; }
             public long RowCount { get; set; }
-            public long TotalSpaceKB { get; set; }
-            public long UsedSpaceKB { get; set; }
+            public DataSize TotalSpace { get; set; }
+            public DataSize UsedSpace { get; set; }
             public int IndexCount { get; set; }
             public DateTime Created { get; set; }
             public DateTime Modified { get; set; }
 
             public string FullTableName => (SchemaName != null ? SchemaName + '.' : "") + TableName;
-            public long UnusedSpaceKB => TotalSpaceKB - UsedSpaceKB;
-            public double UsedSpacePerRowKB => RowCount == 0 ? 0 : (double)UsedSpaceKB / RowCount;
+            public DataSize UnusedSpace => TotalSpace - UsedSpace;
+            public DataSize UsedSpacePerRow => RowCount == 0 ? new DataSize(0) : UsedSpace / (double)RowCount;
             public double RowsPerDay => (double)RowCount / (DateTime.UtcNow - Created).Days;
 
             public static List<TableInfo> LoadAllFromDatabase(SqlConnection connection)
@@ -149,8 +150,8 @@ ORDER BY
                 TableName = reader.GetItem<string>(nameof(TableName)),
                 SchemaName = reader.GetItem<string>(nameof(SchemaName)),
                 RowCount = reader.GetItem<long>(nameof(RowCount)),
-                TotalSpaceKB = reader.GetItem<long>(nameof(TotalSpaceKB)),
-                UsedSpaceKB = reader.GetItem<long>(nameof(UsedSpaceKB)),
+                TotalSpace = new DataSize(reader.GetItem<long>(nameof(TotalSpace) + "KB"), SizeScale.Kilobytes),
+                UsedSpace = new DataSize(reader.GetItem<long>(nameof(UsedSpace) + "KB"), SizeScale.Kilobytes),
                 IndexCount = reader.GetItem<int>(nameof(IndexCount)),
                 Created = reader.GetItem<DateTime>(nameof(Created)),
                 Modified = reader.GetItem<DateTime>(nameof(Modified))

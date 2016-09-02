@@ -3,6 +3,7 @@
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities" %>
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities.Extensions" %>
 <%@ Import Namespace="Evbpc.Framework.Utilities.Extensions" %>
+<%@ Import Namespace="Evbpc.Framework.Utilities" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>System Health</h2>
@@ -40,11 +41,11 @@
                         <td><%#((TableInfo)Container.DataItem).Modified.ToString("yyyy-MM-dd HH:mm:ss") %></td>
                         <td><%#((TableInfo)Container.DataItem).RowCount.ToString("n0") %></td>
                         <td><%#((TableInfo)Container.DataItem).IndexCount %></td>
-                        <td><%#((TableInfo)Container.DataItem).TotalSpaceKB.ToString("n0") %> kB</td>
-                        <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
-                        <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
+                        <td><%#((TableInfo)Container.DataItem).TotalSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
+                        <td><%#((TableInfo)Container.DataItem).UsedSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
+                        <td><%#((TableInfo)Container.DataItem).UsedSpacePerRow.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
                         <td><%#((TableInfo)Container.DataItem).RowsPerDay.ToString("0.00") %></td>
-                        <td><%#(((TableInfo)Container.DataItem).RowsPerDay * ((TableInfo)Container.DataItem).UsedSpacePerRowKB).ToString("0.00") %> kB</td>
+                        <td><%#(((TableInfo)Container.DataItem).UsedSpacePerRow * ((TableInfo)Container.DataItem).RowsPerDay).GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:ListView>
@@ -54,9 +55,9 @@
                 <th></th>
                 <th><%:CoreTableSizeTotals.RowCount.ToString("n0") %></th>
                 <th><%:CoreTableSizeTotals.IndexCount %></th>
-                <th><%:CoreTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
-                <th><%:CoreTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
-                <th><%:CoreTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th><%:CoreTableSizeTotals.TotalSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></th>
+                <th><%:CoreTableSizeTotals.UsedSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></th>
+                <th><%:CoreTableSizeTotals.UsedSpacePerRow.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -95,11 +96,11 @@
                         <td><%#((TableInfo)Container.DataItem).Modified.ToString("yyyy-MM-dd HH:mm:ss") %></td>
                         <td><%#((TableInfo)Container.DataItem).RowCount.ToString("n0") %></td>
                         <td><%#((TableInfo)Container.DataItem).IndexCount %></td>
-                        <td><%#((TableInfo)Container.DataItem).TotalSpaceKB.ToString("n0") %> kB</td>
-                        <td><%#((TableInfo)Container.DataItem).UsedSpaceKB.ToString("n0") %> kB</td>
-                        <td><%#((TableInfo)Container.DataItem).UsedSpacePerRowKB.ToString("0.00") %> kB</td>
+                        <td><%#((TableInfo)Container.DataItem).TotalSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
+                        <td><%#((TableInfo)Container.DataItem).UsedSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
+                        <td><%#((TableInfo)Container.DataItem).UsedSpacePerRow.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
                         <td><%#((TableInfo)Container.DataItem).RowsPerDay.ToString("0.00") %></td>
-                        <td><%#(((TableInfo)Container.DataItem).RowsPerDay * ((TableInfo)Container.DataItem).UsedSpacePerRowKB).ToString("0.00") %> kB</td>
+                        <td><%#(((TableInfo)Container.DataItem).UsedSpacePerRow * ((TableInfo)Container.DataItem).RowsPerDay).GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:ListView>
@@ -109,9 +110,9 @@
                 <th></th>
                 <th><%:WebsiteTableSizeTotals.RowCount.ToString("n0") %></th>
                 <th><%:WebsiteTableSizeTotals.IndexCount %></th>
-                <th><%:WebsiteTableSizeTotals.TotalSpaceKB.ToString("n0") %> kB</th>
-                <th><%:WebsiteTableSizeTotals.UsedSpaceKB.ToString("n0") %> kB</th>
-                <th><%:WebsiteTableSizeTotals.UsedSpacePerRowKB.ToString("0.00") %> kB</th>
+                <th><%:WebsiteTableSizeTotals.TotalSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></th>
+                <th><%:WebsiteTableSizeTotals.UsedSpace.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></th>
+                <th><%:WebsiteTableSizeTotals.UsedSpacePerRow.GetLargestWholeSize(SizeScale.Bytes).ToString("0.00") %></th>
                 <th></th>
                 <th></th>
             </tr>
