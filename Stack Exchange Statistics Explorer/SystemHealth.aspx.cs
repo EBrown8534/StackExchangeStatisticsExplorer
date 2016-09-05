@@ -150,8 +150,8 @@ ORDER BY
                 TableName = reader.GetItem<string>(nameof(TableName)),
                 SchemaName = reader.GetItem<string>(nameof(SchemaName)),
                 RowCount = reader.GetItem<long>(nameof(RowCount)),
-                TotalSpace = new DataSize(reader.GetItem<long>(nameof(TotalSpace) + "KB"), SizeScale.Kilobytes),
-                UsedSpace = new DataSize(reader.GetItem<long>(nameof(UsedSpace) + "KB"), SizeScale.Kilobytes),
+                TotalSpace = DataSize.From(reader.GetItem<long>(nameof(TotalSpace) + "KB"), SizeUnit.Kilobytes),
+                UsedSpace = DataSize.From(reader.GetItem<long>(nameof(UsedSpace) + "KB"), SizeUnit.Kilobytes),
                 IndexCount = reader.GetItem<int>(nameof(IndexCount)),
                 Created = reader.GetItem<DateTime>(nameof(Created)),
                 Modified = reader.GetItem<DateTime>(nameof(Modified))
