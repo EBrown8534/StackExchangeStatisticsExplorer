@@ -54,6 +54,10 @@ input[type="select"] {
     }
 }
 
+.nav-items li:hover, .nav-items li a:hover {
+    background-color: #404040 !important;
+}
+
 .site div:hover {
     background-color: #dfdfdf;
 }

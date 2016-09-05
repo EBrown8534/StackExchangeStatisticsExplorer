@@ -53,7 +53,7 @@
             </ul>
 
             <section class="top-bar-section">
-                <ul class="right">
+                <ul class="right nav-items">
                     <li><a runat="server" href="~/">Home</a></li>
                     <li><a runat="server" href="~/Sites">Sites</a></li>
                     <li><a runat="server" href="~/API">API</a></li>
