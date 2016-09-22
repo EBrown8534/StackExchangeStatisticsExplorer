@@ -77,7 +77,7 @@
                     <tr>
                         <th><span data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</span></th>
                         <td class='<%:LatestStats.QuestionsPerDay.GetClassOption(x => x >= 10, x => x < 5) %>'>
-                            <%:LatestStats.QuestionsPerDay.ToString("0.00") %>
+                            <%:QuestionsPerDay.ToString("0.00") %>
                         </td>
                         <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>
                             Needs work

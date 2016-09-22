@@ -15,7 +15,8 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
     {
         protected SiteStatsCalculated LatestStats { get; private set; }
         protected List<SiteStatsCalculated> AllLatestStats { get; private set; }
-        protected Site CurrentSite { get; set; }
+        protected Site CurrentSite { get; private set; }
+        protected double QuestionsPerDay { get; private set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -81,6 +82,11 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
             Title = CurrentSite.Name;
             LatestStats = sitesStats[0];
+
+            var lastMonthStats = sitesStats.Take(30);
+            var lastMonthFirst = lastMonthStats.First();
+            var lastMonthLast = lastMonthStats.Last();
+            QuestionsPerDay = (lastMonthLast.TotalQuestions - lastMonthFirst.TotalQuestions) / (lastMonthLast.Gathered - lastMonthFirst.Gathered).TotalDays;
 
             SiteStats.DataSource = sitesStats.Take(7);
             SiteStats.DataBind();
