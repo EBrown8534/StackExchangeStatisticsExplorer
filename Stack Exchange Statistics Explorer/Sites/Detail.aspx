@@ -75,7 +75,7 @@
             <table class="detail-table">
                 <tbody>
                     <tr>
-                        <th><span data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back.">Questions Per Day</span></th>
+                        <th><span data-tooltip class="has-tip" title="10 questions per day on average is a healthy beta, 5 questions or fewer per day needs some work. A healthy site generates lots of good content to make sure users keep coming back. This uses a moving average over the last 30 days of questions asked.">Questions Per Day</span></th>
                         <td class='<%:LatestStats.QuestionsPerDay.GetClassOption(x => x >= 10, x => x < 5) %>'>
                             <%:QuestionsPerDay.ToString("0.00") %>
                         </td>
