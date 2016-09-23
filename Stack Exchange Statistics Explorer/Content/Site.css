@@ -134,6 +134,11 @@ code {
     text-align: center;
 }
 
+.image-32 {
+    width: 32px;
+    height: 32px;
+}
+
 /* Graph CSS */
 .axis,
 .tooltip {

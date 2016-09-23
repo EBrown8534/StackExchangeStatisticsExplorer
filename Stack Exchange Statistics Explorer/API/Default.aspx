@@ -3,6 +3,13 @@
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities" %>
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities.Extensions" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <meta name="description" content="The API description for the Stack Exchange Statistics Explorer." />
+    <link rel="canonical" href="API/Default.aspx" />
+    <link rel="canonical" href="API/Default/" />
+    <link rel="canonical" href="API/Default" />
+</asp:Content>
+
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Stack Exchange Statistics Explorer API</h2>
     <h3>General</h3>

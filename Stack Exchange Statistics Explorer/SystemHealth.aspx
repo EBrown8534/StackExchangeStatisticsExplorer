@@ -5,6 +5,10 @@
 <%@ Import Namespace="Evbpc.Framework.Utilities.Extensions" %>
 <%@ Import Namespace="Evbpc.Framework.Utilities" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>System Health</h2>
     <h3>Data Store Health</h3>

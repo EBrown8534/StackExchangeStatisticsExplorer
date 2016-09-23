@@ -3,6 +3,13 @@
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities" %>
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities.Extensions" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <meta name="description" content="The version 1.0 API description for the Stack Exchange Statistics Explorer." />
+    <link rel="canonical" href="API/1.0/Default.aspx" />
+    <link rel="canonical" href="API/1.0/Default/" />
+    <link rel="canonical" href="API/1.0/Default" />
+</asp:Content>
+
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Version 1.0</h2>
     <h3>Shared Parameters</h3>
@@ -48,7 +55,7 @@
                 <td>Extensible Markup Language</td>
                 <td>
                     A graph object that maps property names to object values, including all sub-properties and collections.<br />
-                    <code class="block"><pre>&lt;?xml version="1.0" encoding="utf-16"?&gt;<br />&lt;RootElement&gt;<br />&lt;Property&gt;Value&lt;/Property&gt;<br />&lt;Property2&gt;<br />&lt;Property2.Property&gt;Value&lt;/Property2.Property&gt;<br />&lt;/Property2&gt;<br />&lt;/RootElement&gt;</pre></code>
+                    <code class="block">&lt;?xml version="1.0" encoding="utf-16"?&gt;<br />&lt;RootElement&gt;<br />&lt;Property&gt;Value&lt;/Property&gt;<br />&lt;Property2&gt;<br />&lt;Property2.Property&gt;Value&lt;/Property2.Property&gt;<br />&lt;/Property2&gt;<br />&lt;/RootElement&gt;</code>
                 </td>
             </tr>
             <tr>

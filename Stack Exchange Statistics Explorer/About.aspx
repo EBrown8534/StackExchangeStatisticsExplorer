@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="Stack_Exchange_Statistics_Explorer.About" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <meta name="description" content="General information about the Stack Exchange Statistics Explorer." />
+    <link rel="canonical" href="About.aspx" />
+    <link rel="canonical" href="About" />
+</asp:Content>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %></h2>
 

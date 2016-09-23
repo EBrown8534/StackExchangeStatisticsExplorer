@@ -4,6 +4,13 @@
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Utilities.Extensions" %>
 <%@ Import Namespace="Stack_Exchange_Statistics_Explorer.Models" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <meta name="description" content="A list of all sites in the Stack Exchange Statistics Explorer." />
+    <link rel="canonical" href="Sites/Default.aspx" />
+    <link rel="canonical" href="Sites/Default" />
+    <link rel="canonical" href="Sites/Default/" />
+</asp:Content>
+
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Sites Currently Logged</h2>
     <div class="row collapse">
@@ -52,7 +59,7 @@
             </select>
         </div>
         <div class="small-1 medium-1 columns">
-            <label for="sortOrder" class="prefix postfix">in</label>
+            <span class="prefix postfix">in</span>
         </div>
         <div class="small-3 medium-2 columns">
             <select id="sortOrder" onchange="javascript:sortItems()" class="prefix postfix">
@@ -61,10 +68,10 @@
             </select>
         </div>
         <div class="small-1 medium-1 columns">
-            <label for="sortButton" class="prefix postfix">order</label>
+            <label for="sortOrder" class="prefix postfix">order</label>
         </div>
         <div class="small-2 medium-1 columns">
-            <a class="button postfix radius" id="sortButton" href="javascript:sortItems()">Sort</a>
+            <a id="sortButton" class="button postfix radius" href="javascript:sortItems()">Sort</a>
         </div>
         <div class="small-12 medium-4 columns">
 
@@ -134,7 +141,7 @@
             <div runat="server" class="large-3 medium-4 site columns">
                 <div onclick="window.location.href = '/Sites/Detail?SiteId=<%#Binder.Eval<Site>(Container, "Site").Id %>'" class="radius panel">
                     <h3>
-                        <img src="<%#Binder.Eval<Site>(Container, "Site").HighResolutionIconUrl ?? Binder.Eval<Site>(Container, "Site").IconUrl %>" width="32" height="32" />
+                        <img class="image-32" src="<%#Binder.Eval<Site>(Container, "Site").HighResolutionIconUrl ?? Binder.Eval<Site>(Container, "Site").IconUrl %>" alt="<%#Binder.Eval<Site>(Container, "Site").Name %>" />
                         <span class="name">
                             <%#Binder.Eval<Site>(Container, "Site").Name.Length > 0 ? Binder.Eval<Site>(Container, "Site").Name : "-" %>
                         </span>
