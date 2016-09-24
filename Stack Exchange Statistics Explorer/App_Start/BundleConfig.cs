@@ -50,6 +50,10 @@ namespace Stack_Exchange_Statistics_Explorer
                             "~/Scripts/foundation/foundation.tooltip.js",
                             "~/Scripts/foundation/foundation.equalizer.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/googleAnalytics").Include(
+                            "~/Scripts/googleAnalytics.js"
+                            ));
+
             ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",
                 new ScriptResourceDefinition

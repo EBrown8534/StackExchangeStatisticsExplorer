@@ -41,6 +41,7 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <%: Scripts.Render("~/bundles/googleAnalytics") %>
         <%: Scripts.Render("~/bundles/foundation") %>
 
         <nav class="top-bar" data-topbar role="navigation">
