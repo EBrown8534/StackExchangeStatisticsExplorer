@@ -5,9 +5,7 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <meta name="description" content="The API description for the Stack Exchange Statistics Explorer." />
-    <link rel="canonical" href="API/Default.aspx" />
     <link rel="canonical" href="API/Default/" />
-    <link rel="canonical" href="API/Default" />
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -18,6 +16,13 @@
         for Stack Exchange sites into other applications. All data provided by this API unless otherwise noted
         is still property of Stack Exchange, and as such any use of it is subject to the Stack Exchange API
         terms of use.
+    </p>
+    <p>
+        The number one concern of all developers when reviewing API documentation is price, and the
+        rate-limits. Currently, there are no prices or rate-limits on the API, however that is subject to
+        change if it begins to be abused. Data changes once a day which means that websites using this API
+        should cache aggressively. Data is updated in the API at 00:30:00UTC+00:00 plus or minus several
+        minutes.
     </p>
     <h3>Rate Limiting</h3>
     <p>

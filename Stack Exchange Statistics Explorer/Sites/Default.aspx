@@ -6,8 +6,6 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <meta name="description" content="A list of all sites in the Stack Exchange Statistics Explorer." />
-    <link rel="canonical" href="Sites/Default.aspx" />
-    <link rel="canonical" href="Sites/Default" />
     <link rel="canonical" href="Sites/Default/" />
 </asp:Content>
 

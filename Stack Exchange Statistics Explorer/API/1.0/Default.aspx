@@ -5,9 +5,7 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <meta name="description" content="The version 1.0 API description for the Stack Exchange Statistics Explorer." />
-    <link rel="canonical" href="API/1.0/Default.aspx" />
     <link rel="canonical" href="API/1.0/Default/" />
-    <link rel="canonical" href="API/1.0/Default" />
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">

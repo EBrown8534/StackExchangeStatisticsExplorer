@@ -207,6 +207,7 @@
     <None Include="Properties\PublishProfiles\WEB01.pubxml" />
     <Content Include="Scripts\d3\LICENSE" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\googleAnalytics.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\list\dist\list.js" />

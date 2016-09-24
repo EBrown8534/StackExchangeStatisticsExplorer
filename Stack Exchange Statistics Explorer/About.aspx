@@ -2,8 +2,7 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <meta name="description" content="General information about the Stack Exchange Statistics Explorer." />
-    <link rel="canonical" href="About.aspx" />
-    <link rel="canonical" href="About" />
+    <link rel="canonical" href="About/" />
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -28,5 +27,28 @@
         This website is not directly affiliated with Stack Exchange or Stack Overflow. This website stands as it's own resource
         utilizing data collected from Stack Exchange. As such, use of this software is subject to the original terms of data
         collected from the Stack Exchange API.
+    </p>
+
+    <h3>Contact</h3>
+    <p>
+        You can contact the developer of the Stack Exchange Statistics Explorer on Twitter
+        <a href="https://twitter.com/EBrown9534/">@EBrown8534</a>, or interact with us on
+        <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer">GitHub</a>.
+    </p>
+
+    <h3>Contributing</h3>
+    <p>
+        If you wish to contribute to the Stack Exchange Statistics Explorer project, you can do so in one of several ways:
+    </p>
+    <ul>
+        <li>Present issues on the <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer/issues">GitHub repository</a></li>
+        <li>Submit Pull Requests to the <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer">GitHub repository</a></li>
+        <li>Spread the word on <a href="https://twitter.com">Twtter</a></li>
+        <li>Spread the word on <a href="https://facebook.com">Facebook</a></li>
+    </ul>
+    <p class="panel">
+        Disclaimer: the budget for this project is <code>$0.00 USD</code>, please do not expect any compensation from me for
+        any contribution you might make. I will gladly include your name/information and a description of the contribution on
+        this website somewhere, but I cannot afford to pay anyone for any involvement with this project.
     </p>
 </asp:Content>
