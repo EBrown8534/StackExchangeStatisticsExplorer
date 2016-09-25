@@ -257,8 +257,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="Sites\Compare.aspx" />
     <Content Include="Sites\Default.aspx" />
     <Content Include="Sites\Detail.aspx" />
+    <Content Include="Sites\Select.aspx" />
     <Content Include="SQL Scripts\03 Create SE.SiteRelations.sql" />
     <Content Include="SQL Scripts\04 Create SE.FeatureRequests.sql" />
     <Content Include="SQL Scripts\05 Create SE.BadgeStats.sql" />
@@ -489,6 +491,13 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="Sites\Compare.aspx.cs">
+      <DependentUpon>Compare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\Compare.aspx.designer.cs">
+      <DependentUpon>Compare.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sites\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -502,6 +511,13 @@
     </Compile>
     <Compile Include="Sites\Detail.aspx.designer.cs">
       <DependentUpon>Detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\Select.aspx.cs">
+      <DependentUpon>Select.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\Select.aspx.designer.cs">
+      <DependentUpon>Select.aspx</DependentUpon>
     </Compile>
     <Compile Include="SQL Scripts\ScriptType.cs" />
     <Compile Include="SQL Scripts\SqlScripts.cs" />

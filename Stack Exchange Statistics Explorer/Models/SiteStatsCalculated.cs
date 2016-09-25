@@ -74,6 +74,15 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [ApiDescription("The ratio of answers to questions.")]
         public double AnswerRatio => (double)TotalAnswers / TotalQuestions;
 
+        [ApiDescription("The percentage of answered questions with accepted answers.")]
+        public double AnsweredAcceptRate => (double)TotalAccepted / TotalAnswered;
+
+        [ApiDescription("The percentage of questions with accepted answers.")]
+        public double QuestionAcceptRate => (double)TotalAccepted / TotalQuestions;
+
+        [ApiDescription("The percentage of answers that are accepted.")]
+        public double AnswerAcceptRate => (double)TotalAccepted / TotalAnswers;
+
         public static new List<SiteStatsCalculated> LoadFromDatabase(SqlConnection connection, Site site)
         {
             var sitesStatsCalculated = new List<SiteStatsCalculated>();

@@ -38,17 +38,27 @@ input[type="select"] {
     display: table;
 }
 
-.site div {
-    margin: 4px !important;
-    padding: 4px 8px;
-    cursor: pointer;
-}
+    .site div {
+        margin: 4px !important;
+        padding: 4px 8px;
+        cursor: pointer;
+    }
 
+    .site p {
+        margin: 0;
+        padding: 0;
+    }
 
 @media screen and (min-width: 642px) {
     .site div {
         /* Only needed while we use bootstrap */
         height: 400px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .site.small div {
+        height: 140px;
         display: table-cell;
         vertical-align: middle;
     }
@@ -145,12 +155,12 @@ code {
     font: 10px sans-serif;
 }
 
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
 
 .x.axis path {
     display: none;
