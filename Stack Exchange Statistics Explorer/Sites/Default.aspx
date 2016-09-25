@@ -11,6 +11,10 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Sites Currently Logged</h2>
+    <p>
+        If you would like to compare multiple sites against each other, you should use the
+        <a runat="server" href="~/Sites/Select/">Site Comparison Selection</a> feature.
+    </p>
     <div class="row collapse">
         <div class="small-12 medium-4 columns right">
             <label class="right inline">

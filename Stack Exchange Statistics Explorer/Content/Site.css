@@ -149,6 +149,13 @@ code {
     height: 32px;
 }
 
+.compare-panel {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 99;
+}
+
 /* Graph CSS */
 .axis,
 .tooltip {

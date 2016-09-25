@@ -10,10 +10,11 @@
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Multiple Site Selection
-        <asp:Button runat="server" CssClass="button right radius success" Text="Compare Sites..." OnClick="CompareSites_Click" />
-    </h2>
+    <h2>Multiple Site Selection</h2>
+    <div class="compare-panel panel radius text-right">
+        <span id="site-count">0</span> sites selected<br />
+        <asp:Button runat="server" CssClass="button right radius success" Text="Compare Sites &raquo;" OnClick="CompareSites_Click" />
+    </div>
     <p>
         Select all the sites you wish to compare together below.
     </p>
@@ -171,4 +172,15 @@
             </div>
         </ItemTemplate>
     </asp:ListView>
+
+    <script type="text/javascript">
+        $(".site .switch input").change(function (event) {
+            if (this.checked) {
+                $("#site-count").text(parseInt($("#site-count").text()) + 1);
+            }
+            else {
+                $("#site-count").text(parseInt($("#site-count").text()) - 1);
+            }
+        });
+    </script>
 </asp:Content>
