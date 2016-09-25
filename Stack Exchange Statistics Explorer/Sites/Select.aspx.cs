@@ -49,7 +49,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 }
             }
 
-            Response.Redirect($"/Sites/Compare?Sites={string.Join(",", values)}");
+            Response.Redirect($"~/Sites/Compare?Sites={string.Join(",", values)}");
         }
     }
 }

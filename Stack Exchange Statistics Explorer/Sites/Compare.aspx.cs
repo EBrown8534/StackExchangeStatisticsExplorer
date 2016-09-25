@@ -15,9 +15,24 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Request.QueryString["Sites"]))
+            {
+                Response.Redirect("~/Sites/Select/");
+            }
+
             var items = new List<MainListViewItem>();
             var siteStats = new List<SiteStatsCalculated>();
             var sites = Request.QueryString["Sites"].Split(',');
+
+            foreach (var site in sites)
+            {
+                var testGuid = Guid.NewGuid();
+
+                if (!Guid.TryParse(site, out testGuid))
+                {
+                    Response.Redirect("~/Sites/Select/");
+                }
+            }
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString))
             {
