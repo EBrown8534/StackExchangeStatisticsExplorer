@@ -21,21 +21,27 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public SiteStatsCalculated Previous { get; set; }
 
         [ApiDescription("Percentage of questions that have been answered.")]
+        [SiteCompare("Answered Rate", "0.00%", 10)]
         public double AnsweredRate => 1 - UnansweredRate;
 
         [ApiDescription("Change in <code>" + nameof(AnsweredRate) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Answered Rate Change", "0.00%", 11)]
         public double? AnsweredRateChange => AnsweredRate - Previous?.AnsweredRate;
 
         [ApiDescription("Percentage of questions that have not been answered.")]
+        [SiteCompare("Unanswered Rate", "0.00%", 12)]
         public double UnansweredRate => (double)TotalUnanswered / TotalQuestions;
 
         [ApiDescription("Change in <code>" + nameof(UnansweredRate) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Unanswered Rate Change", "0.00%", 13)]
         public double? UnansweredRateChange => UnansweredRate - Previous?.UnansweredRate;
 
         [ApiDescription("Number of questions posted for each day since the earliest of: <code>" + nameof(Models.Site.ClosedBetaDateTime) + "</code>, <code>" + nameof(Models.Site.OpenBetaDateTime) + "</code> or <code>" + nameof(Models.Site.LaunchDateTime) + "</code>.")]
+        [SiteCompare("Questions per Day", "0.00", 14)]
         public double QuestionsPerDay => (double)TotalQuestions / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime))?.Days ?? 1;
 
         [ApiDescription("Number of answers posted for each day since the earliest of: <code>" + nameof(Models.Site.ClosedBetaDateTime) + "</code>, <code>" + nameof(Models.Site.OpenBetaDateTime) + "</code> or <code>" + nameof(Models.Site.LaunchDateTime) + "</code>.")]
+        [SiteCompare("Answers per Day", "0.00", 16)]
         public double AnswersPerDay => (double)TotalAnswers / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime))?.Days ?? 1;
 
         [ApiDescription("Change in <code>" + nameof(TotalAccepted) + "</code> from the previous object.", Nullable = true)]
@@ -72,15 +78,19 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public int? UsersAbove200RepChange => UsersAbove200Rep - Previous?.UsersAbove200Rep;
 
         [ApiDescription("The ratio of answers to questions.")]
+        [SiteCompare("Answer Ratio", "0.00", 14)]
         public double AnswerRatio => (double)TotalAnswers / TotalQuestions;
 
         [ApiDescription("The percentage of answered questions with accepted answers.")]
+        [SiteCompare("Answered Accept Rate", "0.00%", 15)]
         public double AnsweredAcceptRate => (double)TotalAccepted / TotalAnswered;
 
         [ApiDescription("The percentage of questions with accepted answers.")]
+        [SiteCompare("Questions Answer Accept Rate", "0.00%", 16)]
         public double QuestionAcceptRate => (double)TotalAccepted / TotalQuestions;
 
         [ApiDescription("The percentage of answers that are accepted.")]
+        [SiteCompare("Answer Accept Rate", "0.00%", 17)]
         public double AnswerAcceptRate => (double)TotalAccepted / TotalAnswers;
 
         public static new List<SiteStatsCalculated> LoadFromDatabase(SqlConnection connection, Site site)

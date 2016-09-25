@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,31 +53,9 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 }
             }
 
-            var allProperties = typeof(SiteStatsCalculated).GetProperties();
-            var columns = new List<ColumnFilter>
-            {
-                new ColumnFilter { Name = "", Property = nameof(Models.Site) + "." + nameof(Models.Site.Name) },
-                new ColumnFilter { Name = "ID", Property = nameof(Models.Site) + "." + nameof(Models.Site.Id) },
-                new ColumnFilter { Name = "API Parameter", Property = nameof(Models.Site) + "." + nameof(Models.Site.ApiSiteParameter) },
-                new ColumnFilter { Name = "Questions", Property = nameof(SiteStatsCalculated.TotalQuestions) },
-                new ColumnFilter { Name = "Answers", Property = nameof(SiteStatsCalculated.TotalAnswers) },
-                new ColumnFilter { Name = "Answered", Property = nameof(SiteStatsCalculated.TotalAnswered) },
-                new ColumnFilter { Name = "Users", Property = nameof(SiteStatsCalculated.TotalUsers) },
-                new ColumnFilter { Name = "Users > 150 Rep", Property = nameof(SiteStatsCalculated.UsersAbove150Rep) },
-                new ColumnFilter { Name = "Users > 200 Rep", Property = nameof(SiteStatsCalculated.UsersAbove200Rep) },
-                new ColumnFilter { Name = "Accepted Answers", Property = nameof(SiteStatsCalculated.TotalAccepted) },
-                new ColumnFilter { Name = "State", Property = nameof(Models.Site) + "." + nameof(Models.Site.HumanizeState) },
-                new ColumnFilter { Name = "Type", Property = nameof(Models.Site) + "." + nameof(Models.Site.HumanizeType) },
-                new ColumnFilter { Name = "Answered Rate", Property = nameof(SiteStatsCalculated.AnsweredRate), Format = "0.00%" },
-                new ColumnFilter { Name = "Unanswered Rate", Property = nameof(SiteStatsCalculated.UnansweredRate), Format = "0.00%" },
-                new ColumnFilter { Name = "Answer Ratio", Property = nameof(SiteStatsCalculated.AnswerRatio), Format = "0.00" },
-                new ColumnFilter { Name = "Questions Answer Accept Rate", Property = nameof(SiteStatsCalculated.QuestionAcceptRate), Format = "0.00%" },
-                new ColumnFilter { Name = "Answered Accept Rate", Property = nameof(SiteStatsCalculated.AnsweredAcceptRate), Format = "0.00%" },
-                new ColumnFilter { Name = "Answer Accept Rate", Property = nameof(SiteStatsCalculated.AnswerAcceptRate), Format = "0.00%" },
-                new ColumnFilter { Name = "Questions Per Day", Property = nameof(SiteStatsCalculated.QuestionsPerDay), Format = "0.00" },
-            };
+            var allProperties = typeof(SiteStatsCalculated).GetProperties().Where(x => x.IsDefined(typeof(SiteCompareAttribute), true));
 
-            foreach (var column in columns)
+            foreach (var column in GetColumns(allProperties).OrderBy(x => x.Order))
             {
                 var values = new List<string>();
 
@@ -95,13 +74,41 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 }
 
                 var item = new MainListViewItem();
-                item.Header = column.Name;
+                item.Header = column.Display;
                 item.Items = values;
                 items.Add(item);
             }
 
             MainListView.DataSource = items;
             MainListView.DataBind();
+        }
+
+        private List<ColumnFilter> GetColumns(IEnumerable<PropertyInfo> properties, string rootProperty = null)
+        {
+            var columns = new List<ColumnFilter>();
+
+            foreach (var property in properties)
+            {
+                var attribute = (SiteCompareAttribute)property.GetCustomAttributes(typeof(SiteCompareAttribute), true)[0];
+
+                if (attribute.Traverse)
+                {
+                    columns.AddRange(GetColumns(property.PropertyType.GetProperties().Where(x => x.IsDefined(typeof(SiteCompareAttribute), true)), (rootProperty != null ? rootProperty + "." : "") + property.Name));
+                }
+                else
+                {
+                    columns.Add(new ColumnFilter
+                    {
+                        Display = attribute.Display,
+                        Format = attribute.Format,
+                        Property = (rootProperty != null ? rootProperty + "." : "") + property.Name,
+                        Order = attribute.Order,
+                        Summary = attribute.Summary,
+                    });
+                }
+            }
+
+            return columns;
         }
 
         protected void MainListView_ItemDataBound(object sender, ListViewItemEventArgs e)
@@ -119,9 +126,11 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
         private class ColumnFilter
         {
-            public string Name { get; set; }
+            public string Display { get; set; }
             public string Property { get; set; }
             public string Format { get; set; }
+            public int Order { get; set; }
+            public string Summary { get; set; }
         }
     }
 }

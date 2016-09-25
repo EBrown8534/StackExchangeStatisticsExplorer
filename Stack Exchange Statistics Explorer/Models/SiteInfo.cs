@@ -21,9 +21,11 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public decimal QuestionsPerMinute { get; set; }
 
         [ApiDescription("Total number of accepted answers/questions.")]
+        [SiteCompare("Accepted", null, 6)]
         public int TotalAccepted { get; set; }
 
         [ApiDescription("Total number of answers.")]
+        [SiteCompare("Answers", null, 4)]
         public int TotalAnswers { get; set; }
         
         [ApiDescription("Total number of badges.")]
@@ -33,12 +35,15 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public int TotalComments { get; set; }
 
         [ApiDescription("Total number of questions.")]
+        [SiteCompare("Questions", null, 3)]
         public int TotalQuestions { get; set; }
 
         [ApiDescription("Total number of unanswered questions.")]
+        [SiteCompare("Unanswered", null, 5)]
         public int TotalUnanswered { get; set; }
 
         [ApiDescription("Total number of users.")]
+        [SiteCompare("Users", null, 7)]
         public int TotalUsers { get; set; }
         
         [ApiDescription("Total number of votes.")]

@@ -13,20 +13,67 @@ using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using Evbpc.Framework.Utilities.Serialization.DelimitedSerialization;
+using Evbpc.Framework.Integrations.StackExchange.API.Models;
 
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
     [Serializable]
     [XmlType(TypeName = "DatabaseSite")]
-    public class Site : Evbpc.Framework.Integrations.StackExchange.API.Models.Site
+    public class Site
     {
+        public List<string> Aliases { get; set; }
+
+        [SiteCompare("API Parameter", null, 2)]
+        public string ApiSiteParameter { get; set; }
+
+        public string Audience { get; set; }
+        public long? ClosedBetaDate { get; set; }
+
+        public DateTime? ClosedBetaDateTime
+        {
+            get { return DateTimeExtensions.FromEpoch(ClosedBetaDate); }
+            set { ClosedBetaDate = DateTimeExtensions.ToEpoch(value); }
+        }
+
+        public string FaviconUrl { get; set; }
+        public string HighResolutionIconUrl { get; set; }
+        public string IconUrl { get; set; }
+        public long? LaunchDate { get; set; }
+
+        public DateTime? LaunchDateTime
+        {
+            get { return DateTimeExtensions.FromEpoch(LaunchDate); }
+            set { LaunchDate = DateTimeExtensions.ToEpoch(value); }
+        }
+
+        public string LogoUrl { get; set; }
+        public List<string> MarkdownExtensions { get; set; }
+
+        [SiteCompare(null, null, 0)]
+        public string Name { get; set; }
+
+        public long? OpenBetaDate { get; set; }
+
+        public DateTime? OpenBetaDateTime
+        {
+            get { return DateTimeExtensions.FromEpoch(OpenBetaDate); }
+            set { OpenBetaDate = DateTimeExtensions.ToEpoch(value); }
+        }
+
+        public List<RelatedSite> RelatedSites { get; set; }
+        public string SiteState { get; set; }
+        public string SiteType { get; set; }
+        public string SiteUrl { get; set; }
+        public Styling Styling { get; set; }
+        public string TwitterAccount { get; set; }
+
         public Guid Id { get; set; }
         public DateTime LastUpdate { get; set; }
         public DateTime FirstUpdate { get; set; }
 
         public string AliasesString => Aliases == null ? null : string.Join(";", Aliases);
         public string MarkdownExtensionsString => MarkdownExtensions == null ? null : string.Join(";", MarkdownExtensions);
-        
+
         [JsonIgnore]
         [ScriptIgnore]
         [XmlIgnore]
@@ -200,7 +247,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
                 }
             }
         }
-        
+
         [JsonIgnore]
         [ScriptIgnore]
         [XmlIgnore]

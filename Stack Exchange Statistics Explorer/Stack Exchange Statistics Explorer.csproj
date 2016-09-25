@@ -480,6 +480,7 @@
     <Compile Include="Models\FeatureRequest.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Site.cs" />
+    <Compile Include="Models\SiteCompareAttribute.cs" />
     <Compile Include="Models\SiteInfo.cs" />
     <Compile Include="Models\SiteStats.cs" />
     <Compile Include="Models\SiteStatsCalculated.cs" />

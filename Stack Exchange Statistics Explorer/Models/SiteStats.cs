@@ -21,9 +21,11 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [ScriptIgnore]
         [XmlIgnore]
         [ApiDescription("The <code>" + nameof(Models.Site) + "</code> object for this object.")]
+        [SiteCompare(null, Traverse = true)]
         public Site Site { get; set; }
 
         [ApiDescription("The <code>" + nameof(Models.Site.Id) + "</code> for the <code>" + nameof(Site) + "</code>.")]
+        [SiteCompare("ID", null, 0)]
         public Guid SiteId { get; set; }
 
         [ApiDescription("The date and time the data was collected.")]
@@ -33,12 +35,15 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public bool Manual { get; set; }
 
         [ApiDescription("The number of users over 150 reputation.", Nullable = true)]
+        [SiteCompare("Users > 150 Rep", null, 8)]
         public int? UsersAbove150Rep { get; set; }
 
         [ApiDescription("The number of users over 200 reputation.", Nullable = true)]
+        [SiteCompare("Users > 200 Rep", null, 9)]
         public int? UsersAbove200Rep { get; set; }
 
         [ApiDescription("The number of questions posted less the number of unanswered questions.")]
+        [SiteCompare("Answered", null, 5)]
         public int TotalAnswered => TotalQuestions - TotalUnanswered;
 
         public static void LoadFromReader(SqlDataReader reader, SiteStats siteStats)
