@@ -55,20 +55,26 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
             var allProperties = typeof(SiteStatsCalculated).GetProperties();
             var columns = new List<ColumnFilter>
             {
+                new ColumnFilter { Name = "", Property = nameof(Models.Site) + "." + nameof(Models.Site.Name) },
+                new ColumnFilter { Name = "ID", Property = nameof(Models.Site) + "." + nameof(Models.Site.Id) },
+                new ColumnFilter { Name = "API Parameter", Property = nameof(Models.Site) + "." + nameof(Models.Site.ApiSiteParameter) },
                 new ColumnFilter { Name = "Questions", Property = nameof(SiteStatsCalculated.TotalQuestions) },
                 new ColumnFilter { Name = "Answers", Property = nameof(SiteStatsCalculated.TotalAnswers) },
+                new ColumnFilter { Name = "Answered", Property = nameof(SiteStatsCalculated.TotalAnswered) },
+                new ColumnFilter { Name = "Users", Property = nameof(SiteStatsCalculated.TotalUsers) },
+                new ColumnFilter { Name = "Users > 150 Rep", Property = nameof(SiteStatsCalculated.UsersAbove150Rep) },
+                new ColumnFilter { Name = "Users > 200 Rep", Property = nameof(SiteStatsCalculated.UsersAbove200Rep) },
                 new ColumnFilter { Name = "Accepted Answers", Property = nameof(SiteStatsCalculated.TotalAccepted) },
                 new ColumnFilter { Name = "State", Property = nameof(Models.Site) + "." + nameof(Models.Site.HumanizeState) },
                 new ColumnFilter { Name = "Type", Property = nameof(Models.Site) + "." + nameof(Models.Site.HumanizeType) },
-                new ColumnFilter { Name = "Answer Rate", Property = nameof(SiteStatsCalculated.AnsweredRate), Format = "0.00%" },
+                new ColumnFilter { Name = "Answered Rate", Property = nameof(SiteStatsCalculated.AnsweredRate), Format = "0.00%" },
+                new ColumnFilter { Name = "Unanswered Rate", Property = nameof(SiteStatsCalculated.UnansweredRate), Format = "0.00%" },
                 new ColumnFilter { Name = "Answer Ratio", Property = nameof(SiteStatsCalculated.AnswerRatio), Format = "0.00" },
                 new ColumnFilter { Name = "Questions Answer Accept Rate", Property = nameof(SiteStatsCalculated.QuestionAcceptRate), Format = "0.00%" },
                 new ColumnFilter { Name = "Answered Accept Rate", Property = nameof(SiteStatsCalculated.AnsweredAcceptRate), Format = "0.00%" },
                 new ColumnFilter { Name = "Answer Accept Rate", Property = nameof(SiteStatsCalculated.AnswerAcceptRate), Format = "0.00%" },
                 new ColumnFilter { Name = "Questions Per Day", Property = nameof(SiteStatsCalculated.QuestionsPerDay), Format = "0.00" },
             };
-
-            items.Add(new MainListViewItem { Header = "Site", Items = siteStats.Select(x => x.Site.Name) });
 
             foreach (var column in columns)
             {
