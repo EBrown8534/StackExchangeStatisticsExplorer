@@ -279,6 +279,7 @@
     <Content Include="SQL Scripts\02 Create SE.Sites.sql" />
     <Content Include="SQL Scripts\09 Insert Default Records SE.ApiBatchLog.sql" />
     <Content Include="SQL Scripts\11 Create SE.vwAllSitesWithLatestStat.sql" />
+    <Content Include="Sites\ExportComparison.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -512,6 +513,9 @@
     </Compile>
     <Compile Include="Sites\Detail.aspx.designer.cs">
       <DependentUpon>Detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\ExportComparison.ashx.cs">
+      <DependentUpon>ExportComparison.ashx</DependentUpon>
     </Compile>
     <Compile Include="Sites\Select.aspx.cs">
       <DependentUpon>Select.aspx</DependentUpon>

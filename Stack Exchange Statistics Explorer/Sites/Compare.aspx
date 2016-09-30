@@ -10,6 +10,7 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <h2>Site Comparison <a runat="server" href="~/Sites/Select/" class="button success radius right">Back to Selection &raquo;</a></h2>
+        <%--<a href='/Sites/ExportComparison.ashx?Sites=<%:Request.QueryString["Sites"] %>'>Export as CSV</a>--%>
         <asp:ListView runat="server" ID="MainListView" OnItemDataBound="MainListView_ItemDataBound">
             <LayoutTemplate>
                 <table class="medium-12">

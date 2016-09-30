@@ -89,7 +89,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
             foreach (var property in properties)
             {
-                var attribute = (SiteCompareAttribute)property.GetCustomAttributes(typeof(SiteCompareAttribute), true)[0];
+                var attribute = property.GetCustomAttributes<SiteCompareAttribute>().First();
 
                 if (attribute.Traverse)
                 {
@@ -99,7 +99,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 {
                     columns.Add(new ColumnFilter
                     {
-                        Display = attribute.Display,
+                        Display = attribute.Name,
                         Format = attribute.Format,
                         Property = (rootProperty != null ? rootProperty + "." : "") + property.Name,
                         Order = attribute.Order,

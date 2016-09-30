@@ -1,46 +1,43 @@
-﻿using System;
+﻿using Evbpc.Framework.Utilities.Serialization.DelimitedSerialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Stack_Exchange_Statistics_Explorer.Models
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class SiteCompareAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    public class SiteCompareAttribute : DelimitedColumnAttribute
     {
-        public SiteCompareAttribute(string display)
+        public SiteCompareAttribute(string name)
         {
-            Display = display;
+            Name = name;
         }
 
-        public SiteCompareAttribute(string display, string format)
-            : this(display)
+        public SiteCompareAttribute(string name, string format)
+            : this(name)
         {
             Format = format;
         }
 
-        public SiteCompareAttribute(string display, string format, int order)
-            : this(display, format)
+        public SiteCompareAttribute(string name, string format, int order)
+            : this(name, format)
         {
             Order = order;
         }
 
-        public SiteCompareAttribute(string display, string format, int order, bool traverse)
-            : this(display, format, order)
+        public SiteCompareAttribute(string name, string format, int order, bool traverse)
+            : this(name, format, order)
         {
             Traverse = traverse;
         }
 
-        public SiteCompareAttribute(string display, string format, int order, bool traverse, string summary)
-            : this(display, format, order, traverse)
+        public SiteCompareAttribute(string name, string format, int order, bool traverse, string summary)
+            : this(name, format, order, traverse)
         {
             Summary = summary;
         }
-
-        public string Display { get; set; }
-        public string Format { get; set; }
+        
         public string Summary { get; set; }
-        public bool Traverse { get; set; }
-        public int Order { get; set; }
     }
 }

@@ -157,7 +157,7 @@
                     </h3>
                     <p>
                         API Site Parameter: <span class="apiParameter"><%#Binder.Eval<Site>(Container, "Site").ApiSiteParameter %></span>
-                        <div class="hidden">
+                        <span class="hidden">
                             <span class="updateTime hidden"><%#Binder.Eval<Site>(Container, "Site").FirstUpdate.Ticks %></span>
                             <span class="hidden id"><%#Binder.Eval<Site>(Container, "Site").Id.ToString("d") %></span>
                             Current State: <span class="state"><%#Binder.Eval<Site>(Container, "Site").HumanizeState %></span><br />
@@ -166,7 +166,7 @@
                             Total Questions: <span class="totalQuestions hidden"><%#Binder.Eval<int>(Container, "TotalQuestions")%></span><%#Binder.Eval<int>(Container, "TotalQuestions").ToString("n0") %><br />
                             Total Answers: <span class="totalAnswers hidden"><%#Binder.Eval<int>(Container, "TotalAnswers")%></span><%#Binder.Eval<int>(Container, "TotalAnswers").ToString("n0") %><br />
                             Answer Rate: <span class="answerRate"><%#(((Binder.Eval<int>(Container, "TotalQuestions") - Binder.Eval<int>(Container, "TotalUnanswered")) / (double)Binder.Eval<int>(Container, "TotalQuestions")) * 100).ToString("0.00") %></span>%
-                        </div>
+                        </span>
                     </p>
                 </div>
             </div>
