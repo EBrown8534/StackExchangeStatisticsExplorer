@@ -7,19 +7,25 @@ using System.Web;
 namespace Stack_Exchange_Statistics_Explorer.API._1._0
 {
     /// <summary>
-    /// Summary description for SingleSiteField
+    /// Summary description for LastUpdate
     /// </summary>
-    public class SingleSiteField : IHttpHandler
+    public class LastUpdate : IHttpHandler
     {
         public void ProcessRequest(HttpContext context)
         {
-            var request = new SingleSiteFieldRequest(context);
+            var request = new LastUpdateRequest(context);
             var response = request.ProcessRequest();
-            
+
             context.Response.ContentType = "text/plain";
             context.Response.Write(response);
         }
 
-        public bool IsReusable => false;
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
+            }
+        }
     }
 }

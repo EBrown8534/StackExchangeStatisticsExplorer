@@ -170,6 +170,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="API\1.0\Default.aspx" />
+    <Content Include="API\1.0\LastUpdate.aspx" />
     <Content Include="API\1.0\SingleSiteField.aspx" />
     <Content Include="API\1.0\SiteHistory.aspx" />
     <Content Include="API\1.0\Sites.aspx" />
@@ -204,6 +205,7 @@
     <Content Include="Scripts\foundation\jquery.cookie.js" />
     <Content Include="API\1.0\SingleSiteField.ashx" />
     <Content Include="API\1.0\Sites.ashx" />
+    <Content Include="API\1.0\LastUpdate.ashx" />
     <None Include="Properties\PublishProfiles\WEB01.pubxml" />
     <Content Include="Scripts\d3\LICENSE" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
@@ -401,6 +403,18 @@
     <Compile Include="API\1.0\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="API\1.0\LastUpdate.ashx.cs">
+      <DependentUpon>LastUpdate.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="API\1.0\LastUpdate.aspx.cs">
+      <DependentUpon>LastUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="API\1.0\LastUpdate.aspx.designer.cs">
+      <DependentUpon>LastUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="API\1.0\Models\LastUpdateItem.cs" />
+    <Compile Include="API\1.0\Requests\LastUpdateRequest.cs" />
     <Compile Include="API\1.0\Models\SingleSiteFieldResponseItem.cs" />
     <Compile Include="API\1.0\Models\ApiSite.cs" />
     <Compile Include="API\1.0\Models\SiteHistoryResponseItem.cs" />
