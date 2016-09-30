@@ -23,7 +23,7 @@
         Exchange sites over a period of time, or comparing multiple sites across any number of gathered metrics.
     </p>
     <p>
-        The source code for this website is publicly avaialable on GitHub at the following URL:
+        The source code for this website is publicly available on GitHub at the following URL:
         <a href="https://github.com/EBrown8534/StackExchangeStatisticsExplorer">https://github.com/EBrown8534/StackExchangeStatisticsExplorer</a>.
     </p>
     <p>
