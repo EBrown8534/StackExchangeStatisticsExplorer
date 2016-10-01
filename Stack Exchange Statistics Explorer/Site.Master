@@ -57,6 +57,9 @@
             </ul>
 
             <section class="top-bar-section">
+                <ul class="left nav-items show-for-medium-up">
+                    <li><a href="#">As of <%: DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")%> UTC</a></li>
+                </ul>
                 <ul class="right nav-items">
                     <li><a runat="server" href="~/">Home</a></li>
                     <li><a runat="server" href="~/Sites/">Sites</a></li>
