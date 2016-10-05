@@ -17,6 +17,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
         protected List<SiteStatsCalculated> AllLatestStats { get; private set; }
         protected Site CurrentSite { get; private set; }
         protected double QuestionsPerDay { get; private set; }
+        protected double AnswersPerDay { get; private set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,7 +33,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                     Response.Redirect("/Sites/Default");
                 }
             }
-            
+
             var sitesStats = new List<SiteStatsCalculated>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString))
@@ -87,6 +88,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
             var lastMonthFirst = lastMonthStats.First();
             var lastMonthLast = lastMonthStats.Last();
             QuestionsPerDay = (lastMonthLast.TotalQuestions - lastMonthFirst.TotalQuestions) / (lastMonthLast.Gathered - lastMonthFirst.Gathered).TotalDays;
+            AnswersPerDay = (lastMonthLast.TotalAnswers - lastMonthFirst.TotalAnswers) / (lastMonthLast.Gathered - lastMonthFirst.Gathered).TotalDays;
 
             SiteStats.DataSource = sitesStats.Take(7);
             SiteStats.DataBind();

@@ -12,6 +12,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>System Health</h2>
     <h3>Data Store Health</h3>
+    <h4>Known Data Issues</h4>
+    <p>
+        For a list of all known issues with data collected (errors/inconsistencies) please visit the <a runat="server" href="~/KnownDataIssues">Known Data Issues</a> page.
+    </p>
     <h4>Primary Database</h4>
     <table class="medium-12">
         <thead>

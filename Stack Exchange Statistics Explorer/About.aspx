@@ -22,6 +22,11 @@
         data is inserted into the database and then provided to the public at 00:30:00UTC+00:00.
     </p>
 
+    <h3>Known Data Issues</h3>
+    <p>
+        For a list of all known issues with data collected (errors/inconsistencies) please visit the <a runat="server" href="~/KnownDataIssues">Known Data Issues</a> page.
+    </p>
+
     <h3>Affiliations</h3>
     <p>
         This website is not directly affiliated with Stack Exchange or Stack Overflow. This website stands as it's own resource

@@ -84,6 +84,15 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Answers Per Day</th>
+                        <td class='<%:AnswersPerDay.GetClassOption(x => x >= 20, x => x < 10) %>'>
+                            <%:AnswersPerDay.ToString("0.00") %>
+                        </td>
+                        <td class='show-for-large-up <%:LatestStats.AnswersPerDay >= 20 ? "hidden" : "" %>'>
+                            Needs work
+                        </td>
+                    </tr>
+                    <tr>
                         <th><span data-tooltip class="has-tip" title="90% answered is a healthy beta, 80% answered needs some work. In the beta it's especially important that when new visitors ask questions they usually get a good answer.">Answer Rate</span></th>
                         <td class='<%:LatestStats.AnsweredRate.GetClassOption(x => x >= .9, x => x < .8) %>'>
                             <%:LatestStats.AnsweredRate.ToString("0.00%") %>

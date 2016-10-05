@@ -144,6 +144,10 @@ code {
     text-align: center;
 }
 
+.italic {
+    font-style: italic;
+}
+
 .image-32 {
     width: 32px;
     height: 32px;
