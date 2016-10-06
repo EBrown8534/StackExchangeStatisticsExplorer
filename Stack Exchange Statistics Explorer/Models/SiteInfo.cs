@@ -6,18 +6,21 @@ namespace Stack_Exchange_Statistics_Explorer.Models
     public class SiteInfo
     {
         [ApiDescription("Reported number of answers per minute of site activity.")]
+        [SiteCompare("Answers Per Minute", "0.00", 8)]
         public decimal AnswersPerMinute { get; set; }
 
         [ApiDescription("Version of the Stack Exchange API.")]
         public string ApiRevision { get; set; }
 
         [ApiDescription("Reported number of badges per minute of site activity.")]
+        [SiteCompare("Badges Per Minute", "0.00", 9)]
         public decimal BadgesPerMinute { get; set; }
 
         [ApiDescription("Reported number of new users active on the site.")]
         public int NewActiveUsers { get; set; }
 
         [ApiDescription("Reported number of questions per minute of site activity.")]
+        [SiteCompare("Questions Per Minute", "0.00", 10)]
         public decimal QuestionsPerMinute { get; set; }
 
         [ApiDescription("Total number of accepted answers/questions.")]

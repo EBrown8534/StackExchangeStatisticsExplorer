@@ -29,6 +29,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public string Audience { get; set; }
         public long? ClosedBetaDate { get; set; }
 
+        [SiteCompare("Closed Beta Date", "yyyy-MM-dd", 3)]
         public DateTime? ClosedBetaDateTime
         {
             get { return DateTimeExtensions.FromEpoch(ClosedBetaDate); }
@@ -40,6 +41,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public string IconUrl { get; set; }
         public long? LaunchDate { get; set; }
 
+        [SiteCompare("Launch Date", "yyyy-MM-dd", 3)]
         public DateTime? LaunchDateTime
         {
             get { return DateTimeExtensions.FromEpoch(LaunchDate); }
@@ -54,6 +56,7 @@ namespace Stack_Exchange_Statistics_Explorer.Models
 
         public long? OpenBetaDate { get; set; }
 
+        [SiteCompare("Open Beta Date", "yyyy-MM-dd", 3)]
         public DateTime? OpenBetaDateTime
         {
             get { return DateTimeExtensions.FromEpoch(OpenBetaDate); }

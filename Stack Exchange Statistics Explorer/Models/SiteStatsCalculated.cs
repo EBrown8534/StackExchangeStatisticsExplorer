@@ -45,36 +45,47 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         public double AnswersPerDay => (double)TotalAnswers / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime))?.Days ?? 1;
 
         [ApiDescription("Change in <code>" + nameof(TotalAccepted) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Accepted Change", "0", 17)]
         public int? TotalAcceptedChange => TotalAccepted - Previous?.TotalAccepted;
 
         [ApiDescription("Change in <code>" + nameof(TotalAnswered) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Answered Change", "0", 18)]
         public int? TotalAnsweredChange => TotalAnswered - Previous?.TotalAnswered;
 
         [ApiDescription("Change in <code>" + nameof(TotalAnswers) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Answers Change", "0", 19)]
         public int? TotalAnswersChange => TotalAnswers - Previous?.TotalAnswers;
-
+        
         [ApiDescription("Change in <code>" + nameof(TotalBadges) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Badges Change", "0", 20)]
         public int? TotalBadgesChange => TotalBadges - Previous?.TotalBadges;
 
         [ApiDescription("Change in <code>" + nameof(TotalComments) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Comments Change", "0", 21)]
         public int? TotalCommentsChange => TotalComments - Previous?.TotalComments;
 
         [ApiDescription("Change in <code>" + nameof(TotalQuestions) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Questions Change", "0", 22)]
         public int? TotalQuestionsChange => TotalQuestions - Previous?.TotalQuestions;
 
         [ApiDescription("Change in <code>" + nameof(TotalUnanswered) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Unanswered Change", "0", 23)]
         public int? TotalUnansweredChange => TotalUnanswered - Previous?.TotalUnanswered;
 
         [ApiDescription("Change in <code>" + nameof(TotalUsers) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Users Change", "0", 24)]
         public int? TotalUsersChange => TotalUsers - Previous?.TotalUsers;
 
         [ApiDescription("Change in <code>" + nameof(TotalVotes) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Total Votes Change", "0", 25)]
         public int? TotalVotesChange => TotalVotes - Previous?.TotalVotes;
 
         [ApiDescription("Change in <code>" + nameof(UsersAbove150Rep) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Users Above 150 Rep Change", "0", 26)]
         public int? UsersAbove150RepChange => UsersAbove150Rep - Previous?.UsersAbove150Rep;
 
         [ApiDescription("Change in <code>" + nameof(UsersAbove200Rep) + "</code> from the previous object.", Nullable = true)]
+        [SiteCompare("Users Above 200 Rep Change", "0", 27)]
         public int? UsersAbove200RepChange => UsersAbove200Rep - Previous?.UsersAbove200Rep;
 
         [ApiDescription("The ratio of answers to questions.")]

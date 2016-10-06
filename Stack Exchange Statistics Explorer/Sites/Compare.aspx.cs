@@ -67,8 +67,8 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                     var subProperties = allProperties;
                     foreach (var propertyPart in propertyParts)
                     {
-                        value = subProperties.Where(x => x.Name == propertyPart).First().GetValue(value);
-                        subProperties = value.GetType().GetProperties();
+                        value = subProperties?.Where(x => x.Name == propertyPart).First().GetValue(value);
+                        subProperties = value?.GetType().GetProperties();
                     }
                     values.Add(string.Format($"{{0:{column.Format}}}", value));
                 }
