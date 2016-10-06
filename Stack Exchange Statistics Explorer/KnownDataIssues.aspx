@@ -27,7 +27,10 @@
     </p>
     <h5>Limitations</h5>
     <p>
-        Data for 5 October 2016 could not be gathered at the usual 00:00UTC+00:00, as such any data gathered on this date <span class="italic">may</span> be slightly skewed in relation to 4 October 2016 and 6 October 2016. This will not affect data over a long-period, provided neither endpoint of that period is 5 October 2016. This will affect larger sites much more than smaller ones. Badge stats for this date will not be acquired for any sites.
+        Data for 4 October 2016 could not be gathered at the usual 00:00UTC+00:00, and was not gathered later. As a result, all data for thisdate was unable to be collected, and measures are being taken to make sure that the issues created by this gap can be remedied.
+    </p>
+    <p>
+        Data for 5 October 2016 could not be gathered at the usual 00:00UTC+00:00, as such any data gathered on this date <span class="italic">may</span> be slightly skewed in relation to 3 October 2016 and 6 October 2016. This will not affect data over a long-period, provided neither endpoint of that period is 5 October 2016, or 4 October 2016. This will affect larger sites much more than smaller ones. Badge stats for this date will not be acquired for any sites.
     </p>
     <h5>Prevention</h5>
     <p>
