@@ -198,15 +198,15 @@
                 var lTC = 60;
                 var sTC = 15;
 
-                buildBasicChart(m, fW, fH, siteId, ".zombieChart", "UnansweredRate", "0.00%", "Unanswered Rate (in %)", lTC);
+                buildBasicChart(m, fW, fH, siteId, ".zombieChart", "UnansweredRate", "0.000%", "Unanswered Rate (in %)", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".usersOver150RepChart", "UsersAbove150Rep", "0", "Users > 150 Rep", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".usersOver200RepChart", "UsersAbove200Rep", "0", "Users > 200 Rep", sTC);
 
-                buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.00", "Questions Per Day", lTC);
+                buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.000", "Questions Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionsChart", "TotalQuestions", "0", "Total Questions", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionsChangeChart", "TotalQuestionsChange", "0", "Questions Change", sTC);
 
-                buildBasicChart(m, fW, fH, siteId, ".answersPerDayChart", "AnswersPerDay", "0.00", "Answers Per Day", lTC);
+                buildBasicChart(m, fW, fH, siteId, ".answersPerDayChart", "AnswersPerDay", "0.000", "Answers Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".answersChart", "TotalAnswers", "0", "Total Answers", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".answersChangeChart", "TotalAnswersChange", "0", "Answers Change", sTC);
             </script>
