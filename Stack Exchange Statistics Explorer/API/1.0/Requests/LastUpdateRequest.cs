@@ -41,8 +41,6 @@ namespace Stack_Exchange_Statistics_Explorer.API._1._0.Requests
                 }
             }
 
-            // Initial implementation won't use the `Sites` parameter.
-
             var results = new List<LastUpdateItem>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnection"].ConnectionString))
@@ -59,11 +57,14 @@ namespace Stack_Exchange_Statistics_Explorer.API._1._0.Requests
                     {
                         while (reader.Read())
                         {
-                            results.Add(new LastUpdateItem
+                            if (sites.Count == 0 || sites.Contains(reader.GetItem<Guid>(nameof(Site.Id))))
                             {
-                                Id = reader.GetItem<Guid>(nameof(Site.Id)).ToString(),
-                                Updated = reader.GetItem<DateTime>(nameof(SiteStats.Gathered)).ToString("yyyy-MM-dd HH:mm:ss.fffffff"),
-                            });
+                                results.Add(new LastUpdateItem
+                                {
+                                    Id = reader.GetItem<Guid>(nameof(Site.Id)).ToString(),
+                                    Updated = reader.GetItem<DateTime>(nameof(SiteStats.Gathered)).ToString("yyyy-MM-dd HH:mm:ss.fffffff"),
+                                });
+                            }
                         }
                     }
                 }

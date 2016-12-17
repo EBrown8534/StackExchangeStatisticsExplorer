@@ -20,7 +20,9 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="3" class="center grey">None</td>
+                <td>Sites</td>
+                <td>List&lt;Guid&gt;?</td>
+                <td>An optional list of the specific sites to return. If this is not provided all sites are returned.</td>
             </tr>
         </tbody>
     </table>
