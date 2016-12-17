@@ -16,6 +16,26 @@ body {
     white-space: normal;
 }
 
+footer {
+    margin-top: 10px;
+    border-top: 1px solid #888;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+    footer a {
+        color: #ccc;
+    }
+
+        footer a:hover {
+            color: #7df;
+        }
+
+    footer p {
+        font-size: 15px;
+    }
+
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input[type="text"],
 input[type="password"],
