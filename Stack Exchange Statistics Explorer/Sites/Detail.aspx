@@ -182,6 +182,8 @@
                     <svg class="usersChart"></svg>
                     <svg class="usersOver150RepChart"></svg>
                     <svg class="usersOver200RepChart"></svg>
+                    <svg class="percentUsersOver150RepChart"></svg>
+                    <svg class="percentUsersOver200RepChart"></svg>
                 </div>
                 <div class="content" id="graphSet3">
                     <svg class="questionsPerDayChart"></svg>
@@ -204,13 +206,15 @@
                 var lTC = 60;
                 var sTC = 15;
 
-                buildBasicChart(m, fW, fH, siteId, ".zombieChart", "UnansweredRate", "0.000%", "Unanswered Rate (in %)", lTC);
-                buildBasicChart(m, hW, hH, siteId, ".questionAcceptRateChart", "QuestionAcceptRate", "0.000%", "Question Answer Accept Rate", sTC);
-                buildBasicChart(m, hW, hH, siteId, ".answerAcceptRateChart", "AnswerAcceptRate", "0.000%", "Answer Accept Rate", sTC);
+                buildBasicChart(m, fW, fH, siteId, ".zombieChart", "AnsweredRate", "0.000%", "Answered Rate (%)", lTC);
+                buildBasicChart(m, hW, hH, siteId, ".questionAcceptRateChart", "QuestionAcceptRate", "0.000%", "Question Answer Accept Rate (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".answerAcceptRateChart", "AnswerAcceptRate", "0.000%", "Answer Accept Rate (%)", sTC);
 
                 buildBasicChart(m, fW, fH, siteId, ".usersChart", "TotalUsers", "0", "Total Users", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".usersOver150RepChart", "UsersAbove150Rep", "0", "Users > 150 Rep", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".usersOver200RepChart", "UsersAbove200Rep", "0", "Users > 200 Rep", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".percentUsersOver150RepChart", "PercentUsersAbove150Rep", "0.000%", "Users > 150 Rep (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".percentUsersOver200RepChart", "PercentUsersAbove200Rep", "0.000%", "Users > 200 Rep (%)", sTC);
 
                 buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.000", "Questions Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionsChart", "TotalQuestions", "0", "Total Questions", sTC);
