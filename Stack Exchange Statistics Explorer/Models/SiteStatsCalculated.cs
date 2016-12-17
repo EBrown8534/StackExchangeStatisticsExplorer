@@ -112,6 +112,10 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [SiteCompare("Answer Accept Rate", "0.00%", 17)]
         public double AnswerAcceptRate => (double)TotalAccepted / TotalAnswers;
 
+        [ApiDescription("The percentage of answered questions with accepted answers.")]
+        [SiteCompare("Question Answer Accept Rate", "0.00%", 18)]
+        public double QuestionAnswerAcceptRate => (double)TotalAccepted / TotalAnswered;
+
         public static new List<SiteStatsCalculated> LoadFromDatabase(SqlConnection connection, Site site)
         {
             var sitesStatsCalculated = new List<SiteStatsCalculated>();

@@ -207,7 +207,7 @@
                 var sTC = 15;
 
                 buildBasicChart(m, fW, fH, siteId, ".zombieChart", "AnsweredRate", "0.000%", "Answered Rate (%)", lTC);
-                buildBasicChart(m, hW, hH, siteId, ".questionAcceptRateChart", "QuestionAcceptRate", "0.000%", "Question Answer Accept Rate (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".questionAcceptRateChart", "QuestionAnswerAcceptRate", "0.000%", "Answered Accept Rate (%)", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".answerAcceptRateChart", "AnswerAcceptRate", "0.000%", "Answer Accept Rate (%)", sTC);
 
                 buildBasicChart(m, fW, fH, siteId, ".usersChart", "TotalUsers", "0", "Total Users", lTC);
