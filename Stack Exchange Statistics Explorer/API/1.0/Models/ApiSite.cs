@@ -1,4 +1,5 @@
-﻿using Stack_Exchange_Statistics_Explorer.Utilities.Extensions;
+﻿using Stack_Exchange_Statistics_Explorer.Models;
+using Stack_Exchange_Statistics_Explorer.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -9,8 +10,10 @@ using System.Threading.Tasks;
 namespace Stack_Exchange_Statistics_Explorer.API._1._0.Models
 {
     [Serializable]
-    public class ApiSite : Stack_Exchange_Statistics_Explorer.Models.Site, IBaseModel
+    public class ApiSite : Site, IBaseModel
     {
+        public Guid? Merged { get; set; }
+
         public static new List<ApiSite> LoadAllFromDatabase(SqlConnection connection)
         {
             var sites = new List<ApiSite>();
@@ -50,6 +53,7 @@ namespace Stack_Exchange_Statistics_Explorer.API._1._0.Models
             site.TwitterAccount = reader.GetItem<string>(nameof(TwitterAccount));
             site.LastUpdate = reader.GetItem<DateTime>(nameof(LastUpdate));
             site.FirstUpdate = reader.GetItem<DateTime>(nameof(FirstUpdate));
+            site.Merged = reader.GetItem<Guid?>("NewSiteId");
 
             if (includeStyling)
             {

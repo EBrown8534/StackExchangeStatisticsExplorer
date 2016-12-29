@@ -58,6 +58,12 @@ namespace Stack_Exchange_Statistics_Explorer.API._1._0.Requests
                     connection.Open();
                 }
 
+                var siteMerge = SiteMerge.LoadWithOriginalId(connection, siteId);
+                if (siteMerge != null)
+                {
+                    siteId = siteMerge.NewSiteId;
+                }
+
                 site = Stack_Exchange_Statistics_Explorer.Models.Site.LoadFromDatabase(connection, siteId);
 
                 if (site == null)

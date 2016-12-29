@@ -19,6 +19,12 @@
         </div>
     </div>
     <div class="medium-12 columns">
+        <% if (Merge != null)
+            { %>
+        <div class="alert-box warning radius">
+            You were sent here as a result of attempting to load a site which has been merged to a new site. On <%:Merge.DateMerged.ToString("dddd, MMMM d, yyyy") %> the site you tried to view (<%:Merge.OriginalSite.ApiSiteParameter%>/<%:HttpUtility.HtmlDecode(Merge.OriginalSite.Name)%>) was merged to this site (<%:CurrentSite.ApiSiteParameter%>/<%:HttpUtility.HtmlDecode(CurrentSite.Name)%>) by Stack Exchange. All data within our system has already been merged, and any API requests to the original site (<%:Merge.OriginalSite.ApiSiteParameter%>) will no longer return any results.
+        </div>
+        <% } %>
         <div class="medium-7 small-12 columns">
             <h3>General</h3>
             <table class="detail-table medium-12">
@@ -65,7 +71,8 @@
                     </tr>
                     <tr>
                         <th>Logo</th>
-                        <td><img src="<%:CurrentSite.LogoUrl %>" height="48" class="logo" /></td>
+                        <td>
+                            <img src="<%:CurrentSite.LogoUrl %>" height="48" class="logo" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -79,8 +86,7 @@
                         <td class='<%:QuestionsPerDay.GetClassOption(x => x >= 10, x => x < 5) %>'>
                             <%:QuestionsPerDay.ToString("0.00") %>
                         </td>
-                        <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>
-                            Needs work
+                        <td class='show-for-large-up <%:LatestStats.QuestionsPerDay >= 10 ? "hidden" : "" %>'>Needs work
                         </td>
                     </tr>
                     <tr>
@@ -88,8 +94,7 @@
                         <td class='<%:AnswersPerDay.GetClassOption(x => x >= 20, x => x < 10) %>'>
                             <%:AnswersPerDay.ToString("0.00") %>
                         </td>
-                        <td class='show-for-large-up <%:LatestStats.AnswersPerDay >= 20 ? "hidden" : "" %>'>
-                            Needs work
+                        <td class='show-for-large-up <%:LatestStats.AnswersPerDay >= 20 ? "hidden" : "" %>'>Needs work
                         </td>
                     </tr>
                     <tr>
@@ -97,8 +102,7 @@
                         <td class='<%:LatestStats.AnsweredRate.GetClassOption(x => x >= .9, x => x < .8) %>'>
                             <%:LatestStats.AnsweredRate.ToString("0.00%") %>
                         </td>
-                        <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>
-                            Needs work
+                        <td class='show-for-large-up <%:LatestStats.AnsweredRate >= .9 ? "hidden" : "" %>'>Needs work
                         </td>
                     </tr>
                     <tr>
@@ -106,8 +110,7 @@
                         <td class='<%:LatestStats.UsersAbove200Rep.GetClassOption(x => x >= 150, x => x < 125) %>'>
                             <%:LatestStats.UsersAbove200Rep?.ToString("n0") ?? "N/A" %>
                         </td>
-                        <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>
-                            Needs work
+                        <td class='show-for-large-up <%:LatestStats.UsersAbove200Rep >= 150 ? "hidden" : "" %>'>Needs work
                         </td>
                     </tr>
                     <tr>
@@ -115,8 +118,7 @@
                         <td class='<%:LatestStats.AnswerRatio.GetClassOption(x => x >= 2.5, x => x < 1) %>'>
                             <%:LatestStats.AnswerRatio.ToString("0.00") %>
                         </td>
-                        <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>
-                            Needs work
+                        <td class='show-for-large-up <%:LatestStats.AnswerRatio >= 2.5 ? "hidden" : "" %>'>Needs work
                         </td>
                     </tr>
                 </tbody>

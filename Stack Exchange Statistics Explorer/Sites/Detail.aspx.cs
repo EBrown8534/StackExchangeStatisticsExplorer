@@ -18,6 +18,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
         protected Site CurrentSite { get; private set; }
         protected double QuestionsPerDay { get; private set; }
         protected double AnswersPerDay { get; private set; }
+        protected SiteMerge Merge { get; private set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,6 +51,25 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 else
                 {
                     CurrentSite = Models.Site.LoadFromDatabase(connection, apiSiteParameter);
+                }
+
+                var siteMerged = SiteMerge.LoadWithOriginalId(connection, CurrentSite.Id);
+                if (siteMerged != null)
+                {
+                    Response.Redirect("/Sites/Detail?SiteId=" + siteMerged.NewSiteId.ToString("d") + "&FromMerge=" + siteMerged.OriginalSiteId.ToString("d"));
+                }
+
+                var fromMerge = Request.QueryString["FromMerge"];
+                if (!string.IsNullOrWhiteSpace(fromMerge))
+                {
+                    var fromMergeGuid = Guid.NewGuid();
+                    var validFromMergeGuid = Guid.TryParse(fromMerge, out fromMergeGuid);
+
+                    if (validFromMergeGuid)
+                    {
+                        Merge = SiteMerge.LoadWithBothIds(connection, fromMergeGuid, CurrentSite.Id);
+                        Merge.OriginalSite = Models.Site.LoadFromDatabase(connection, Merge.OriginalSiteId);
+                    }
                 }
 
                 sitesStats = SiteStatsCalculated.LoadFromDatabase(connection, CurrentSite);

@@ -505,6 +505,7 @@
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\SiteCompareAttribute.cs" />
     <Compile Include="Models\SiteInfo.cs" />
+    <Compile Include="Models\SiteMerge.cs" />
     <Compile Include="Models\SiteStats.cs" />
     <Compile Include="Models\SiteStatsCalculated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

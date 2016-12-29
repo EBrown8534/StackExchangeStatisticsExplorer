@@ -31,6 +31,20 @@
         this may be done with or without prior notice. All callers should expect to be subject to a rate limit
         and follow all expected procedures. (Acknowledge any backoff request, follow any quota limits, etc.)
     </p>
+    <h3>Site Renames / Merges</h3>
+    <p>
+        On occasion Stack Exchange is known for renaming sites. (In 2016 two of these happened that affected us:
+        <code>beer</code> -> <code>alcohol</code>, and <code>programmers</code> ->
+        <code>softwareengineering</code>.) Unfortunately, this is a difficult problem for us to solve as it
+        requires us to decide: do we fail that API request, do we return the new site data, do we return no
+        data, or do we return data up to the merge point?
+    </p>
+    <p>
+        In this case we made the decision to return all data for both requests. If you make a request for the
+        data for <code>programmers</code> and <code>softwareengineering</code>, you will see that both requests
+        will return the same history data. (If the request is for the site information itself, it will return
+        the information for that site.)
+    </p>
     <h3>Versions</h3>
     <asp:ListView runat="server" ID="ApiVersions">
         <LayoutTemplate>
