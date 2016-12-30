@@ -42,6 +42,18 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [SiteCompare("Users > 200 Rep", null, 9)]
         public int? UsersAbove200Rep { get; set; }
 
+        [ApiDescription("The number of users over 1000 reputation.", Nullable = true)]
+        [SiteCompare("Users > 1k Rep", null, 10)]
+        public int? UsersAbove1000Rep { get; set; }
+
+        [ApiDescription("The number of users over 10000 reputation.", Nullable = true)]
+        [SiteCompare("Users > 10k Rep", null, 11)]
+        public int? UsersAbove10000Rep { get; set; }
+
+        [ApiDescription("The number of users over 20000 reputation.", Nullable = true)]
+        [SiteCompare("Users > 20k Rep", null, 12)]
+        public int? UsersAbove20000Rep { get; set; }
+
         [ApiDescription("The number of questions posted less the number of unanswered questions.")]
         [SiteCompare("Answered", null, 5)]
         public int TotalAnswered => TotalQuestions - TotalUnanswered;
@@ -66,6 +78,9 @@ namespace Stack_Exchange_Statistics_Explorer.Models
             siteStats.TotalVotes = reader.GetItem<int>(nameof(TotalVotes));
             siteStats.UsersAbove150Rep = reader.GetItem<int?>(nameof(UsersAbove150Rep));
             siteStats.UsersAbove200Rep = reader.GetItem<int?>(nameof(UsersAbove200Rep));
+            siteStats.UsersAbove1000Rep = reader.GetItem<int?>(nameof(UsersAbove1000Rep));
+            siteStats.UsersAbove10000Rep = reader.GetItem<int?>(nameof(UsersAbove10000Rep));
+            siteStats.UsersAbove20000Rep = reader.GetItem<int?>(nameof(UsersAbove20000Rep));
         }
 
         public static List<SiteStats> LoadFromDatabase(SqlConnection connection, Site site)

@@ -10,6 +10,24 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Version 1.0</h2>
+    <h3>Endpoints</h3>
+    <asp:ListView runat="server" ID="VersionMethods">
+        <LayoutTemplate>
+            <div runat="server" id="groupPlaceholder"></div>
+        </LayoutTemplate>
+
+        <GroupTemplate>
+            <div runat="server" id="itemPlaceholder"></div>
+        </GroupTemplate>
+
+        <ItemTemplate>
+            <div runat="server">
+                <a href='<%#Binder.Eval<string>(Container, "File") %>'>
+                    <%#Binder.Eval<string>(Container, "Name") %>
+                </a>
+            </div>
+        </ItemTemplate>
+    </asp:ListView>
     <h3>Shared Parameters</h3>
     <p>
         All API Version 1.0 endpoints share the following parameters (specified in the query string):
@@ -43,41 +61,45 @@
             <tr>
                 <td>json</td>
                 <td>Javascript Object Notation</td>
-                <td>
-                    A graph object that maps property names to object values, including all sub-properties and collections.<br />
+                <td>A graph object that maps property names to object values, including all sub-properties and collections.<br />
                     <code class="block">{"property":"value","property2":{"property2.property":"value"}}</code>
                 </td>
             </tr>
             <tr>
                 <td>xml</td>
                 <td>Extensible Markup Language</td>
-                <td>
-                    A graph object that maps property names to object values, including all sub-properties and collections.<br />
-                    <code class="block">&lt;?xml version="1.0" encoding="utf-16"?&gt;<br />&lt;RootElement&gt;<br />&lt;Property&gt;Value&lt;/Property&gt;<br />&lt;Property2&gt;<br />&lt;Property2.Property&gt;Value&lt;/Property2.Property&gt;<br />&lt;/Property2&gt;<br />&lt;/RootElement&gt;</code>
+                <td>A graph object that maps property names to object values, including all sub-properties and collections.<br />
+                    <code class="block">&lt;?xml version="1.0" encoding="utf-16"?&gt;<br />
+                        &lt;RootElement&gt;<br />
+                        &lt;Property&gt;Value&lt;/Property&gt;<br />
+                        &lt;Property2&gt;<br />
+                        &lt;Property2.Property&gt;Value&lt;/Property2.Property&gt;<br />
+                        &lt;/Property2&gt;<br />
+                        &lt;/RootElement&gt;</code>
                 </td>
             </tr>
             <tr>
                 <td>csv</td>
                 <td>Comma-Separated Values</td>
-                <td>
-                    Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal commas (<code>,</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal comma (<code>,</code>) will be escaped with the unicode sequence for a comma: <code>\u002C</code>.<br />
-                    <code class="block">Property,Property2<br />Value,Value2</code>
+                <td>Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal commas (<code>,</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal comma (<code>,</code>) will be escaped with the unicode sequence for a comma: <code>\u002C</code>.<br />
+                    <code class="block">Property,Property2<br />
+                        Value,Value2</code>
                 </td>
             </tr>
             <tr>
                 <td>tsv</td>
                 <td>Tab-Separated Values</td>
-                <td>
-                    Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal tabs (<code>\t</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal tab (<code>\t</code>) will be escaped with the escape sequence for a tab: <code>\t</code>.<br />
-                    <code class="block">Property&nbsp;&nbsp;&nbsp;&nbsp;Property2<br />Value&nbsp;&nbsp;&nbsp;Value2</code>
+                <td>Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal tabs (<code>\t</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal tab (<code>\t</code>) will be escaped with the escape sequence for a tab: <code>\t</code>.<br />
+                    <code class="block">Property&nbsp;&nbsp;&nbsp;&nbsp;Property2<br />
+                        Value&nbsp;&nbsp;&nbsp;Value2</code>
                 </td>
             </tr>
             <tr>
                 <td>psv</td>
                 <td>Pipe-Separated Values</td>
-                <td>
-                    Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal pipes (<code>|</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal pipe (<code>|</code>) will be escaped with the unicode sequence for a pipe: <code>\u007C</code>.<br />
-                    <code class="block">Property|Property2<br />Value|Value2</code>
+                <td>Returns the <code>Items</code> of the response in a delimited format using new lines (<code>\r\n</code>) as row/record delimiters and literal pipes (<code>|</code>) as column/field delimiters. Collections and sub-objects will not be returned. Names and values containing a literal pipe (<code>|</code>) will be escaped with the unicode sequence for a pipe: <code>\u007C</code>.<br />
+                    <code class="block">Property|Property2<br />
+                        Value|Value2</code>
                 </td>
             </tr>
         </tbody>
@@ -128,22 +150,4 @@
             </tr>
         </tbody>
     </table>
-    <h3>Endpoints</h3>
-    <asp:ListView runat="server" ID="VersionMethods">
-        <LayoutTemplate>
-            <div runat="server" id="groupPlaceholder"></div>
-        </LayoutTemplate>
-
-        <GroupTemplate>
-            <div runat="server" id="itemPlaceholder"></div>
-        </GroupTemplate>
-
-        <ItemTemplate>
-            <div runat="server">
-                <a href='<%#Binder.Eval<string>(Container, "File") %>'>
-                    <%#Binder.Eval<string>(Container, "Name") %>
-                </a>
-            </div>
-        </ItemTemplate>
-    </asp:ListView>
 </asp:Content>

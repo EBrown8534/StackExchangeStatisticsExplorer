@@ -10,6 +10,22 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Stack Exchange Statistics Explorer API</h2>
+    <h3>Versions</h3>
+    <asp:ListView runat="server" ID="ApiVersions">
+        <LayoutTemplate>
+            <div runat="server" id="groupPlaceholder"></div>
+        </LayoutTemplate>
+
+        <GroupTemplate>
+            <div runat="server" id="itemPlaceholder"></div>
+        </GroupTemplate>
+
+        <ItemTemplate>
+            <div runat="server">
+                <h4><a href='/API/<%#Binder.Eval<string>(Container, "Name") %>'><%#Binder.Eval<string>(Container, "Name") %></a></h4>
+            </div>
+        </ItemTemplate>
+    </asp:ListView>
     <h3>General</h3>
     <p>
         The Stack Exchange Statistics Explorer API is provided to help facilitate the integration of statistics
@@ -45,20 +61,4 @@
         will return the same history data. (If the request is for the site information itself, it will return
         the information for that site.)
     </p>
-    <h3>Versions</h3>
-    <asp:ListView runat="server" ID="ApiVersions">
-        <LayoutTemplate>
-            <div runat="server" id="groupPlaceholder"></div>
-        </LayoutTemplate>
-
-        <GroupTemplate>
-            <div runat="server" id="itemPlaceholder"></div>
-        </GroupTemplate>
-
-        <ItemTemplate>
-            <div runat="server">
-                <a href='/API/<%#Binder.Eval<string>(Container, "Name") %>'><%#Binder.Eval<string>(Container, "Name") %></a>
-            </div>
-        </ItemTemplate>
-    </asp:ListView>
 </asp:Content>
