@@ -96,6 +96,18 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [SiteCompare("Percent Users Above 200 Rep", "0.000%", 31)]
         public double? PercentUsersAbove200Rep => UsersAbove200Rep != null ? (double?)UsersAbove200Rep / TotalUsers : null;
 
+        [ApiDescription("The percentage of users that have more than 1000 rep.", Nullable = true)]
+        [SiteCompare("Percent Users Above 1000 Rep", "0.000%", 32)]
+        public double? PercentUsersAbove1000Rep => UsersAbove1000Rep != null ? (double?)UsersAbove1000Rep / TotalUsers : null;
+
+        [ApiDescription("The percentage of users that have more than 10000 rep.", Nullable = true)]
+        [SiteCompare("Percent Users Above 10000 Rep", "0.000%", 33)]
+        public double? PercentUsersAbove10000Rep => UsersAbove1000Rep != null ? (double?)UsersAbove10000Rep / TotalUsers : null;
+
+        [ApiDescription("The percentage of users that have more than 20000 rep.", Nullable = true)]
+        [SiteCompare("Percent Users Above 20000 Rep", "0.000%", 34)]
+        public double? PercentUsersAbove20000Rep => UsersAbove1000Rep != null ? (double?)UsersAbove20000Rep / TotalUsers : null;
+
         [ApiDescription("The ratio of answers to questions.")]
         [SiteCompare("Answer Ratio", "0.00", 14)]
         public double AnswerRatio => (double)TotalAnswers / TotalQuestions;

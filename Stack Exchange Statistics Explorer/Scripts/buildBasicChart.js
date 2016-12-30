@@ -35,7 +35,7 @@
             .y(function (d) { return y(d.FieldValue); })
             .interpolate("monotone");
 
-        y.domain([d3.min(data, function (d) { return d.FieldValue; }), d3.max(data, function (d) { return d.FieldValue; })]).nice();
+        y.domain([d3.min(data, function (d) { return d.FieldValue; }) - 0.001, d3.max(data, function (d) { return d.FieldValue; }) + 0.001]).nice();
 
         chart.append("g")
             .attr("class", "x axis lineChartAxis")

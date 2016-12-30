@@ -183,9 +183,15 @@
                 <div class="content" id="graphSet2">
                     <svg class="usersChart"></svg>
                     <svg class="usersOver150RepChart"></svg>
-                    <svg class="usersOver200RepChart"></svg>
                     <svg class="percentUsersOver150RepChart"></svg>
+                    <svg class="usersOver200RepChart"></svg>
                     <svg class="percentUsersOver200RepChart"></svg>
+                    <svg class="usersOver1000RepChart"></svg>
+                    <svg class="percentUsersOver1000RepChart"></svg>
+                    <svg class="usersOver10000RepChart"></svg>
+                    <svg class="percentUsersOver10000RepChart"></svg>
+                    <svg class="usersOver20000RepChart"></svg>
+                    <svg class="percentUsersOver20000RepChart"></svg>
                 </div>
                 <div class="content" id="graphSet3">
                     <svg class="questionsPerDayChart"></svg>
@@ -214,9 +220,15 @@
 
                 buildBasicChart(m, fW, fH, siteId, ".usersChart", "TotalUsers", "0", "Total Users", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".usersOver150RepChart", "UsersAbove150Rep", "0", "Users > 150 Rep", sTC);
-                buildBasicChart(m, hW, hH, siteId, ".usersOver200RepChart", "UsersAbove200Rep", "0", "Users > 200 Rep", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".percentUsersOver150RepChart", "PercentUsersAbove150Rep", "0.000%", "Users > 150 Rep (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".usersOver200RepChart", "UsersAbove200Rep", "0", "Users > 200 Rep", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".percentUsersOver200RepChart", "PercentUsersAbove200Rep", "0.000%", "Users > 200 Rep (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".usersOver1000RepChart", "UsersAbove1000Rep", "0", "Users > 1k Rep", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".percentUsersOver1000RepChart", "PercentUsersAbove1000Rep", "0.000%", "Users > 1k Rep (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".usersOver10000RepChart", "UsersAbove10000Rep", "0", "Users > 10k Rep", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".percentUsersOver10000RepChart", "PercentUsersAbove10000Rep", "0.000%", "Users > 10k Rep (%)", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".usersOver20000RepChart", "UsersAbove20000Rep", "0", "Users > 20k Rep", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".percentUsersOver20000RepChart", "PercentUsersAbove20000Rep", "0.000%", "Users > 20k Rep (%)", sTC);
 
                 buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.000", "Questions Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionsChart", "TotalQuestions", "0", "Total Questions", sTC);
