@@ -267,6 +267,28 @@
                     }
                 });
             </script>
+            <div class="row collapse small-12 medium-9 columns">
+                <div class="medium-2 columns">
+                    <label for="StartDate" class="prefix radius">Start date</label>
+                </div>
+                <div class="medium-3 columns">
+                    <asp:TextBox runat="server" ID="StartDate"></asp:TextBox>
+                </div>
+                <div class="medium-2 columns">
+                    <label for="EndDate" class="postfix prefix">End date</label>
+                </div>
+                <div class="medium-3 columns">
+                    <asp:TextBox runat="server" ID="EndDate"></asp:TextBox>
+                </div>
+                <div class="medium-2 columns">
+                    <asp:Button runat="server" ID="FilterTable" Text="Filter" CssClass="button postfix radius" OnClick="FilterTable_Click" />
+                </div>
+            </div>
+            <asp:Literal runat="server" ID="ErrorPanel" Visible="false">
+                <p class="alert-box alert radius">
+                    There was an error processing one or more of the dates you provided.
+                </p>
+            </asp:Literal>
             <table>
                 <thead>
                     <tr>

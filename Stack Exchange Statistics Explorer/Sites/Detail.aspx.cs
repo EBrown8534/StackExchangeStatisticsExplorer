@@ -5,13 +5,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Stack_Exchange_Statistics_Explorer.Sites
 {
-    public partial class Detail : System.Web.UI.Page
+    public partial class Detail : Page
     {
         protected SiteStatsCalculated LatestStats { get; private set; }
         protected List<SiteStatsCalculated> AllLatestStats { get; private set; }
@@ -110,12 +111,98 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
             QuestionsPerDay = (lastMonthLast.TotalQuestions - lastMonthFirst.TotalQuestions) / (lastMonthLast.Gathered - lastMonthFirst.Gathered).TotalDays;
             AnswersPerDay = (lastMonthLast.TotalAnswers - lastMonthFirst.TotalAnswers) / (lastMonthLast.Gathered - lastMonthFirst.Gathered).TotalDays;
 
-            SiteStats.DataSource = sitesStats.Take(7);
+            DateTime startDateTime;
+            DateTime endDateTime;
+
+            var startDate = Request.QueryString["StartDate"];
+            var endDate = Request.QueryString["EndDate"];
+
+            if (!string.IsNullOrWhiteSpace(startDate)
+                && !string.IsNullOrWhiteSpace(endDate)
+                && DateTime.TryParse(startDate, out startDateTime)
+                && DateTime.TryParse(endDate, out endDateTime))
+            {
+                ErrorPanel.Visible = false;
+                SiteStats.DataSource = sitesStats.Where(x => x.Gathered.Date >= startDateTime && x.Gathered.Date <= endDateTime)
+                                                 .OrderByDescending(x => x.Gathered)
+                                                 .ToList();
+            }
+            else
+            {
+                SiteStats.DataSource = sitesStats.Take(7);
+            }
+
             SiteStats.DataBind();
         }
 
         protected int GetRank<T>(Func<SiteStatsCalculated, T> pred) => AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).OrderByDescending(pred).TakeWhile(x => x.SiteId != CurrentSite.Id).Count() + 1;
 
         protected int GetPercentile<T>(Func<SiteStatsCalculated, T> pred) => (int)(((double)AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() - GetRank(pred)) / AllLatestStats.Where(x => x.Site.SiteType == CurrentSite.SiteType).Count() * 100);
+
+        protected void FilterTable_Click(object sender, EventArgs e)
+        {
+            var siteId = Request.QueryString["SiteId"];
+            var apiSiteParameter = Request.QueryString["ApiSiteParameter"];
+            var fromMerge = Request.QueryString["FromMerge"];
+            var tableStartDate = StartDate.Text;
+            var tableEndDate = EndDate.Text;
+
+            var newQueryString = new StringBuilder("?");
+
+            if (!string.IsNullOrWhiteSpace(siteId))
+            {
+                newQueryString.Append("SiteId=");
+                newQueryString.Append(siteId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(apiSiteParameter))
+            {
+                if (newQueryString.Length > 1)
+                {
+                    newQueryString.Append('&');
+                }
+
+                newQueryString.Append("ApiSiteParameter=");
+                newQueryString.Append(apiSiteParameter);
+            }
+
+            if (!string.IsNullOrWhiteSpace(fromMerge))
+            {
+                if (newQueryString.Length > 1)
+                {
+                    newQueryString.Append('&');
+                }
+
+                newQueryString.Append("FromMerge=");
+                newQueryString.Append(fromMerge);
+            }
+
+            DateTime startDateTime;
+            DateTime endDateTime;
+
+            if (!string.IsNullOrWhiteSpace(tableStartDate)
+                && !string.IsNullOrWhiteSpace(tableEndDate)
+                && DateTime.TryParse(tableStartDate, out startDateTime)
+                && DateTime.TryParse(tableEndDate, out endDateTime))
+            {
+                ErrorPanel.Visible = false;
+
+                if (newQueryString.Length > 1)
+                {
+                    newQueryString.Append('&');
+                }
+
+                newQueryString.Append("StartDate=");
+                newQueryString.Append(startDateTime.ToString("yyyy-MM-dd"));
+                newQueryString.Append('&');
+                newQueryString.Append("EndDate=");
+                newQueryString.Append(endDateTime.ToString("yyyy-MM-dd"));
+                Response.Redirect("~/Sites/Detail" + newQueryString.ToString());
+            }
+            else
+            {
+                ErrorPanel.Visible = true;
+            }
+        }
     }
 }
