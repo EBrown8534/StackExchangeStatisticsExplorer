@@ -128,6 +128,14 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [SiteCompare("Question Answer Accept Rate", "0.00%", 18)]
         public double QuestionAnswerAcceptRate => (double)TotalAccepted / TotalAnswered;
 
+        [ApiDescription("The average number of votes cast per day by users of the site.")]
+        [SiteCompare("Votes Per Day", "0.00", 35)]
+        public double VotesPerDay => (double)TotalVotes / (Gathered - (Site.ClosedBetaDateTime ?? Site.OpenBetaDateTime ?? Site.LaunchDateTime))?.Days ?? 1;
+
+        [ApiDescription("The average number of votes cast per user above 150 rep.")]
+        [SiteCompare("Votes Per User > 150 Rep", "0.00", 36)]
+        public double? VotesPerUserAbove150Rep => ((double)TotalVotes / UsersAbove150Rep) ?? null;
+
         public static new List<SiteStatsCalculated> LoadFromDatabase(SqlConnection connection, Site site)
         {
             var sitesStatsCalculated = new List<SiteStatsCalculated>();

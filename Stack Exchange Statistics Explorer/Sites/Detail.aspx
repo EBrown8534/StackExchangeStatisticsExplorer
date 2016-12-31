@@ -171,6 +171,7 @@
             <ul class="tabs" data-tab>
                 <li class="tab-title active"><a href="#graphSet1">General Charts</a></li>
                 <li class="tab-title"><a href="#graphSet2">User Charts</a></li>
+                <li class="tab-title"><a href="#graphSet5">Voting Charts</a></li>
                 <li class="tab-title"><a href="#graphSet3">Question Charts</a></li>
                 <li class="tab-title"><a href="#graphSet4">Answer Charts</a></li>
             </ul>
@@ -192,6 +193,11 @@
                     <svg class="percentUsersOver10000RepChart"></svg>
                     <svg class="usersOver20000RepChart"></svg>
                     <svg class="percentUsersOver20000RepChart"></svg>
+                </div>
+                <div class="content active" id="graphSet5">
+                    <svg class="totalVotes"></svg>
+                    <svg class="votesPerDay"></svg>
+                    <svg class="votesPerUserAbove150Rep"></svg>
                 </div>
                 <div class="content" id="graphSet3">
                     <svg class="questionsPerDayChart"></svg>
@@ -229,6 +235,10 @@
                 buildBasicChart(m, hW, hH, siteId, ".percentUsersOver10000RepChart", "PercentUsersAbove10000Rep", "0.000%", "Users > 10k Rep (%)", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".usersOver20000RepChart", "UsersAbove20000Rep", "0", "Users > 20k Rep", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".percentUsersOver20000RepChart", "PercentUsersAbove20000Rep", "0.000%", "Users > 20k Rep (%)", sTC);
+
+                buildBasicChart(m, fW, fH, siteId, ".totalVotes", "TotalVotes", "0", "Total Votes", lTC);
+                buildBasicChart(m, hW, hH, siteId, ".votesPerDay", "VotesPerDay", "0.000", "Votes Per Day", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".votesPerUserAbove150Rep", "VotesPerUserAbove150Rep", "0.000", "Votes Per User > 150 Rep", sTC);
 
                 buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.000", "Questions Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionsChart", "TotalQuestions", "0", "Total Questions", sTC);
