@@ -194,7 +194,7 @@
                     <svg class="usersOver20000RepChart"></svg>
                     <svg class="percentUsersOver20000RepChart"></svg>
                 </div>
-                <div class="content active" id="graphSet5">
+                <div class="content" id="graphSet5">
                     <svg class="totalVotes"></svg>
                     <svg class="votesPerDay"></svg>
                     <svg class="votesPerUserAbove150Rep"></svg>
