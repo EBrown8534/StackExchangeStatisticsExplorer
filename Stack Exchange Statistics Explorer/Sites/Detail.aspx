@@ -248,16 +248,7 @@
                 buildBasicChart(m, hW, hH, siteId, ".answersChart", "TotalAnswers", "0", "Total Answers", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".answersChangeChart", "TotalAnswersChange", "0", "Answers Change", sTC);
             </script>
-            <h3>Raw Stats Data (Newest to oldest)
-            <span class="right">
-                <span class="show-for-medium-up">
-                    <span class="switch radius has-tip" data-tooltip aria-haspopup="true" title="Toggle deltas">
-                        <input id="toggleDeltas" type="checkbox" checked />
-                        <label for="toggleDeltas"></label>
-                    </span>
-                </span>
-            </span>
-            </h3>
+            <h3>Raw Stats Data (Newest to oldest)</h3>
             <script type="text/javascript">
                 document.getElementById("toggleDeltas").addEventListener('change', function (event) {
                     if (document.getElementById("toggleDeltas").checked) {
@@ -267,23 +258,23 @@
                     }
                 });
             </script>
-            <div class="row collapse small-12 medium-10 columns">
-                <div class="medium-2 columns">
+            <div class="row collapse">
+                <div class="medium-1 small-2 columns">
                     <label for="StartDate" class="prefix radius">Start date</label>
                 </div>
-                <div class="medium-2 columns">
+                <div class="medium-2 small-2 columns">
                     <asp:TextBox runat="server" ID="StartDate" CssClass="postfix prefix"></asp:TextBox>
                 </div>
-                <div class="medium-1 columns">
+                <div class="medium-1 small-1 columns">
                     <label for="EndDate" class="postfix prefix">End</label>
                 </div>
-                <div class="medium-2 columns">
+                <div class="medium-2 small-2 columns">
                     <asp:TextBox runat="server" ID="EndDate" CssClass="postfix prefix"></asp:TextBox>
                 </div>
-                <div class="medium-2 columns">
+                <div class="medium-1 small-2 columns">
                     <label for="Interval" class="postfix prefix">Interval</label>
                 </div>
-                <div class="medium-2 columns">
+                <div class="medium-2 small-2 columns">
                     <asp:DropDownList runat="server" ID="Interval" CssClass="postfix prefix">
                         <asp:ListItem Value="1d">Daily</asp:ListItem>
                         <asp:ListItem Value="1w">Weekly</asp:ListItem>
@@ -292,9 +283,17 @@
                         <asp:ListItem Value="1y">Yearly</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="medium-1 columns">
+                <div class="medium-1 small-1 columns">
                     <asp:Button runat="server" ID="FilterTable" Text="Filter" CssClass="button postfix radius" OnClick="FilterTable_Click" />
                 </div>
+                <span class="right">
+                    <span class="show-for-medium-up">
+                        <span class="switch radius has-tip" data-tooltip aria-haspopup="true" title="Toggle deltas">
+                            <input id="toggleDeltas" type="checkbox" checked />
+                            <label for="toggleDeltas"></label>
+                        </span>
+                    </span>
+                </span>
             </div>
             <asp:Literal runat="server" ID="ErrorPanel" Visible="false">
                 <p class="alert-box alert radius">
