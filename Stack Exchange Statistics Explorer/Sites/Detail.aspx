@@ -249,15 +249,6 @@
                 buildBasicChart(m, hW, hH, siteId, ".answersChangeChart", "TotalAnswersChange", "0", "Answers Change", sTC);
             </script>
             <h3>Raw Stats Data (Newest to oldest)</h3>
-            <script type="text/javascript">
-                document.getElementById("toggleDeltas").addEventListener('change', function (event) {
-                    if (document.getElementById("toggleDeltas").checked) {
-                        $(".delta").removeClass("hidden");
-                    } else {
-                        $(".delta").addClass("hidden");
-                    }
-                });
-            </script>
             <div class="row collapse">
                 <div class="medium-1 small-2 columns">
                     <label for="StartDate" class="prefix radius">Start date</label>
@@ -294,6 +285,15 @@
                         </span>
                     </span>
                 </span>
+                <script type="text/javascript">
+                    document.getElementById("toggleDeltas").addEventListener('change', function (event) {
+                        if (document.getElementById("toggleDeltas").checked) {
+                            $(".delta").removeClass("hidden");
+                        } else {
+                            $(".delta").addClass("hidden");
+                        }
+                    });
+                </script>
             </div>
             <asp:Literal runat="server" ID="ErrorPanel" Visible="false">
                 <p class="alert-box alert radius">
