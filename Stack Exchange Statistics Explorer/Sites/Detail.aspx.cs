@@ -23,6 +23,11 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                return;
+            }
+
             var siteId = Request.QueryString["SiteId"];
             var apiSiteParameter = Request.QueryString["ApiSiteParameter"];
 
@@ -116,6 +121,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
 
             var startDate = Request.QueryString["StartDate"];
             var endDate = Request.QueryString["EndDate"];
+            var interval = Request.QueryString["Interval"];
 
             if (!string.IsNullOrWhiteSpace(startDate)
                 && !string.IsNullOrWhiteSpace(endDate)
@@ -123,15 +129,151 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 && DateTime.TryParse(endDate, out endDateTime))
             {
                 ErrorPanel.Visible = false;
-                SiteStats.DataSource = sitesStats.Where(x => x.Gathered.Date >= startDateTime && x.Gathered.Date <= endDateTime)
-                                                 .OrderByDescending(x => x.Gathered)
-                                                 .ToList();
+                StartDate.Text = startDateTime.ToString("yyyy-MM-dd");
+                EndDate.Text = endDateTime.ToString("yyyy-MM-dd");
+
+                switch (interval)
+                {
+                    case "1w":
+                        startDateTime = startDateTime.AddDays(-7);
+                        break;
+                    case "1m":
+                        startDateTime = startDateTime.AddDays(-31);
+                        break;
+                    case "3m":
+                        startDateTime = startDateTime.AddDays(-93);
+                        break;
+                    case "1y":
+                        startDateTime = startDateTime.AddDays(-366);
+                        break;
+                    default:
+                        startDateTime = startDateTime.AddDays(-1);
+                        interval = "1d";
+                        break;
+                }
+
+                Interval.SelectedValue = interval;
             }
             else
             {
-                SiteStats.DataSource = sitesStats.Take(7);
+                startDateTime = DateTime.Now;
+
+                switch (interval)
+                {
+                    case "1w":
+                        startDateTime = startDateTime.AddDays(-7 * 8);
+                        break;
+                    case "1m":
+                        startDateTime = startDateTime.AddDays(-31 * 8);
+                        break;
+                    case "3m":
+                        startDateTime = startDateTime.AddDays(-93 * 8);
+                        break;
+                    case "1y":
+                        startDateTime = startDateTime.AddDays(-366 * 8);
+                        break;
+                    default:
+                        startDateTime = startDateTime.AddDays(-1 * 8);
+                        interval = "1d";
+                        break;
+                }
+
+                endDateTime = DateTime.Now;
+                Interval.SelectedValue = interval;
             }
 
+            sitesStats = sitesStats.Where(x => x.Gathered.Date >= startDateTime && x.Gathered.Date <= endDateTime)
+                                   .OrderByDescending(x => x.Gathered)
+                                   .ToList();
+
+            switch (interval)
+            {
+                case "1d":
+                    sitesStats.RemoveAt(sitesStats.Count - 1);
+                    break;
+                case "1w":
+                    {
+                        var newSiteStats = new List<SiteStatsCalculated>();
+
+                        var lastDate = default(DateTime);
+
+                        foreach (var stat in sitesStats)
+                        {
+                            if ((lastDate - stat.Gathered.Date).Days >= 7 || lastDate == default(DateTime))
+                            {
+                                newSiteStats.Add(stat);
+                                lastDate = stat.Gathered.Date;
+                            }
+                        }
+
+                        SiteStatsCalculated.LinkToNext(newSiteStats);
+                        newSiteStats.RemoveAt(newSiteStats.Count - 1);
+                        sitesStats = newSiteStats;
+                    }
+                    break;
+                case "1m":
+                    {
+                        var newSiteStats = new List<SiteStatsCalculated>();
+
+                        var lastDate = default(DateTime);
+
+                        foreach (var stat in sitesStats)
+                        {
+                            if ((lastDate - stat.Gathered).Days >= 28 && lastDate.Day >= stat.Gathered.Day || lastDate == default(DateTime))
+                            {
+                                newSiteStats.Add(stat);
+                                lastDate = stat.Gathered.Date;
+                            }
+                        }
+
+                        SiteStatsCalculated.LinkToNext(newSiteStats);
+                        newSiteStats.RemoveAt(newSiteStats.Count - 1);
+                        sitesStats = newSiteStats;
+                    }
+                    break;
+                case "3m":
+                    {
+                        var newSiteStats = new List<SiteStatsCalculated>();
+
+                        var lastDate = default(DateTime);
+
+                        foreach (var stat in sitesStats)
+                        {
+                            if ((lastDate - stat.Gathered).Days > 84 && lastDate.Day >= stat.Gathered.Day || lastDate == default(DateTime))
+                            {
+                                newSiteStats.Add(stat);
+                                lastDate = stat.Gathered.Date;
+                            }
+                        }
+
+                        SiteStatsCalculated.LinkToNext(newSiteStats);
+                        newSiteStats.RemoveAt(newSiteStats.Count - 1);
+                        sitesStats = newSiteStats;
+                    }
+                    break;
+                case "1y":
+                    {
+                        var newSiteStats = new List<SiteStatsCalculated>();
+
+                        var lastDate = default(DateTime);
+
+                        foreach (var stat in sitesStats)
+                        {
+                            if (lastDate.Year != stat.Gathered.Year && lastDate.Month >= stat.Gathered.Month && lastDate.Day >= stat.Gathered.Day || lastDate == default(DateTime))
+                            {
+                                newSiteStats.Add(stat);
+                                lastDate = stat.Gathered.Date;
+                            }
+                        }
+
+                        SiteStatsCalculated.LinkToNext(newSiteStats);
+                        newSiteStats.RemoveAt(newSiteStats.Count - 1);
+                        sitesStats = newSiteStats;
+                    }
+                    break;
+            }
+
+            SiteStats.DataSource = sitesStats;
             SiteStats.DataBind();
         }
 
@@ -146,6 +288,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
             var fromMerge = Request.QueryString["FromMerge"];
             var tableStartDate = StartDate.Text;
             var tableEndDate = EndDate.Text;
+            var interval = Interval.SelectedValue;
 
             var newQueryString = new StringBuilder("?");
 
@@ -197,11 +340,25 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                 newQueryString.Append('&');
                 newQueryString.Append("EndDate=");
                 newQueryString.Append(endDateTime.ToString("yyyy-MM-dd"));
-                Response.Redirect("~/Sites/Detail" + newQueryString.ToString());
             }
-            else
+            else 
             {
                 ErrorPanel.Visible = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(interval))
+            {
+                ErrorPanel.Visible = false;
+
+                if (newQueryString.Length > 1)
+                {
+                    newQueryString.Append('&');
+                }
+
+                newQueryString.Append("Interval=");
+                newQueryString.Append(interval);
+
+                Response.Redirect("~/Sites/Detail" + newQueryString.ToString());
             }
         }
     }

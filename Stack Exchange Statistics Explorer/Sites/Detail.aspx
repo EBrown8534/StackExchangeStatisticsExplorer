@@ -267,20 +267,32 @@
                     }
                 });
             </script>
-            <div class="row collapse small-12 medium-9 columns">
+            <div class="row collapse small-12 medium-10 columns">
                 <div class="medium-2 columns">
                     <label for="StartDate" class="prefix radius">Start date</label>
                 </div>
-                <div class="medium-3 columns">
-                    <asp:TextBox runat="server" ID="StartDate"></asp:TextBox>
+                <div class="medium-2 columns">
+                    <asp:TextBox runat="server" ID="StartDate" CssClass="postfix prefix"></asp:TextBox>
+                </div>
+                <div class="medium-1 columns">
+                    <label for="EndDate" class="postfix prefix">End</label>
                 </div>
                 <div class="medium-2 columns">
-                    <label for="EndDate" class="postfix prefix">End date</label>
-                </div>
-                <div class="medium-3 columns">
-                    <asp:TextBox runat="server" ID="EndDate"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="EndDate" CssClass="postfix prefix"></asp:TextBox>
                 </div>
                 <div class="medium-2 columns">
+                    <label for="Interval" class="postfix prefix">Interval</label>
+                </div>
+                <div class="medium-2 columns">
+                    <asp:DropDownList runat="server" ID="Interval" CssClass="postfix prefix">
+                        <asp:ListItem Value="1d">Daily</asp:ListItem>
+                        <asp:ListItem Value="1w">Weekly</asp:ListItem>
+                        <asp:ListItem Value="1m">Monthly</asp:ListItem>
+                        <asp:ListItem Value="3m">Quartery</asp:ListItem>
+                        <asp:ListItem Value="1y">Yearly</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <div class="medium-1 columns">
                     <asp:Button runat="server" ID="FilterTable" Text="Filter" CssClass="button postfix radius" OnClick="FilterTable_Click" />
                 </div>
             </div>

@@ -49,6 +49,15 @@ namespace Stack_Exchange_Statistics_Explorer.Sites {
         protected global::System.Web.UI.WebControls.TextBox EndDate;
         
         /// <summary>
+        /// Interval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Interval;
+        
+        /// <summary>
         /// FilterTable control.
         /// </summary>
         /// <remarks>
