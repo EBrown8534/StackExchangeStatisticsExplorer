@@ -169,11 +169,11 @@
         <div class="medium-12 columns graphs">
             <h3>Graphs</h3>
             <ul class="tabs" data-tab>
-                <li class="tab-title active"><a href="#graphSet1">General Charts</a></li>
-                <li class="tab-title"><a href="#graphSet2">User Charts</a></li>
-                <li class="tab-title"><a href="#graphSet5">Voting Charts</a></li>
-                <li class="tab-title"><a href="#graphSet3">Question Charts</a></li>
-                <li class="tab-title"><a href="#graphSet4">Answer Charts</a></li>
+                <li class="tab-title active"><a href="#graphSet1">General</a></li>
+                <li class="tab-title"><a href="#graphSet2">User</a></li>
+                <li class="tab-title"><a href="#graphSet5">Voting</a></li>
+                <li class="tab-title"><a href="#graphSet3">Question</a></li>
+                <li class="tab-title"><a href="#graphSet4">Answer</a></li>
             </ul>
             <div class="tabs-content">
                 <div class="content active" id="graphSet1">
