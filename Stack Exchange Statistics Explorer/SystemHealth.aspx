@@ -176,13 +176,13 @@
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerRequest.ToString("0.00") %>
                 </td>
                 <td><%#((ApiBatchLog)Container.DataItem).SiteCount %></td>
-                <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1200, x => x > 1500) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1000, x => x > 1300) %>'>
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.ToString("0.00") %>
                 </td>
-                <td class='<%#((ApiBatchLog)Container.DataItem).BackoffCount.GetClassOption(x => x <= 6, x => x > 9) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).BackoffCount.GetClassOption(x => x <= 8, x => x > 10) %>'>
                     <%#((ApiBatchLog)Container.DataItem).BackoffCount %>
                 </td>
-                <td class='<%#((ApiBatchLog)Container.DataItem).TotalBackoff.GetClassOption(x => x <= 60, x => x > 90) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).TotalBackoff.GetClassOption(x => x <= 80, x => x > 100) %>'>
                     <%#((ApiBatchLog)Container.DataItem).TotalBackoff %>
                 </td>
                 <td class='<%#((ApiBatchLog)Container.DataItem).EndQuotaRemaining.GetClassOption(x => x >= 2000, x => x < 1500) %>'>
