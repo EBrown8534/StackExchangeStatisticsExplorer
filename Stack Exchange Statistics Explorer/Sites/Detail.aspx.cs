@@ -156,7 +156,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
             }
             else
             {
-                startDateTime = DateTime.Now;
+                startDateTime = DateTime.UtcNow;
 
                 switch (interval)
                 {
@@ -178,7 +178,7 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
                         break;
                 }
 
-                endDateTime = DateTime.Now;
+                endDateTime = DateTime.UtcNow;
                 Interval.SelectedValue = interval;
             }
 
