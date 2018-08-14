@@ -22,7 +22,8 @@
             </label>
         </div>
         <div class="small-2 medium-1 columns">
-            <label for="filterDropDown" class="prefix radius">Filter by</label>
+            <%--<label for="filterDropDown" class="prefix radius">Filter by</label>--%>
+            <a class="button prefix radius" id="filterButton" href="javascript:filterItems()">Filter by</a>
         </div>
         <div class="small-3 medium-2 large-2 columns">
             <select id="filterDropDown" onchange="javascript:filterItems()">
@@ -37,15 +38,17 @@
             <label for="filterTextBox" class="postfix prefix">contains</label>
         </div>
         <div class="small-3 medium-2 large-3 columns">
-            <input type="text" id="filterTextBox" name="filterTextBox" onkeyup="javascript:filterItems()" />
+            <%--<input type="text" id="filterTextBox" name="filterTextBox" onkeyup="javascript:filterItems()" />--%>
+            <input type="text" id="filterTextBox" name="filterTextBox" onkeyup="javascript:filterItems()" class="postfix radius" />
         </div>
         <div class="small-2 medium-1 columns">
-            <a class="button postfix radius" id="filterButton" href="javascript:filterItems()">Filter</a>
+            <%--<a class="button postfix radius" id="filterButton" href="javascript:filterItems()">Filter</a>--%>
         </div>
     </div>
     <div class="row collapse">
         <div class="small-2 medium-1 columns">
-            <label for="sortProperty" class="prefix radius">Sort by</label>
+            <%--<label for="sortProperty" class="prefix radius">Sort by</label>--%>
+            <a id="sortButton" class="button prefix radius" href="javascript:sortItems()">Sort by</a>
         </div>
         <div class="small-3 medium-2 columns">
             <select id="sortProperty" onchange="javascript:sortItems()">
@@ -70,10 +73,11 @@
             </select>
         </div>
         <div class="small-1 medium-1 columns">
-            <label for="sortOrder" class="prefix postfix">order</label>
+            <%--<label for="sortOrder" class="prefix postfix">order</label>--%>
+            <label for="sortOrder" class="postfix radius">order</label>
         </div>
         <div class="small-2 medium-1 columns">
-            <a id="sortButton" class="button postfix radius" href="javascript:sortItems()">Sort</a>
+            <%--<a id="sortButton" class="button postfix radius" href="javascript:sortItems()">Sort</a>--%>
         </div>
         <div class="small-12 medium-4 columns">
 

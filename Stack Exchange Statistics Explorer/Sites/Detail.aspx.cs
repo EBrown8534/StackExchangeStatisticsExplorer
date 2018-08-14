@@ -189,7 +189,10 @@ namespace Stack_Exchange_Statistics_Explorer.Sites
             switch (interval)
             {
                 case "1d":
-                    sitesStats.RemoveAt(sitesStats.Count - 1);
+                    if (sitesStats.Count > 0)
+                    {
+                        sitesStats.RemoveAt(sitesStats.Count - 1);
+                    }
                     break;
                 case "1w":
                     {
