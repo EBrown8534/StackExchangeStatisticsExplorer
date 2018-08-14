@@ -176,7 +176,7 @@
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerRequest.ToString("0.00") %>
                 </td>
                 <td><%#((ApiBatchLog)Container.DataItem).SiteCount %></td>
-                <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1000, x => x > 1300) %>'>
+                <td class='<%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.GetClassOption(x => x <= 1400, x => x > 1600) %>'>
                     <%#((ApiBatchLog)Container.DataItem).MillisecondsPerSite.ToString("0.00") %>
                 </td>
                 <td class='<%#((ApiBatchLog)Container.DataItem).BackoffCount.GetClassOption(x => x <= 8, x => x > 10) %>'>
