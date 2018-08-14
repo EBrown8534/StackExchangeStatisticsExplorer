@@ -203,6 +203,15 @@ code {
     stroke-width: 1.5px;
 }
 
+.area {
+    fill: steelblue;
+    fill-opacity: 0.3;
+}
+
 .x.axis.lineChartAxis path {
     display: inherit;
+}
+
+input[type="text"].radius {
+    border-radius: 0px;
 }

@@ -35,6 +35,12 @@
             .y(function (d) { return y(d.FieldValue); })
             .interpolate("monotone");
 
+        var area = d3.svg.area()
+            .x(function (d) { return x(d.Gathered); })
+            .y0(h)
+            .y1(function (d) { return y(d.FieldValue); })
+            .interpolate("monotone");
+
         y.domain([d3.min(data, function (d) { return d.FieldValue; }) - 0.001, d3.max(data, function (d) { return d.FieldValue; }) + 0.001]).nice();
 
         chart.append("g")
@@ -61,6 +67,12 @@
             .datum(data)
             .attr("class", "line")
             .attr("d", line)
+            .attr("transform", "translate(" + (w / data.length / 2) + ",0)");
+
+        chart.append("path")
+            .datum(data)
+            .attr("class", "area")
+            .attr("d", area)
             .attr("transform", "translate(" + (w / data.length / 2) + ",0)");
     });
 }
