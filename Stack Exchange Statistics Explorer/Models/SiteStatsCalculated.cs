@@ -28,6 +28,10 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [SiteCompare("Answered Rate Change", "0.00%", 14)]
         public double? AnsweredRateChange => AnsweredRate - Previous?.AnsweredRate;
 
+        [ApiDescription("Change in <code>" + nameof(AnsweredRate) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Answered Rate Change Per Day", "0.00%", 37)]
+        public double? AnsweredRateChangePerDay => AnsweredRateChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Percentage of questions that have not been answered.")]
         [SiteCompare("Unanswered Rate", "0.00%", 15)]
         public double UnansweredRate => (double)TotalUnanswered / TotalQuestions;
@@ -35,6 +39,10 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [ApiDescription("Change in <code>" + nameof(UnansweredRate) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Unanswered Rate Change", "0.00%", 17)]
         public double? UnansweredRateChange => UnansweredRate - Previous?.UnansweredRate;
+
+        [ApiDescription("Change in <code>" + nameof(UnansweredRate) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Unanswered Rate Change", "0.00%", 38)]
+        public double? UnansweredRateChangePerDay => UnansweredRateChange / (Gathered - Previous?.Gathered)?.TotalDays;
 
         [ApiDescription("Number of questions posted for each day since the earliest of: <code>" + nameof(Models.Site.ClosedBetaDateTime) + "</code>, <code>" + nameof(Models.Site.OpenBetaDateTime) + "</code> or <code>" + nameof(Models.Site.LaunchDateTime) + "</code>.")]
         [SiteCompare("Questions per Day", "0.00", 16)]
@@ -48,45 +56,89 @@ namespace Stack_Exchange_Statistics_Explorer.Models
         [SiteCompare("Total Accepted Change", "0", 19)]
         public int? TotalAcceptedChange => TotalAccepted - Previous?.TotalAccepted;
 
+        [ApiDescription("Change in <code>" + nameof(TotalAccepted) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Accepted Change Per Day", "0.00", 39)]
+        public double? TotalAcceptedChangePerDay => TotalAcceptedChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(TotalAnswered) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Answered Change", "0", 20)]
         public int? TotalAnsweredChange => TotalAnswered - Previous?.TotalAnswered;
 
+        [ApiDescription("Change in <code>" + nameof(TotalAnswered) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Answered Change Per Day", "0.00", 40)]
+        public double? TotalAnsweredChangePerDay => TotalAnsweredChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(TotalAnswers) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Answers Change", "0", 21)]
         public int? TotalAnswersChange => TotalAnswers - Previous?.TotalAnswers;
-        
+
+        [ApiDescription("Change in <code>" + nameof(TotalAnswers) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Answers Change Per Day", "0.00", 41)]
+        public double? TotalAnswersChangePerDay => TotalAnswersChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(TotalBadges) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Badges Change", "0", 22)]
         public int? TotalBadgesChange => TotalBadges - Previous?.TotalBadges;
+
+        [ApiDescription("Change in <code>" + nameof(TotalBadges) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Badges Change Per Day", "0.00", 42)]
+        public double? TotalBadgesChangePerDay => TotalBadgesChange / (Gathered - Previous?.Gathered)?.TotalDays;
 
         [ApiDescription("Change in <code>" + nameof(TotalComments) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Comments Change", "0", 23)]
         public int? TotalCommentsChange => TotalComments - Previous?.TotalComments;
 
+        [ApiDescription("Change in <code>" + nameof(TotalComments) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Comments Change Per Day", "0.00", 43)]
+        public double? TotalCommentsChangePerDay => TotalCommentsChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(TotalQuestions) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Questions Change", "0", 24)]
         public int? TotalQuestionsChange => TotalQuestions - Previous?.TotalQuestions;
+
+        [ApiDescription("Change in <code>" + nameof(TotalQuestions) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Questions Change Per Day", "0.00", 44)]
+        public double? TotalQuestionsChangePerDay => TotalQuestionsChange / (Gathered - Previous?.Gathered)?.TotalDays;
 
         [ApiDescription("Change in <code>" + nameof(TotalUnanswered) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Unanswered Change", "0", 25)]
         public int? TotalUnansweredChange => TotalUnanswered - Previous?.TotalUnanswered;
 
+        [ApiDescription("Change in <code>" + nameof(TotalUnanswered) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Unanswered Change Per Day", "0.00", 45)]
+        public double? TotalUnansweredChangePerDay => TotalUnansweredChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(TotalUsers) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Users Change", "0", 26)]
         public int? TotalUsersChange => TotalUsers - Previous?.TotalUsers;
+
+        [ApiDescription("Change in <code>" + nameof(TotalUsers) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Users Change Per Day", "0.00", 46)]
+        public double? TotalUsersChangePerDay => TotalUsersChange / (Gathered - Previous?.Gathered)?.TotalDays;
 
         [ApiDescription("Change in <code>" + nameof(TotalVotes) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Total Votes Change", "0", 27)]
         public int? TotalVotesChange => TotalVotes - Previous?.TotalVotes;
 
+        [ApiDescription("Change in <code>" + nameof(TotalVotes) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Total Votes Change Per Day", "0.00", 47)]
+        public double? TotalVotesChangePerDay => TotalVotesChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(UsersAbove150Rep) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Users Above 150 Rep Change", "0", 28)]
         public int? UsersAbove150RepChange => UsersAbove150Rep - Previous?.UsersAbove150Rep;
 
+        [ApiDescription("Change in <code>" + nameof(UsersAbove150Rep) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Users Above 150 Rep Change Per Day", "0.00", 47)]
+        public double? UsersAbove150RepChangePerDay => UsersAbove150RepChange / (Gathered - Previous?.Gathered)?.TotalDays;
+
         [ApiDescription("Change in <code>" + nameof(UsersAbove200Rep) + "</code> from the previous object.", Nullable = true)]
         [SiteCompare("Users Above 200 Rep Change", "0", 29)]
         public int? UsersAbove200RepChange => UsersAbove200Rep - Previous?.UsersAbove200Rep;
+
+        [ApiDescription("Change in <code>" + nameof(UsersAbove200Rep) + "</code> from the previous object. This is normalized to a \"per day\" estimate.", Nullable = true)]
+        [SiteCompare("Users Above 200 Rep Change Per Day", "0.00", 47)]
+        public double? UsersAbove200RepChangePerDay => UsersAbove200RepChange / (Gathered - Previous?.Gathered)?.TotalDays;
 
         [ApiDescription("The percentage of users that have more than 150 rep.", Nullable = true)]
         [SiteCompare("Percent Users Above 150 Rep", "0.000%", 30)]

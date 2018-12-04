@@ -219,7 +219,7 @@
                 var siteId = "<%:LatestStats.Site.Id%>";
                 var lTC = 60;
                 var sTC = 15;
-
+                
                 buildBasicChart(m, fW, fH, siteId, ".zombieChart", "AnsweredRate", "0.000%", "Answered Rate (%)", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionAcceptRateChart", "QuestionAnswerAcceptRate", "0.000%", "Answered Accept Rate (%)", sTC);
                 buildBasicChart(m, hW, hH, siteId, ".answerAcceptRateChart", "AnswerAcceptRate", "0.000%", "Answer Accept Rate (%)", sTC);
@@ -242,11 +242,11 @@
 
                 buildBasicChart(m, fW, fH, siteId, ".questionsPerDayChart", "QuestionsPerDay", "0.000", "Questions Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".questionsChart", "TotalQuestions", "0", "Total Questions", sTC);
-                buildBasicChart(m, hW, hH, siteId, ".questionsChangeChart", "TotalQuestionsChange", "0", "Questions Change", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".questionsChangeChart", "TotalQuestionsChangePerDay", "0", "Questions Change (Per Day)", sTC);
 
                 buildBasicChart(m, fW, fH, siteId, ".answersPerDayChart", "AnswersPerDay", "0.000", "Answers Per Day", lTC);
                 buildBasicChart(m, hW, hH, siteId, ".answersChart", "TotalAnswers", "0", "Total Answers", sTC);
-                buildBasicChart(m, hW, hH, siteId, ".answersChangeChart", "TotalAnswersChange", "0", "Answers Change", sTC);
+                buildBasicChart(m, hW, hH, siteId, ".answersChangeChart", "TotalAnswersChangePerDay", "0", "Answers Change (Per Day)", sTC);
             </script>
             <h3>Raw Stats Data (Newest to oldest)</h3>
             <div class="row collapse">
