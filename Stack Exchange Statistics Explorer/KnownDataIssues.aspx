@@ -7,6 +7,23 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Known Data Issues</h2>
     <h3>Inconsistencies</h3>
+    <h4>September 21, 2018</h4>
+    <h5>Diagnosis</h5>
+    <p>
+        On 21 September 2018 at approximately 00:00UTC+00:00, the Stack Exchange API was unreachable by the data-aggregation utility. As the data-aggregation utility had not been a particularly high priority for me, it was not noticed for over two months, on 4 Dec 2018 at 00:39 UTC+00:00.
+    </p>
+    <h5>Remediation</h5>
+    <p>
+        The aggregator was run upon discovery of a failure to retrieve data.
+    </p>
+    <h5>Limitations</h5>
+    <p>
+        Data for 21 September 2018 through 3 December 2018 could not be gathered at the usual 00:00UTC+00:00, and was not gathered later. As a result, all data for this date range was unable to be collected.
+    </p>
+    <h5>Prevention</h5>
+    <p>
+        N/A
+    </p>
     <h4>October 5, 2016</h4>
     <h5>Diagnosis</h5>
     <p>
